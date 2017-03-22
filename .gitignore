@@ -1,0 +1,12 @@
+# Created by Comporment on 22/03/2017 at 19:37
+# Dev'ving like a sir since 1998. | https://github.com/Comportment
+
+# Packages
+.idea/
+target/
+token/
+test/
+
+# Specific files.
+*.iml
+dependency-reduced-pom.xml
