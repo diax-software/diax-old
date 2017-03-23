@@ -24,9 +24,9 @@ public class Main
         }
         catch (LoginException|InterruptedException|RateLimitedException exception)
         {
-            System.err.println("Someone thing wrong :/\nHave an error message so I can make it up to you <3\n\n");
+            System.err.println("Someone thing wrong :/\nHave an error message so I can make it up to you <3\n");
             exception.printStackTrace();
-            System.err.println("\n\nEnd of error message. Hope you fix the bug.");
+            System.err.println("\nEnd of error message. Hope you fix the bug.");
         }
     }
 }
