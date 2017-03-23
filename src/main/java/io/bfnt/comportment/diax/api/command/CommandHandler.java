@@ -16,7 +16,7 @@ public class CommandHandler extends Diax
         String command = event.getMessage().getRawContent().replaceFirst(prefix(), "").trim().toLowerCase();
         for (DiaxCommand i : getCommands())
         {
-            if (i.getName().equals(command.split(" ")[0]))
+            if (i.getClass().getAnnotation(CommandDescription.class).name().equals(command.split(" ")[0]))
             {
                 i.execute(event.getMessage());
                 break;

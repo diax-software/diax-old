@@ -9,9 +9,4 @@ import net.dv8tion.jda.core.entities.Message;
 public interface Command
 {
     void execute(Message message);
-    String getName();
-    String getEmoji();
-    @Deprecated
-    String getDescription();
-    String getArgs();
 }
