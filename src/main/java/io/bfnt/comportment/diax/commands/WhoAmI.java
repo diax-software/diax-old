@@ -23,10 +23,10 @@ public class WhoAmI extends DiaxCommand
     }
     public String getArgs()
     {
-        return "[command name]";
+        return "";
     }
     public String getDescription()
     {
-        return "Gives you help for Diax and his commands.";
+        return "Tells you about yourself.";
     }
 }

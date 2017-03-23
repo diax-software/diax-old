@@ -34,7 +34,7 @@ public class Help extends DiaxCommand
         StringBuilder sb = new StringBuilder();
         for (DiaxCommand command : getCommands())
         {
-            sb.append(String.format("%s %s%s `%s `\n\n", command.getEmoji(), prefix(), command.getName(), command.getArgs()));
+            sb.append(String.format("`%s %s%s %s `\n\n", command.getEmoji(), prefix(), command.getName(), command.getArgs()));
         }
         return sb + "";
     }
