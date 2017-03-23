@@ -18,7 +18,7 @@ public class Main
      * The main method is called when the application starts up.
      * Attempts to make an {@link net.dv8tion.jda.core.JDA} object
      * using the {@link net.dv8tion.jda.core.JDABuilder} (Needed for everything else.)
-     * @param args {@link java.lang.String} {"foo", "bar", "baz"}
+     * @param args An array of {@link java.lang.String}s, i.e: {"foo", "bar", "baz"}
      */
     public static void main(String[] args)
     {
