@@ -2,9 +2,14 @@ package io.bfnt.comportment.diax.api;
 
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import io.bfnt.comportment.diax.commands.Help;
+import io.bfnt.comportment.diax.commands.Kick;
 import io.bfnt.comportment.diax.commands.WhoAmI;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
+import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -19,6 +24,10 @@ public abstract class Diax extends ListenerAdapter
     protected MessageBuilder makeMessage(String title, String content)
     {
         return new MessageBuilder().append(String.format("__**%s**__\n\n%s", title, content));
+    }
+    protected Message makeError(String content)
+    {
+        return makeMessage("Error!", content).build();
     }
     @Deprecated
     protected EmbedBuilder makeEmbed(String title, String content)
@@ -40,7 +49,20 @@ public abstract class Diax extends ListenerAdapter
             {
                 add(new WhoAmI());
                 add(new Help());
+                add(new Kick());
             }
         };
+    }
+    protected void selfNoPermission(MessageChannel channel)
+    {
+        channel.sendMessage(makeError("I do not have enough permission to do this.")).queue();
+    }
+    protected void notInGuild(MessageChannel channel)
+    {
+        channel.sendMessage(makeError("This command can not be used in a private message.")).queue();
+    }
+    protected boolean checkPermission(Member member, Permission permission)
+    {
+        return member.hasPermission(permission);
     }
 }

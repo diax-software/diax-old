@@ -1,5 +1,7 @@
 package io.bfnt.comportment.diax.api.command;
 
+import net.dv8tion.jda.core.Permission;
+
 import java.lang.annotation.*;
 
 /**
@@ -14,4 +16,5 @@ public @interface CommandDescription
     String emoji() default "";
     String name() default "";
     String args() default "";
+    Permission permission() default Permission.MESSAGE_WRITE;
 }
