@@ -19,6 +19,7 @@ public class Main
      * Attempts to make an {@link net.dv8tion.jda.core.JDA} object
      * using the {@link net.dv8tion.jda.core.JDABuilder} (Needed for everything else.)
      * @param args An array of {@link java.lang.String}s, i.e: {"foo", "bar", "baz"}
+     * @since 0.0.1
      */
     public static void main(String[] args)
     {
