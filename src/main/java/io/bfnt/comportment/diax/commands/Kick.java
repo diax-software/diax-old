@@ -8,5 +8,4 @@ import io.bfnt.comportment.diax.api.command.DiaxCommand;
  */
 public abstract class Kick extends DiaxCommand
 {
-
 }

@@ -30,8 +30,8 @@ public abstract class Diax extends ListenerAdapter
     {
         return String.format("%s#%s", user.getName(), user.getDiscriminator());
     }
-    protected String prefix(){
-
+    protected String prefix()
+    {
         return "<>";
     }
     protected List<DiaxCommand> getCommands()
