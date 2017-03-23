@@ -5,6 +5,7 @@ import io.bfnt.comportment.diax.commands.Help;
 import io.bfnt.comportment.diax.commands.WhoAmI;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.util.ArrayList;
@@ -24,6 +25,10 @@ public abstract class Diax extends ListenerAdapter
     protected EmbedBuilder makeEmbed(String title, String content)
     {
         return new EmbedBuilder().setTitle(String.format("__**%s**__", title), "").setDescription(content);
+    }
+    protected String getNiceName(User user)
+    {
+        return String.format("%s#%s", user.getName(), user.getDiscriminator());
     }
     protected String prefix(){
 
