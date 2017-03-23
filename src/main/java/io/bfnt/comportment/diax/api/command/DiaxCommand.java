@@ -8,12 +8,4 @@ import io.bfnt.comportment.diax.api.Diax;
  */
 public abstract class DiaxCommand extends Diax implements Command
 {
-    String getName()
-    {
-        return getDescription().name();
-    }
-    CommandDescription getDescription()
-    {
-        return DiaxCommand.class.getAnnotation(CommandDescription.class);
-    }
 }

@@ -13,12 +13,13 @@ public class CommandHandler extends Diax
     public void onMessageReceived(MessageReceivedEvent event)
     {
         if (!event.getMessage().getRawContent().startsWith(prefix())) return;
-        String command = event.getMessage().getRawContent().replaceFirst(prefix(), "").trim();
+        String command = event.getMessage().getRawContent().replaceFirst(prefix(), "").trim().toLowerCase();
         for (DiaxCommand i : getCommands())
         {
             if (i.getName().equals(command.split(" ")[0]))
             {
                 i.execute(event.getMessage());
+                break;
             }
         }
     }

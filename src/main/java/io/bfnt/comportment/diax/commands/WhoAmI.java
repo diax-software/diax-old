@@ -1,6 +1,5 @@
 package io.bfnt.comportment.diax.commands;
 
-import io.bfnt.comportment.diax.api.command.CommandDescription;
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import net.dv8tion.jda.core.entities.Message;
 
@@ -10,9 +9,24 @@ import net.dv8tion.jda.core.entities.Message;
  */
 public class WhoAmI extends DiaxCommand
 {
-    @CommandDescription(name = "whoami", description = "Tells you about yourself.", emoji = "👤")
     public void execute(Message trigger)
     {
         trigger.getChannel().sendMessage(makeMessage("About You:", String.format("Your name is: %s", trigger.getAuthor().getName())).build()).queue();
+    }
+    public String getEmoji()
+    {
+        return "👤";
+    }
+    public String getName()
+    {
+        return "whoami";
+    }
+    public String getArgs()
+    {
+        return "[command name]";
+    }
+    public String getDescription()
+    {
+        return "Gives you help for Diax and his commands.";
     }
 }

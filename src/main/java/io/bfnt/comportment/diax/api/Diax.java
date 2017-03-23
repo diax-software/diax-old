@@ -20,6 +20,7 @@ public abstract class Diax extends ListenerAdapter
     {
         return new MessageBuilder().append(String.format("__**%s**__\n\n%s", title, content));
     }
+    @Deprecated
     protected EmbedBuilder makeEmbed(String title, String content)
     {
         return new EmbedBuilder().setTitle(String.format("__**%s**__", title), "").setDescription(content);
