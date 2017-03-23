@@ -1,6 +1,5 @@
 package io.bfnt.comportment.diax.api.command;
 
-
 import io.bfnt.comportment.diax.api.Diax;
 /**
  * Created by Comporment on 23/03/2017 at 16:44
