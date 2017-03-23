@@ -14,10 +14,7 @@ public class WhoAmI extends DiaxCommand
     {
         User user = trigger.getAuthor();
         String bot = "You are ";
-        if (!user.isBot())
-        {
-            bot += "not ";
-        }
+        if (!user.isBot()) bot += "not ";
         trigger.getChannel().sendMessage(makeMessage("About You:", String.format("Your name is %s-senpai\nWe are in %d mutual guild(s).\n%sa bot.", getNiceName(user), user.getMutualGuilds().size(), bot)).build()).queue();
     }
     public String getEmoji()
