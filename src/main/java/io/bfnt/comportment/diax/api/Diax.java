@@ -8,8 +8,7 @@ import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.TreeSet;
 
 /**
  * Created by Comporment on 23/03/2017 at 16:41
@@ -34,13 +33,13 @@ public abstract class Diax extends ListenerAdapter
     {
         return "<>";
     }
-    protected List<DiaxCommand> getCommands()
+    protected TreeSet<DiaxCommand> getCommands()
     {
-        return new ArrayList<DiaxCommand>()
+        return new TreeSet<DiaxCommand>()
         {
             {
-                add(new Help());
                 add(new WhoAmI());
+                add(new Help());
             }
         };
     }
