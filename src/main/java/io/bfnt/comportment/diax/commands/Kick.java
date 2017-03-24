@@ -15,15 +15,15 @@ public class Kick extends DiaxCommand
 {
     public void execute(Message trigger)
     {
-        try
         {
             Member member = trigger.getGuild().getMemberById(trigger.getRawContent().split(" ")[1].replaceAll("[<!@>]", ""));
+            if (member == null)
+            {
+                userNotFound(trigger.getChannel());
+                return;
+            }
             trigger.getGuild().getController().kick(member);
             trigger.getChannel().sendMessage(makeMessage("Kicked!", getNiceName(member.getUser()) + " has been kicked.").build()).queue();
-        }
-        catch (NullPointerException exception)
-        {
-
         }
     }
 }

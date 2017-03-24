@@ -74,4 +74,8 @@ public abstract class Diax extends ListenerAdapter
     {
         return PermissionUtil.checkPermission(member.getGuild(), member, permission);
     }
+    protected void userNotFound(MessageChannel channel)
+    {
+        channel.sendMessage(makeError("That user could not be found.")).queue();
+    }
 }
