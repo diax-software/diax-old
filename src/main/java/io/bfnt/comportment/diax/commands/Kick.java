@@ -23,7 +23,7 @@ public class Kick extends DiaxCommand
                 makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
                 return;
             }
-            trigger.getGuild().getController().kick(member);
+            trigger.getGuild().getController().kick(member).queue();
             trigger.getChannel().sendMessage(makeMessage("Kicked!", getNiceName(member.getUser()) + " has been kicked.").build()).queue();
         }
     }
