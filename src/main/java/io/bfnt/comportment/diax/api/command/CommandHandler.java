@@ -33,7 +33,14 @@ public class CommandHandler extends Diax
                 }
                 else if (checkPermission(event.getGuild().getMember(event.getAuthor()), cd.permission()))
                 {
-                    i.execute(event.getMessage());
+                    if (checkPermission(event.getGuild().getMember(event.getJDA().getSelfUser()), cd.permission()))
+                    {
+                        i.execute(event.getMessage());
+                    }
+                    else
+                    {
+                        selfNoPermission(channel);
+                    }
                 }
                 else
                 {
