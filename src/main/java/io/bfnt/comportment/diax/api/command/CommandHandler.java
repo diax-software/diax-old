@@ -39,7 +39,7 @@ public class CommandHandler extends Diax
                     }
                     else
                     {
-                        selfNoPermission(channel);
+                        makeError(channel, ErrorType.NO_PERMISSION);
                     }
                 }
                 else

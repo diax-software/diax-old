@@ -1,6 +1,7 @@
 package io.bfnt.comportment.diax.api;
 
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
+import io.bfnt.comportment.diax.api.command.ErrorType;
 import io.bfnt.comportment.diax.commands.Help;
 import io.bfnt.comportment.diax.commands.Kick;
 import io.bfnt.comportment.diax.commands.WhoAmI;
@@ -26,9 +27,14 @@ public abstract class Diax extends ListenerAdapter
     {
         return new MessageBuilder().append(String.format("__**%s**__\n\n%s", title, content));
     }
+    @Deprecated
     private Message makeError(String content)
     {
         return makeMessage("Error!", content).build();
+    }
+    public void makeError(MessageChannel channel, ErrorType type)
+    {
+        channel.sendMessage(makeMessage("Error!", type.getDescription()).build()).queue();
     }
     @Deprecated
     protected EmbedBuilder makeEmbed(String title, String content)
@@ -60,7 +66,7 @@ public abstract class Diax extends ListenerAdapter
     }
     protected void selfNoPermission(MessageChannel channel)
     {
-        channel.sendMessage(makeError("I do not have enough permission to do this.")).queue();
+        channel.sendMessage(makeError(ErrorType.NO_PERMISSION.getDescription())).queue();
     }
     protected void noPermission(MessageChannel channel)
     {
