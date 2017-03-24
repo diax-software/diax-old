@@ -1,7 +1,6 @@
 package io.bfnt.comportment.diax.api.command;
 
 import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.exceptions.PermissionException;
 
 /**
  * Created by Comporment on 23/03/2017 at 16:53
@@ -9,5 +8,5 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
  */
 public interface Command
 {
-    void execute(Message message) throws PermissionException;
+    void execute(Message message);
 }

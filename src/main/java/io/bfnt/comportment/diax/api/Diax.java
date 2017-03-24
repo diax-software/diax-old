@@ -56,7 +56,7 @@ public abstract class Diax extends ListenerAdapter
     }
     protected void notEnoughArgs(MessageChannel channel)
     {
-
+        channel.sendMessage(makeError("You have not specified enough arguments for this command.")).queue();
     }
     protected void selfNoPermission(MessageChannel channel)
     {
