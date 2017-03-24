@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax.commands;
+package io.bfnt.comportment.diax.commands.moderation;
 
 import io.bfnt.comportment.diax.api.command.CommandDescription;
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
