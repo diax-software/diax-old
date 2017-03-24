@@ -25,11 +25,11 @@ public class CommandHandler extends Diax
             {
                 if (cd.minimumArgs() + 1 > command.split(" ").length)
                 {
-                    notEnoughArgs(channel);
+                    makeError(channel, ErrorType.NOT_ENOUGH_ARGS);
                 }
                 else if (cd.guildOnly() && channel.getType().equals(ChannelType.PRIVATE))
                 {
-                    notInGuild(channel);
+                    makeError(channel, ErrorType.NOT_IN_GUILD);
                 }
                 else if (checkPermission(event.getGuild().getMember(event.getAuthor()), cd.permission()))
                 {
@@ -44,7 +44,7 @@ public class CommandHandler extends Diax
                 }
                 else
                 {
-                    noPermission(channel);
+                    makeError(channel, ErrorType.SELF_NO_PERMISSION);
                 }
                 return;
             }

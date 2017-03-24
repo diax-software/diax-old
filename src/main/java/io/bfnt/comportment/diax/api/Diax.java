@@ -32,7 +32,7 @@ public abstract class Diax extends ListenerAdapter
     {
         return makeMessage("Error!", content).build();
     }
-    public void makeError(MessageChannel channel, ErrorType type)
+    protected void makeError(MessageChannel channel, ErrorType type)
     {
         channel.sendMessage(makeMessage("Error!", type.getDescription()).build()).queue();
     }
@@ -60,28 +60,8 @@ public abstract class Diax extends ListenerAdapter
             }
         };
     }
-    protected void notEnoughArgs(MessageChannel channel)
-    {
-        channel.sendMessage(makeError("You have not specified enough arguments for this command.")).queue();
-    }
-    protected void selfNoPermission(MessageChannel channel)
-    {
-        channel.sendMessage(makeError(ErrorType.NO_PERMISSION.getDescription())).queue();
-    }
-    protected void noPermission(MessageChannel channel)
-    {
-        channel.sendMessage(makeError("You do not have enough permission to do this.")).queue();
-    }
-    protected void notInGuild(MessageChannel channel)
-    {
-        channel.sendMessage(makeError("This command can not be used in a private message.")).queue();
-    }
     protected boolean checkPermission(Member member, Permission permission)
     {
         return PermissionUtil.checkPermission(member.getGuild(), member, permission);
-    }
-    protected void userNotFound(MessageChannel channel)
-    {
-        channel.sendMessage(makeError("That user could not be found.")).queue();
     }
 }

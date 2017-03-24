@@ -2,6 +2,7 @@ package io.bfnt.comportment.diax.commands;
 
 import io.bfnt.comportment.diax.api.command.CommandDescription;
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
+import io.bfnt.comportment.diax.api.command.ErrorType;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
@@ -19,7 +20,7 @@ public class Kick extends DiaxCommand
             Member member = trigger.getGuild().getMemberById(trigger.getRawContent().split(" ")[1].replaceAll("[<!@>]", ""));
             if (member == null)
             {
-                userNotFound(trigger.getChannel());
+                makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
                 return;
             }
             trigger.getGuild().getController().kick(member);
