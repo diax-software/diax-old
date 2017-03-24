@@ -25,7 +25,7 @@ public class CommandHandler extends Diax
             {
                 if (cd.minimumArgs() + 1 > command.split(" ").length)
                 {
-                    channel.sendMessage("not enough args boii").queue();
+                    notEnoughArgs(channel);
                 }
                 else if (cd.guildOnly() && channel.getType().equals(ChannelType.PRIVATE))
                 {

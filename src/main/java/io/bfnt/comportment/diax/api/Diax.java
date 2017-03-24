@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.core.utils.PermissionUtil;
 
 import java.util.TreeSet;
 
@@ -53,6 +54,10 @@ public abstract class Diax extends ListenerAdapter
             }
         };
     }
+    protected void notEnoughArgs(MessageChannel channel)
+    {
+
+    }
     protected void selfNoPermission(MessageChannel channel)
     {
         channel.sendMessage(makeError("I do not have enough permission to do this.")).queue();
@@ -67,6 +72,6 @@ public abstract class Diax extends ListenerAdapter
     }
     protected boolean checkPermission(Member member, Permission permission)
     {
-        return member.hasPermission(permission);
+        return PermissionUtil.checkPermission(member.getGuild(), member, permission);
     }
 }
