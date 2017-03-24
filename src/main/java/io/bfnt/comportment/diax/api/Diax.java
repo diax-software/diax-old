@@ -27,11 +27,6 @@ public abstract class Diax extends ListenerAdapter
     {
         return new MessageBuilder().append(String.format("__**%s**__\n\n%s", title, content));
     }
-    @Deprecated
-    private Message makeError(String content)
-    {
-        return makeMessage("Error!", content).build();
-    }
     protected void makeError(MessageChannel channel, ErrorType type)
     {
         channel.sendMessage(makeMessage("Error!", type.getDescription()).build()).queue();
