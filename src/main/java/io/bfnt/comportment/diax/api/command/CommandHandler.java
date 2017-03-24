@@ -4,8 +4,6 @@ import io.bfnt.comportment.diax.api.Diax;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.exceptions.PermissionException;
-import net.dv8tion.jda.core.utils.PermissionUtil;
 
 /**
  * Created by Comporment on 23/03/2017 at 20:14
@@ -25,7 +23,11 @@ public class CommandHandler extends Diax
             CommandDescription cd = i.getClass().getAnnotation(CommandDescription.class);
             if (cd.name().equals(command.split(" ")[0]))
             {
-                if (cd.guildOnly() && channel.getType().equals(ChannelType.PRIVATE))
+                if (cd.minimumArgs() + 1 > command.split(" ").length)
+                {
+                    channel.sendMessage("not enough args boii").queue();
+                }
+                else if (cd.guildOnly() && channel.getType().equals(ChannelType.PRIVATE))
                 {
                     notInGuild(channel);
                 }

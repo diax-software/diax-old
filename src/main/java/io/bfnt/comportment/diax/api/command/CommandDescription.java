@@ -18,4 +18,5 @@ public @interface CommandDescription
     String args() default "";
     Permission permission() default Permission.MESSAGE_WRITE;
     boolean guildOnly() default true;
+    int minimumArgs() default 0;
 }
