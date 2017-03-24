@@ -1,6 +1,7 @@
 package io.bfnt.comportment.diax.api.command;
 
 import io.bfnt.comportment.diax.api.Diax;
+import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.PermissionException;
@@ -24,27 +25,19 @@ public class CommandHandler extends Diax
             CommandDescription cd = i.getClass().getAnnotation(CommandDescription.class);
             if (cd.name().equals(command.split(" ")[0]))
             {
-                switch (event.getChannelType())
+                if (cd.guildOnly() && channel.getType().equals(ChannelType.PRIVATE))
                 {
-                    case TEXT:
-                    {
-                        try
-                        {
-                            if (checkPermission(event.getGuild().getMember(event.getAuthor()), cd.permission())) i.execute(event.getMessage());
-                        }
-                        catch (PermissionException e1)
-                        {
-                            selfNoPermission(channel);
-                        }
-                        break;
-                    }
-                    default:
-                    {
-                        notInGuild(channel);
-                        break;
-                    }
+                    notInGuild(channel);
                 }
-                break;
+                else if (checkPermission(event.getGuild().getMember(event.getAuthor()), cd.permission()))
+                {
+                    i.execute(event.getMessage());
+                }
+                else
+                {
+                    noPermission(channel);
+                }
+                return;
             }
         }
     }

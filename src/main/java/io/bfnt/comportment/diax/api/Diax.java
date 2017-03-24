@@ -25,7 +25,7 @@ public abstract class Diax extends ListenerAdapter
     {
         return new MessageBuilder().append(String.format("__**%s**__\n\n%s", title, content));
     }
-    protected Message makeError(String content)
+    private Message makeError(String content)
     {
         return makeMessage("Error!", content).build();
     }
@@ -56,6 +56,10 @@ public abstract class Diax extends ListenerAdapter
     protected void selfNoPermission(MessageChannel channel)
     {
         channel.sendMessage(makeError("I do not have enough permission to do this.")).queue();
+    }
+    protected void noPermission(MessageChannel channel)
+    {
+        channel.sendMessage(makeError("You do not have enough permission to do this.")).queue();
     }
     protected void notInGuild(MessageChannel channel)
     {

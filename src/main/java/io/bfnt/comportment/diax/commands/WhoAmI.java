@@ -9,7 +9,7 @@ import net.dv8tion.jda.core.entities.User;
  * Created by Comporment on 23/03/2017 at 16:47
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-@CommandDescription(name = "whoami")
+@CommandDescription(name = "whoami", guildOnly = false)
 public class WhoAmI extends DiaxCommand
 {
     public void execute(Message trigger)
