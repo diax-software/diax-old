@@ -12,7 +12,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Created by Comporment on 24/03/2017 at 21:19
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-@CommandDescription(name = "ban", minimumArgs = 1, permission = Permission.BAN_MEMBERS, args = "@mention", guildOnly = true, emoji = "🔨")
+@CommandDescription(name = "ban", minimumArgs = 1, permission = Permission.BAN_MEMBERS, args = "@mention", guildOnly = true, emoji = "🛠")
 public class Ban extends ModerationCommand
 {
     public void execute(Message trigger)

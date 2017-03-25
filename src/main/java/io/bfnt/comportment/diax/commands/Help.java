@@ -8,7 +8,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Created by Comporment on 23/03/2017 at 17:49
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-@CommandDescription(name = "help", args = "[command name]")
+@CommandDescription(name = "help", args = "[command name]", emoji = "❗")
 public class Help extends DiaxCommand
 {
     public void execute(Message message)
