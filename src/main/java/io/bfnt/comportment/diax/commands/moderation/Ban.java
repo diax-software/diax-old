@@ -23,6 +23,6 @@ public class Ban extends ModerationCommand
             makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
             return;
         }
-        punish(member, trigger.getChannel(), Punishment.BAN);
+        punish(member, trigger.getTextChannel(), Punishment.BAN);
     }
 }

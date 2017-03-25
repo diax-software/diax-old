@@ -23,6 +23,6 @@ public class Softban extends ModerationCommand
             makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
             return;
         }
-        punish(member, trigger.getChannel(), Punishment.SOFT_BAN);
+        punish(member, trigger.getTextChannel(), Punishment.SOFT_BAN);
     }
 }

@@ -23,6 +23,6 @@ public class Kick extends ModerationCommand
             makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
             return;
         }
-        punish(member, trigger.getChannel(), Punishment.KICK);
+        punish(member, trigger.getTextChannel(), Punishment.KICK);
     }
 }
