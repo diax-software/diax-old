@@ -15,10 +15,6 @@ public class Help extends DiaxCommand
 {
     public void execute(Message message)
     {
-        message.getChannel().sendMessage(makeMessage("Commands", makeCommands()).build()).queue();
-    }
-    private String makeCommands()
-    {
-        return getCommands().descendingSet().stream().map(DiaxCommand::getHelpDescription).collect(Collectors.joining("\n\n"));
+        message.getChannel().sendMessage(makeMessage("Commands", getCommands().descendingSet().stream().map(DiaxCommand::getHelpDescription).collect(Collectors.joining("\n\n"))).build()).queue();
     }
 }
