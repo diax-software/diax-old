@@ -1,7 +1,6 @@
 package io.bfnt.comportment.diax.commands.moderation;
 
 import io.bfnt.comportment.diax.api.command.CommandDescription;
-import io.bfnt.comportment.diax.api.command.ErrorType;
 import io.bfnt.comportment.diax.api.command.ModerationCommand;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
@@ -21,10 +20,6 @@ public class Ban extends ModerationCommand
             Member member = getMemberFromString(trigger.getRawContent().split(" ")[1], trigger.getGuild());
             trigger.getGuild().getController().ban(member, 7).queue(_void ->
                     trigger.getChannel().sendMessage(makeMessage("Banned!", getNiceName(member) + " has been banned.").build()).queue());
-        }
-        catch (NullPointerException e)
-        {
-            makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
         }
     }
 }
