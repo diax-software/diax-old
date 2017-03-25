@@ -39,7 +39,7 @@ public class Bump extends DiaxCommand
         Guild guild = trigger.getGuild();
         String invite = "https://discord.gg/" + trigger.getGuild().getPublicChannel().createInvite().complete().getCode();
         BumpTimer.removeBump(guild);
-        trigger.getJDA().getGuildById("293889712014360586").getTextChannelById("294519934996971520").sendMessage(new EmbedBuilder().setAuthor(guild.getName(), invite, guild.getIconUrl()).setDescription(String.format("Join %s by using this link: %s", guild.getName(), invite)).setColor(trigger.getGuild().getMember(trigger.getAuthor()).getColor()).build()).queue();
+        trigger.getJDA().getGuildById("293889712014360586").getTextChannelById("294519934996971520").sendMessage(new EmbedBuilder().setAuthor(guild.getName(), invite, guild.getIconUrl()).setDescription(String.format("Join %s by clicking this [link](%s).", guild.getName(), invite)).setColor(trigger.getGuild().getMember(trigger.getAuthor()).getColor()).build()).queue();
         trigger.getChannel().sendMessage(makeMessage("Bumped!", trigger.getGuild().getName() + " has been bumped!").build()).queue();
         BumpTimer.addBump(trigger.getGuild(), trigger.getCreationTime().toEpochSecond());
     }
