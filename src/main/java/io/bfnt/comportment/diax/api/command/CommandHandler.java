@@ -40,7 +40,7 @@ public class CommandHandler extends Diax
                     }
                     catch (PermissionException e)
                     {
-                        makeError(channel, ErrorType.NO_PERMISSION);
+                        makeError(channel, ErrorType.SELF_NO_PERMISSION);
                     }
                     catch (Exception e)
                     {
