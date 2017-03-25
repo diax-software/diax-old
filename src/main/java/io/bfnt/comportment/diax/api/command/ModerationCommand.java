@@ -41,17 +41,17 @@ public abstract class ModerationCommand extends DiaxCommand
                 }
                 case PURGE:
                 {
-                    channel.getHistory().retrievePast(100).queue(history ->
-                            channel.deleteMessages(history).queue(_void ->
-                                    channel.sendMessage(makeMessage("Purged", "100 messages have been purged.").build()).queue()));
+                   // channel.getHistory().retrievePast(100).queue(history ->
+                     //       channel.deleteMessages(history).queue(_void ->
+                       //             channel.sendMessage(makeMessage("Purged", "100 messages have been purged.").build()).queue()));
                     return;
                 }
             }
-            channel.sendMessage(makeMessage(punishment.getPast(), String.format("%s has been %s.", getNiceName(member.getUser()), punishment.getPast())).build()).queue();
+            //channel.sendMessage(makeMessage(punishment.getPast(), String.format("%s has been %s.", getNiceName(member.getUser()), punishment.getPast())).build()).queue();
         }
         catch (PermissionException e)
         {
-            makeError(channel, ErrorType.SELF_NO_PERMISSION);
+            //makeError(channel, ErrorType.SELF_NO_PERMISSION);
         }
 
     }

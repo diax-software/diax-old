@@ -18,7 +18,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
     {
         return g.getMemberById(s.replaceAll("[<!@>]", ""));
     }
-    private CommandDescription getCommandAnnotation()
+    public CommandDescription getCommandAnnotation()
     {
         return getClass().getAnnotation(CommandDescription.class);
     }

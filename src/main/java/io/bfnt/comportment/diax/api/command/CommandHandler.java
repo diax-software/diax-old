@@ -20,7 +20,7 @@ public class CommandHandler extends Diax
         MessageChannel channel = event.getChannel();
         for (DiaxCommand i : getCommands())
         {
-            CommandDescription cd = i.getClass().getAnnotation(CommandDescription.class);
+            CommandDescription cd = i.getCommandAnnotation();
             if (cd.name().equals(command.split(" ")[0]))
             {
                 if (cd.minimumArgs() + 1 > command.split(" ").length)
