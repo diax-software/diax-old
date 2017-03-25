@@ -19,6 +19,7 @@ import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.managers.AudioManager;
 
 import java.util.HashMap;
@@ -71,6 +72,20 @@ public final class Main extends Diax
     }
 
 
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event) {
+        String[] command = event.getMessage().getContent().split(" ", 2);
+        Guild guild = event.getGuild();
+
+        if (guild != null) {
+            if ("~play".equals(command[0]) && command.length == 2) {
+                loadAndPlay(event.getTextChannel(), command[1]);
+            } else if ("~skip".equals(command[0])) {
+                skipTrack(event.getTextChannel());
+            }
+        }
+        super.onMessageReceived(event);
+    }
     private void loadAndPlay(final TextChannel channel, final String trackUrl) {
         GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
 
