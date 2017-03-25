@@ -51,7 +51,8 @@ public abstract class ModerationCommand extends DiaxCommand
                             }
                         })
                     );
-                    break;
+                    channel.sendMessage(makeMessage("Purged", "100 messages have been purged.").build()).queue();
+                    return;
                 }
             }
             channel.sendMessage(message).queue();

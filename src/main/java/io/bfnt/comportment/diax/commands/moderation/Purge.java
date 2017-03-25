@@ -15,7 +15,6 @@ public class Purge extends ModerationCommand
 {
     public void execute(Message trigger)
     {
-        Member member = getMemberFromString(trigger.getRawContent().split(" ")[1], trigger.getGuild());
-        punish(member, trigger.getChannel(), Punishment.PURGE);
+        punish(trigger.getGuild().getMember(trigger.getJDA().getSelfUser()), trigger.getChannel(), Punishment.PURGE);
     }
 }
