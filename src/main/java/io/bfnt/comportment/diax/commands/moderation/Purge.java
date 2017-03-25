@@ -8,11 +8,13 @@ import net.dv8tion.jda.core.entities.Message;
  * Created by Comporment on 25/03/2017 at 11:41
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-@CommandDescription(name = "p̶u̶r̶g̶e", args = "@mention", guildOnly = true, emoji = "🚓")
+@CommandDescription(name = "purge", args = "@mention", guildOnly = true, emoji = "🚓")
 public class Purge extends DiaxCommand
 {
     public void execute(Message trigger)
     {
-       // punish(trigger.getGuild().getMember(trigger.getJDA().getSelfUser()), trigger.getTextChannel(), Punishment.PURGE);
+        trigger.getTextChannel().getHistory().retrievePast(100).queue(history ->
+                trigger.getTextChannel().deleteMessages(history).queue(_void ->
+                    trigger.getTextChannel().sendMessage(makeMessage("Deleted!", history.size() + " messages have been deleted.").build()).queue()));
     }
 }
