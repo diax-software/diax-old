@@ -24,7 +24,7 @@ public class Bump extends DiaxCommand
             }
             else
             {
-                trigger.getChannel().sendMessage(makeMessage(" ", "Please wait " + cooldown + " more seconds more to do this.").build()).queue();
+                trigger.getChannel().sendMessage(makeMessage(" ", "Please wait " + timeLeft + " more seconds more to do this.").build()).queue();
             }
         }
         else
