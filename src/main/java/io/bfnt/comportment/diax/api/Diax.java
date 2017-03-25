@@ -2,8 +2,8 @@ package io.bfnt.comportment.diax.api;
 
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import io.bfnt.comportment.diax.api.command.ErrorType;
-import io.bfnt.comportment.diax.commands.Help;
-import io.bfnt.comportment.diax.commands.WhoAmI;
+import io.bfnt.comportment.diax.commands.information.Help;
+import io.bfnt.comportment.diax.commands.information.WhoAmI;
 import io.bfnt.comportment.diax.commands.moderation.Ban;
 import io.bfnt.comportment.diax.commands.moderation.Kick;
 import io.bfnt.comportment.diax.commands.moderation.Purge;
