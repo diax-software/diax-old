@@ -23,4 +23,9 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
     {
         return getClass().getAnnotation(CommandDescription.class);
     }
+    public String getHelpDescription()
+    {
+        CommandDescription cd = getCommandAnnotation();
+        return String.format("`%s %s%s %s `", cd.emoji(), prefix(), cd.name(), cd.args());
+    }
 }
