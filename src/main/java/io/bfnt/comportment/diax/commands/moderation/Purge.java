@@ -10,7 +10,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Created by Comporment on 25/03/2017 at 11:41
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-@CommandDescription(name = "p̶u̶r̶g̶e", args = "[@mention]", guildOnly = true, minimumArgs = 1, emoji = "🚓")
+@CommandDescription(name = "p̶u̶r̶g̶e", args = "@mention", guildOnly = true, minimumArgs = 1, emoji = "🚓")
 public class Purge extends ModerationCommand
 {
     public void execute(Message trigger)
