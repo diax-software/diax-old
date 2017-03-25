@@ -16,12 +16,15 @@ public class Kick extends ModerationCommand
 {
     public void execute(Message trigger)
     {
-        Member member = getMemberFromString(trigger.getRawContent().split(" ")[1], trigger.getGuild());
-        if (member == null)
+        try
+        {
+            Member member = getMemberFromString(trigger.getRawContent().split(" ")[1], trigger.getGuild());
+            trigger.getGuild().getController().ban(member, 7).queue(_void ->
+                    trigger.getChannel().sendMessage(makeMessage("Kicked!", getNiceName(member) + " has been kicked.").build()).queue());
+        }
+        catch (NullPointerException e)
         {
             makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
-            return;
         }
-        //punish(member, trigger.getTextChannel(), Punishment.KICK);
     }
 }
