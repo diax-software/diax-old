@@ -1,8 +1,9 @@
 package io.bfnt.comportment.diax.commands.moderation;
 
 import io.bfnt.comportment.diax.api.command.CommandDescription;
-import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import io.bfnt.comportment.diax.api.command.ErrorType;
+import io.bfnt.comportment.diax.api.command.ModerationCommand;
+import io.bfnt.comportment.diax.api.command.Punishment;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
@@ -12,7 +13,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 @CommandDescription(name = "kick", args = "@mention", emoji = "🔨", permission = Permission.KICK_MEMBERS, minimumArgs = 1, guildOnly = true)
-public class Kick extends DiaxCommand
+public class Kick extends ModerationCommand
 {
     public void execute(Message trigger)
     {
@@ -22,7 +23,6 @@ public class Kick extends DiaxCommand
             makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
             return;
         }
-        trigger.getGuild().getController().kick(member).queue();
-        trigger.getChannel().sendMessage(makeMessage("Kicked!", getNiceName(member.getUser()) + " has been kicked.").build()).queue();
+        punish(member, trigger.getChannel(), Punishment.KICK);
     }
 }
