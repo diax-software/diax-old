@@ -1,15 +1,12 @@
 package io.bfnt.comportment.diax;
 
-import io.bfnt.comportment.diax.api.command.CommandHandler;
 import io.bfnt.comportment.diax.api.Diax;
+import io.bfnt.comportment.diax.api.command.CommandHandler;
 import io.bfnt.comportment.diax.token.Token;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.exceptions.RateLimitedException;
-
-import javax.security.auth.login.LoginException;
 
 /**
  * Created by Comporment on 22/03/2017 at 19:09
@@ -28,7 +25,7 @@ public final class Main extends Diax
                     .setGame(Game.of("<>help", "https://twitch.tv/skiletro"))
                     .buildBlocking();
         }
-        catch (LoginException|InterruptedException|RateLimitedException exception)
+        catch (Exception exception)
         {
             System.err.println("Someone thing wrong :/\nHave an error message so I can make it up to you <3\n");
             exception.printStackTrace();
