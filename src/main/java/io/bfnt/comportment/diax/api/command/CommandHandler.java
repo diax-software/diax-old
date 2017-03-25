@@ -11,7 +11,7 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 
-public class CommandHandler extends Diax
+public final class CommandHandler extends Diax
 {
     @Override
     public void onMessageReceived(MessageReceivedEvent event)

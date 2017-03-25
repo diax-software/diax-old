@@ -23,7 +23,7 @@ import java.util.TreeSet;
  * Created by Comporment on 23/03/2017 at 16:41
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public abstract class Diax extends ListenerAdapter
+public class Diax extends ListenerAdapter
 {
     protected MessageBuilder makeMessage(String title, String content)
     {
