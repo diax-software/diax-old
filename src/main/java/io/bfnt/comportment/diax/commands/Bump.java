@@ -22,7 +22,7 @@ public class Bump extends DiaxCommand
         Long time = trigger.getCreationTime().toEpochSecond();
         if (guilds.containsKey(guild))
         {
-            if (guilds.get(trigger.getGuild()) - trigger.getCreationTime().toEpochSecond() > 100)
+            if (time - guilds.get(trigger.getGuild()) > 100)
             {
                 bump(trigger.getTextChannel(), time);
             }
