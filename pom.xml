@@ -6,7 +6,7 @@
     <!--File declaration.-->
     <groupId>io.bfnt.comportment</groupId>
     <artifactId>Diax</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <build>
         <plugins>
             <!--Shades the .jar file-->
