@@ -16,15 +16,13 @@ public class Kick extends DiaxCommand
 {
     public void execute(Message trigger)
     {
+        Member member = trigger.getGuild().getMemberById(trigger.getRawContent().split(" ")[1].replaceAll("[<!@>]", ""));
+        if (member == null)
         {
-            Member member = trigger.getGuild().getMemberById(trigger.getRawContent().split(" ")[1].replaceAll("[<!@>]", ""));
-            if (member == null)
-            {
-                makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
-                return;
-            }
-            trigger.getGuild().getController().kick(member).queue();
-            trigger.getChannel().sendMessage(makeMessage("Kicked!", getNiceName(member.getUser()) + " has been kicked.").build()).queue();
+            makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
+            return;
         }
+        trigger.getGuild().getController().kick(member).queue();
+        trigger.getChannel().sendMessage(makeMessage("Kicked!", getNiceName(member.getUser()) + " has been kicked.").build()).queue();
     }
 }
