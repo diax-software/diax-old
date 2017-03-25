@@ -38,9 +38,9 @@ public abstract class ModerationCommand extends DiaxCommand
                 }
                 case PURGE:
                 {
-                    channel.getHistory().retrievePast(100).queue(history -> channel.deleteMessages(history).queue());
-
-                    channel.sendMessage(makeMessage("Purged", "100 messages have been purged.").build()).queue();
+                    channel.getHistory().retrievePast(100).queue(history ->
+                            channel.deleteMessages(history).queue(_void ->
+                                    channel.sendMessage(makeMessage("Purged", "100 messages have been purged.").build()).queue()));
                     return;
                 }
             }
