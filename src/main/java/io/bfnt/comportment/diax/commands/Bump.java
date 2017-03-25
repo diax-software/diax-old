@@ -12,7 +12,7 @@ import net.dv8tion.jda.core.entities.Message;
 @CommandDescription(name = "bump", guildOnly = true, emoji = "🎉")
 public class Bump extends DiaxCommand
 {
-    private int cooldown = 5;
+    private int cooldown = 10;
     public void execute(Message trigger)
     {
         if (BumpTimer.getBumps().containsKey(trigger.getGuild()))
@@ -36,5 +36,6 @@ public class Bump extends DiaxCommand
     {
         BumpTimer.removeBump(trigger.getGuild());
         trigger.getChannel().sendMessage(makeMessage("Bumped!", trigger.getGuild().getName() + " has been bumped!").build()).queue();
+        BumpTimer.addBump(trigger.getGuild(), trigger.getCreationTime().toEpochSecond());
     }
 }
