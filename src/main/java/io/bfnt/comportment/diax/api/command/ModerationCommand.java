@@ -1,7 +1,7 @@
 package io.bfnt.comportment.diax.api.command;
 
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.exceptions.PermissionException;
 import net.dv8tion.jda.core.managers.GuildController;
 
@@ -11,8 +11,14 @@ import net.dv8tion.jda.core.managers.GuildController;
  */
 public abstract class ModerationCommand extends DiaxCommand
 {
-    protected void punish(Member member, TextChannel channel, Punishment punishment)
+    protected void punish(Message trigger, Punishment punishment)
     {
+        Member member = getMemberFromString(trigger.getRawContent().split(" ")[1], trigger.getGuild());
+        if (member == null)
+        {
+            makeError(trigger.getChannel(), ErrorType.USER_NOT_FOUND);
+            return;
+        }
         GuildController c = member.getGuild().getController();
         try
         {

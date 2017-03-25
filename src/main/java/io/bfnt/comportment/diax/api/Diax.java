@@ -3,9 +3,9 @@ package io.bfnt.comportment.diax.api;
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import io.bfnt.comportment.diax.api.command.ErrorType;
 import io.bfnt.comportment.diax.commands.Help;
+import io.bfnt.comportment.diax.commands.WhoAmI;
 import io.bfnt.comportment.diax.commands.moderation.Ban;
 import io.bfnt.comportment.diax.commands.moderation.Kick;
-import io.bfnt.comportment.diax.commands.WhoAmI;
 import io.bfnt.comportment.diax.commands.moderation.Purge;
 import io.bfnt.comportment.diax.commands.moderation.Softban;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -40,6 +40,11 @@ public abstract class Diax extends ListenerAdapter
     }
     protected String getNiceName(User user)
     {
+        return String.format("%s#%s", user.getName(), user.getDiscriminator());
+    }
+    protected String getNiceName(Member member)
+    {
+        User user = member.getUser();
         return String.format("%s#%s", user.getName(), user.getDiscriminator());
     }
     protected String prefix()
