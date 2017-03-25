@@ -51,6 +51,7 @@
         </plugins>
     </build>
     <repositories>
+        <!--Repository for JDA and Lavaplayer-->
         <repository>
             <id>jcenter</id>
             <name>jcenter-bintray</name>
@@ -58,11 +59,17 @@
         </repository>
     </repositories>
     <dependencies>
-        <!--JDA Wrapper: https://github.com/DV8FromTheWorld/JDA-->
+        <!--Java Discord Wrapper: https://github.com/DV8FromTheWorld/JDA-->
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>3.0.0_161</version>
+        </dependency>
+        <!--Music: https://github.com/sedmelluq/lavaplayer-->
+        <dependency>
+            <groupId>com.sedmelluq</groupId>
+            <artifactId>lavaplayer</artifactId>
+            <version>1.2.34</version>
         </dependency>
     </dependencies>
 </project>
