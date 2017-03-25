@@ -19,7 +19,6 @@ public class Help extends DiaxCommand
     }
     private String makeCommands()
     {
-
         return getCommands().descendingSet().stream().map(DiaxCommand::getHelpDescription).collect(Collectors.joining("\n\n"));
     }
 }
