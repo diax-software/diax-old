@@ -1,8 +1,6 @@
 package io.bfnt.comportment.diax.api.command;
 
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.exceptions.PermissionException;
 import net.dv8tion.jda.core.managers.GuildController;
@@ -16,7 +14,6 @@ public abstract class ModerationCommand extends DiaxCommand
     protected void punish(Member member, TextChannel channel, Punishment punishment)
     {
         GuildController c = member.getGuild().getController();
-        Message message = makeMessage(punishment.getPast(), String.format("%s has been %s.", getNiceName(member.getUser()), punishment.getPast())).build();
         try
         {
             switch (punishment)
@@ -44,7 +41,7 @@ public abstract class ModerationCommand extends DiaxCommand
                     return;
                 }
             }
-            channel.sendMessage(message).queue();
+            channel.sendMessage(makeMessage(punishment.getPast(), String.format("%s has been %s.", getNiceName(member.getUser()), punishment.getPast())).build()).queue();
         }
         catch (PermissionException e)
         {
