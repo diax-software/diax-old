@@ -10,3 +10,4 @@ test/
 # Specific files.
 *.iml
 dependency-reduced-pom.xml
+!/.idea/
