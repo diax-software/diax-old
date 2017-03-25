@@ -1,8 +1,8 @@
 package io.bfnt.comportment.diax.commands.moderation;
 
 import io.bfnt.comportment.diax.api.command.CommandDescription;
+import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import io.bfnt.comportment.diax.api.command.ErrorType;
-import io.bfnt.comportment.diax.api.command.ModerationCommand;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
@@ -12,7 +12,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 @CommandDescription(name = "ban", minimumArgs = 1, permission = Permission.BAN_MEMBERS, args = "@mention", guildOnly = true, emoji = "🛠")
-public class Ban extends ModerationCommand
+public class Ban extends DiaxCommand
 {
     public void execute(Message trigger)
     {
@@ -24,6 +24,5 @@ public class Ban extends ModerationCommand
         }
         trigger.getGuild().getController().ban(member, 7).queue(_void ->
                 trigger.getChannel().sendMessage(makeMessage("Banned!", getNiceName(member) + " has been banned.").build()).queue());
-
     }
 }
