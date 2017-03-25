@@ -17,6 +17,7 @@ public class Bump extends DiaxCommand
         if (BumpTimer.getBumps().containsKey(trigger.getGuild()))
         {
             long timeleft = (trigger.getCreationTime().toEpochSecond() - BumpTimer.getBumps().get(trigger.getGuild()));
+            if (timeleft >= 5) BumpTimer.removeBump(trigger.getGuild());
             trigger.getChannel().sendMessage("" + timeleft).queue();
         }
         else
