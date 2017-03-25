@@ -35,7 +35,7 @@ public final class Main extends Diax
     private final Map<Long, GuildMusicManager> musicManagers;
     private Main()
     {
-        this.musicManagers = new HashMap<Long, GuildMusicManager>();
+        this.musicManagers = new HashMap<>();
         this.playerManager = new DefaultAudioPlayerManager();
         AudioSourceManagers.registerLocalSource(playerManager);
         AudioSourceManagers.registerRemoteSources(playerManager);
@@ -46,8 +46,8 @@ public final class Main extends Diax
         {
             JDA jda = new JDABuilder(AccountType.BOT)
                     .setToken(Token.main())
-                    .addListener(new CommandHandler())
-                    .setAudioEnabled(false)
+                    .addListener(new CommandHandler(), new Main())
+                    .setAudioEnabled(true)
                     .setGame(Game.of("<>help", "https://twitch.tv/skiletro"))
                     .buildBlocking();
         }
