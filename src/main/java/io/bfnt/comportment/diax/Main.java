@@ -6,6 +6,7 @@ import io.bfnt.comportment.diax.token.Token;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 import javax.security.auth.login.LoginException;
@@ -23,6 +24,8 @@ public final class Main extends Diax
             JDA jda = new JDABuilder(AccountType.BOT)
                     .setToken(Token.main())
                     .addListener(new CommandHandler())
+                    .setAudioEnabled(false)
+                    .setGame(Game.of("<>help", "https://twitch.tv/skiletro"))
                     .buildBlocking();
         }
         catch (LoginException|InterruptedException|RateLimitedException exception)
