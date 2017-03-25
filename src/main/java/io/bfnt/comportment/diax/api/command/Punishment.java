@@ -6,9 +6,9 @@ package io.bfnt.comportment.diax.api.command;
  */
 public enum Punishment
 {
-    BAN("banned"),
-    KICK("kicked"),
-    SOFTBAN("softbanned");
+    BAN("BANNED"),
+    KICK("KICKED"),
+    SOFT_BAN("SOFT-BANNED");
 
     private String past;
 

@@ -15,7 +15,7 @@ public abstract class ModerationCommand extends DiaxCommand
     protected void punish(Member member, MessageChannel channel, Punishment punishment)
     {
         GuildController c = member.getGuild().getController();
-        Message message = makeMessage(punishment.name(), String.format("%s has been %s.", getNiceName(member.getUser()), punishment.getPast())).build();
+        Message message = makeMessage(punishment.getPast(), String.format("%s has been %s.", getNiceName(member.getUser()), punishment.getPast())).build();
         try
         {
             switch (punishment)
@@ -23,18 +23,18 @@ public abstract class ModerationCommand extends DiaxCommand
                 case BAN:
                 {
                     c.ban(member, 1).queue();
-                    return;
+                    break;
                 }
                 case KICK:
                 {
                     c.kick(member).queue();
-                    return;
+                    break;
                 }
-                case SOFTBAN:
+                case SOFT_BAN:
                 {
                     c.ban(member, 1).queue();
                     c.unban(member.getUser()).queue();
-                    return;
+                    break;
                 }
             }
             channel.sendMessage(message).queue();
