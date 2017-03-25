@@ -22,7 +22,7 @@ public class Help extends DiaxCommand
       //  DiaxCommand::des
         //String commands = String.join(",", getCommands().stream().map(DiaxCommand.getClass.getAnnotation(CommandDescription.class).b));
         StringBuilder sb = new StringBuilder();
-        for (DiaxCommand command : getCommands())
+        for (DiaxCommand command : getCommands().descendingSet())
         {
             CommandDescription cd = command.getCommandAnnotation();
             sb.append(String.format("`%s %s%s %s `\n\n", cd.emoji(), prefix(), cd.name(), cd.args()));

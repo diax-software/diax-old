@@ -12,7 +12,8 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
 {
     public int compareTo(DiaxCommand o)
     {
-        return o.getClass().getAnnotation(CommandDescription.class).name().compareTo(getClass().getAnnotation(CommandDescription.class).name());
+        return o.getCommandAnnotation().name().compareTo(getClass().getAnnotation(CommandDescription.class).name());
+        //return o.getClass().getAnnotation(CommandDescription.class).name().compareTo(getClass().getAnnotation(CommandDescription.class).name());
     }
     protected Member getMemberFromString(String s, Guild g)
     {
