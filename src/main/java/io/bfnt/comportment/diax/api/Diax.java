@@ -3,6 +3,7 @@ package io.bfnt.comportment.diax.api;
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import io.bfnt.comportment.diax.api.command.ErrorType;
 import io.bfnt.comportment.diax.commands.Help;
+import io.bfnt.comportment.diax.commands.moderation.Ban;
 import io.bfnt.comportment.diax.commands.moderation.Kick;
 import io.bfnt.comportment.diax.commands.WhoAmI;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -51,6 +52,7 @@ public abstract class Diax extends ListenerAdapter
                 add(new WhoAmI());
                 add(new Help());
                 add(new Kick());
+                add(new Ban());
             }
         };
     }
