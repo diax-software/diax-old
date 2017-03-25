@@ -5,10 +5,8 @@
 .idea/
 target/
 token/
-test/
 
 # Specific files.
 *.iml
 dependency-reduced-pom.xml
-/.idea/
 src/main/resources/
