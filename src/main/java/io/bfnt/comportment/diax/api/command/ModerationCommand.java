@@ -3,6 +3,7 @@ package io.bfnt.comportment.diax.api.command;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.exceptions.PermissionException;
 import net.dv8tion.jda.core.managers.GuildController;
 
@@ -12,7 +13,7 @@ import net.dv8tion.jda.core.managers.GuildController;
  */
 public abstract class ModerationCommand extends DiaxCommand
 {
-    protected void punish(Member member, MessageChannel channel, Punishment punishment)
+    protected void punish(Member member, TextChannel channel, Punishment punishment)
     {
         GuildController c = member.getGuild().getController();
         Message message = makeMessage(punishment.getPast(), String.format("%s has been %s.", getNiceName(member.getUser()), punishment.getPast())).build();
@@ -37,20 +38,8 @@ public abstract class ModerationCommand extends DiaxCommand
                 }
                 case PURGE:
                 {
-                    channel.getHistory().retrievePast(100).queue(messages ->
+                    channel.getHistory().retrievePast(100).queue(history -> channel.deleteMessages(history).queue());
 
-                        messages.forEach(msg ->
-                        {
-                            try
-                            {
-                                msg.delete().queue();
-                            }
-                            catch (PermissionException e)
-                            {
-                                //Hue hue hue
-                            }
-                        })
-                    );
                     channel.sendMessage(makeMessage("Purged", "100 messages have been purged.").build()).queue();
                     return;
                 }
