@@ -10,7 +10,8 @@ public enum ErrorType
     NOT_ENOUGH_ARGS("You did not specify enough arguments for this command."),
     NO_PERMISSION("You do not have permission to do that."),
     NOT_IN_GUILD("This command can not be used in a direct message."),
-    USER_NOT_FOUND("That user could not be found.");
+    USER_NOT_FOUND("That user could not be found."),
+    UNKNOWN("Something went wrong, but we don't know what ://");
 
     String description;
 

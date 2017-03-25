@@ -4,6 +4,7 @@ import io.bfnt.comportment.diax.api.Diax;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.exceptions.PermissionException;
 
 /**
  * Created by Comporment on 23/03/2017 at 20:14
@@ -33,13 +34,17 @@ public class CommandHandler extends Diax
                 }
                 else if (checkPermission(event.getGuild().getMember(event.getAuthor()), cd.permission()))
                 {
-                    if (checkPermission(event.getGuild().getMember(event.getJDA().getSelfUser()), cd.permission()))
+                    try
                     {
                         i.execute(event.getMessage());
                     }
-                    else
+                    catch (PermissionException e)
                     {
                         makeError(channel, ErrorType.NO_PERMISSION);
+                    }
+                    catch (Exception e)
+                    {
+                        makeError(channel, ErrorType.UNKNOWN);
                     }
                 }
                 else
