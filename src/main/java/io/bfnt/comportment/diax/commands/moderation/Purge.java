@@ -16,7 +16,7 @@ public class Purge extends DiaxCommand
         int amount;
         try
         {
-                amount = Integer.parseInt(trigger.getRawContent().split(" ")[1]);
+            amount = Integer.parseInt(trigger.getRawContent().split(" ")[1]);
         }
         catch (NumberFormatException e)
         {
