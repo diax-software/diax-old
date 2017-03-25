@@ -12,7 +12,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Created by Comporment on 23/03/2017 at 21:45
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-@CommandDescription(name = "kick", args = "@mention", emoji = "🔨", permission = Permission.KICK_MEMBERS, minimumArgs = 1, guildOnly = true)
+@CommandDescription(name = "kick", args = "@mention", emoji = "👞", permission = Permission.KICK_MEMBERS, minimumArgs = 1, guildOnly = true)
 public class Kick extends ModerationCommand
 {
     public void execute(Message trigger)
