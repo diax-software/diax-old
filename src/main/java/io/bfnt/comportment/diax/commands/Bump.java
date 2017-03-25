@@ -22,9 +22,7 @@ public class Bump extends DiaxCommand
         {
             if (guilds.get(trigger.getGuild()) - trigger.getCreationTime().toEpochSecond() > 100)
             {
-                guilds.remove(trigger.getGuild());
-                trigger.getChannel().sendMessage(makeMessage("Bumped!", "This server has been bumped.").build()).queue();
-                guilds.put(guild, time);
+                bump(trigger.getTextChannel(), time);
             }
             else
             {
@@ -33,11 +31,10 @@ public class Bump extends DiaxCommand
         }
         else
         {
-            guilds.put(guild, time);
-            trigger.getChannel().sendMessage(makeMessage("Bumped!", "This server has been bumped!").build()).queue();
+            bump(trigger.getTextChannel(), time);
         }
     }
-    public void bump(TextChannel channel, Long time)
+    private void bump(TextChannel channel, Long time)
     {
         Guild guild = channel.getGuild();
         if (guilds.containsKey(guild)) guilds.remove(guild);
