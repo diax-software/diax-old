@@ -7,7 +7,7 @@ package io.bfnt.comportment.diax.api.command;
 public enum ErrorType
 {
     SELF_NO_PERMISSION("I do not have the permission to do that."),
-    NOT_ENOUGH_ARGS("You did not specify enough args for this command."),
+    NOT_ENOUGH_ARGS("You did not specify enough arguments for this command."),
     NO_PERMISSION("You do not have permission to do that."),
     NOT_IN_GUILD("This command can not be used in a direct message."),
     USER_NOT_FOUND("That user could not be found.");
