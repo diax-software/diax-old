@@ -8,7 +8,8 @@ public enum Punishment
 {
     BAN("BANNED"),
     KICK("KICKED"),
-    SOFT_BAN("SOFT-BANNED");
+    SOFT_BAN("SOFT-BANNED"),
+    PURGE("PURGED");
 
     private String past;
 

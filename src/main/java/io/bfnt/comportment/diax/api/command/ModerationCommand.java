@@ -22,7 +22,7 @@ public abstract class ModerationCommand extends DiaxCommand
             {
                 case BAN:
                 {
-                    c.ban(member, 1).queue();
+                    c.ban(member, 7).queue();
                     break;
                 }
                 case KICK:
@@ -32,8 +32,11 @@ public abstract class ModerationCommand extends DiaxCommand
                 }
                 case SOFT_BAN:
                 {
-                    c.ban(member, 1).queue();
-                    c.unban(member.getUser()).queue();
+                    c.ban(member, 7).queue(_void -> c.unban(member.getUser()).queue());
+                    break;
+                }
+                case PURGE:
+                {
                     break;
                 }
             }

@@ -13,6 +13,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CommandDescription
 {
+    String description() default "";
     String emoji() default "";
     String name() default "";
     String args() default "";
