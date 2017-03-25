@@ -1,6 +1,5 @@
 package io.bfnt.comportment.diax.commands;
 
-import io.bfnt.comportment.diax.api.command.Command;
 import io.bfnt.comportment.diax.api.command.CommandDescription;
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import net.dv8tion.jda.core.entities.Message;
