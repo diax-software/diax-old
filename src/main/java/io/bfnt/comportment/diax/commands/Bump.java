@@ -16,17 +16,17 @@ public class Bump extends DiaxCommand
 {
     public void execute(Message trigger)
     {
-        int coolDown = 10;
+        int coolDown = 14400;
         if (BumpTimer.getBumps().containsKey(trigger.getGuild()))
         {
-            long timeLeft = (trigger.getCreationTime().toEpochSecond() - BumpTimer.getBumps().get(trigger.getGuild()));
-            if (timeLeft >= coolDown)
+            long timeSinceLast = (trigger.getCreationTime().toEpochSecond() - BumpTimer.getBumps().get(trigger.getGuild()));
+            if (timeSinceLast >= coolDown)
             {
                 bump(trigger);
             }
             else
             {
-                trigger.getChannel().sendMessage(makeMessage("Error", "Please wait " + (coolDown - timeLeft) + " more seconds more to do this.").build()).queue();
+                trigger.getChannel().sendMessage(makeMessage("Error", "Please wait " + (coolDown - timeSinceLast) + " more seconds more to do this.").build()).queue();;
             }
         }
         else
