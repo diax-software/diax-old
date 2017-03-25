@@ -15,11 +15,9 @@ public class Ban extends ModerationCommand
 {
     public void execute(Message trigger)
     {
-        try
-        {
-            Member member = getMemberFromString(trigger.getRawContent().split(" ")[1], trigger.getGuild());
-            trigger.getGuild().getController().ban(member, 7).queue(_void ->
-                    trigger.getChannel().sendMessage(makeMessage("Banned!", getNiceName(member) + " has been banned.").build()).queue());
-        }
+        Member member = getMemberFromString(trigger.getRawContent().split(" ")[1], trigger.getGuild());
+        trigger.getGuild().getController().ban(member, 7).queue(_void ->
+                trigger.getChannel().sendMessage(makeMessage("Banned!", getNiceName(member) + " has been banned.").build()).queue());
+
     }
 }
