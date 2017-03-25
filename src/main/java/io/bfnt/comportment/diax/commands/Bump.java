@@ -17,8 +17,8 @@ public class Bump extends DiaxCommand
     {
         if (BumpTimer.getBumps().containsKey(trigger.getGuild()))
         {
-            long timeleft = (trigger.getCreationTime().toEpochSecond() - BumpTimer.getBumps().get(trigger.getGuild()));
-            if (timeleft >= cooldown)
+            long timeLeft = (trigger.getCreationTime().toEpochSecond() - BumpTimer.getBumps().get(trigger.getGuild()));
+            if (timeLeft >= cooldown)
             {
                 bump(trigger);
             }
@@ -35,6 +35,6 @@ public class Bump extends DiaxCommand
     private void bump(Message trigger)
     {
         BumpTimer.removeBump(trigger.getGuild());
-        trigger.getChannel().sendMessage(makeMessage("Bumped!", trigger.getChannel().getName() + " has been bumped!").build()).queue();
+        trigger.getChannel().sendMessage(makeMessage("Bumped!", trigger.getGuild().getName() + " has been bumped!").build()).queue();
     }
 }
