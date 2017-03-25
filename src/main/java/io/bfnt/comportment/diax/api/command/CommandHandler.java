@@ -45,6 +45,7 @@ public final class CommandHandler extends Diax
                     catch (Exception e)
                     {
                         makeError(channel, ErrorType.UNKNOWN);
+                        e.printStackTrace();
                     }
                 }
                 else
