@@ -6,6 +6,7 @@ import io.bfnt.comportment.diax.commands.Help;
 import io.bfnt.comportment.diax.commands.moderation.Ban;
 import io.bfnt.comportment.diax.commands.moderation.Kick;
 import io.bfnt.comportment.diax.commands.WhoAmI;
+import io.bfnt.comportment.diax.commands.moderation.Purge;
 import io.bfnt.comportment.diax.commands.moderation.Softban;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
@@ -55,6 +56,7 @@ public abstract class Diax extends ListenerAdapter
                 add(new Kick());
                 add(new Softban());
                 add(new Ban());
+                add(new Purge());
             }
         };
     }
