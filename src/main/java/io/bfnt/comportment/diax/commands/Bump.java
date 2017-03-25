@@ -1,12 +1,9 @@
 package io.bfnt.comportment.diax.commands;
 
+import io.bfnt.comportment.diax.api.BumpTimer;
 import io.bfnt.comportment.diax.api.command.CommandDescription;
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
-import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-
-import java.util.HashMap;
 
 /**
  * Created by Comporment on 25/03/2017 at 17:46
@@ -15,32 +12,16 @@ import java.util.HashMap;
 @CommandDescription(name = "bump", guildOnly = true, emoji = "🎉")
 public class Bump extends DiaxCommand
 {
-    private HashMap<Guild, Long> guilds = new HashMap<>();
     public void execute(Message trigger)
     {
-        Guild guild = trigger.getGuild();
-        Long time = trigger.getCreationTime().toEpochSecond();
-        if (guilds.containsKey(guild))
+        if (BumpTimer.getBumps().containsKey(trigger.getGuild()))
         {
-            if (time - guilds.get(trigger.getGuild()) > 100)
-            {
-                bump(trigger.getTextChannel(), time);
-            }
-            else
-            {
-                trigger.getChannel().sendMessage(makeMessage("Error!", String.format("Please wait %d more seconds to bump this server again.", guilds.get(guild))).build()).queue();
-            }
+            trigger.getChannel().sendMessage("in the timer.").queue();
         }
         else
         {
-            bump(trigger.getTextChannel(), time);
+            trigger.getChannel().sendMessage("not in the timer").queue();
+            BumpTimer.addBump(trigger.getGuild(), trigger.getCreationTime().toEpochSecond());
         }
-    }
-    private void bump(TextChannel channel, Long time)
-    {
-        Guild guild = channel.getGuild();
-        if (guilds.containsKey(guild)) guilds.remove(guild);
-        channel.sendMessage(makeMessage("Bumped!", "This server has been bumped!").build()).queue(_void ->
-                guilds.put(guild, time));
     }
 }
