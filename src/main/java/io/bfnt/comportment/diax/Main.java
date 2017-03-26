@@ -37,7 +37,7 @@ public final class Main extends Diax
         {
             JDA jda = new JDABuilder(AccountType.BOT)
                     .setToken(Token.main())
-                    .addListener(new CommandHandler(), new Main())
+                    .addListener(new CommandHandler())
                     .setAudioEnabled(true)
                     .setGame(Game.of("<>help", "https://twitch.tv/skiletro"))
                     .buildBlocking();

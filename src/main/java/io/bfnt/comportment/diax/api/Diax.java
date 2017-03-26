@@ -10,7 +10,6 @@ import io.bfnt.comportment.diax.commands.moderation.Ban;
 import io.bfnt.comportment.diax.commands.moderation.Kick;
 import io.bfnt.comportment.diax.commands.moderation.Purge;
 import io.bfnt.comportment.diax.commands.moderation.Softban;
-import io.bfnt.comportment.diax.commands.music.Play;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.Permission;
@@ -67,7 +66,6 @@ public class Diax extends ListenerAdapter
                 add(new Purge());
                 add(new Ginfo());
                 add(new Bump());
-                add(new Play());
             }
         };
     }
