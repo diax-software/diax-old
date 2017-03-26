@@ -10,10 +10,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import io.bfnt.comportment.diax.api.command.ErrorType;
 import io.bfnt.comportment.diax.api.music.GuildMusicManager;
-import io.bfnt.comportment.diax.commands.information.Bump;
-import io.bfnt.comportment.diax.commands.information.Ginfo;
-import io.bfnt.comportment.diax.commands.information.Help;
-import io.bfnt.comportment.diax.commands.information.WhoAmI;
+import io.bfnt.comportment.diax.commands.information.*;
 import io.bfnt.comportment.diax.commands.moderation.Ban;
 import io.bfnt.comportment.diax.commands.moderation.Kick;
 import io.bfnt.comportment.diax.commands.moderation.Purge;
@@ -78,6 +75,7 @@ public class Diax extends ListenerAdapter
                 add(new Ginfo());
                 add(new Bump());
                 add(new Play());
+                add(new Ping());
             }
         };
     }

@@ -16,6 +16,6 @@ public class Ping extends DiaxCommand
     public void execute(Message trigger)
     {
         trigger.getChannel().sendMessage("⏱ Pinging...").queue(pinging
-                -> pinging.editMessage("⏱ Ping: " + trigger.getCreationTime().until(pinging.getCreationTime(), ChronoUnit.MILLIS) + "ms"));
+                -> pinging.editMessage("⏱ Ping: " + trigger.getCreationTime().until(pinging.getCreationTime(), ChronoUnit.MILLIS) + "ms").queue());
     }
 }
