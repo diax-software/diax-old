@@ -8,7 +8,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Created by Comporment on 26/03/2017 at 18:48
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-@CommandDescription(name = "echo")
+@CommandDescription(name = "echo", minimumArgs = 1, emoji = "🗣")
 public class Echo extends DiaxCommand
 {
     public void execute(Message trigger)

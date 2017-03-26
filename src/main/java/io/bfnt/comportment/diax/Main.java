@@ -1,30 +1,13 @@
 package io.bfnt.comportment.diax;
 
-import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
-import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
-import com.sedmelluq.discord.lavaplayer.source.AudioSourceManager;
-import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
-import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
-import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import io.bfnt.comportment.diax.api.Diax;
 import io.bfnt.comportment.diax.api.command.CommandHandler;
 import io.bfnt.comportment.diax.api.music.DisconnectListener;
-import io.bfnt.comportment.diax.api.music.GuildMusicManager;
 import io.bfnt.comportment.diax.token.Token;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.VoiceChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.managers.AudioManager;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Comporment on 22/03/2017 at 19:09
@@ -38,10 +21,10 @@ public final class Main extends Diax
         {
             JDA jda = new JDABuilder(AccountType.BOT)
                     .setToken(Token.main())
-                    .addListener(new CommandHandler(), new DisconnectListener())
                     .setAudioEnabled(true)
-                    .setGame(Game.of("<>help", "https://twitch.tv/skiletro"))
+                    .setGame(Game.of("<>help"))
                     .buildBlocking();
+            jda.addEventListener(new CommandHandler(), new DisconnectListener());
         }
         catch (Exception exception)
         {
