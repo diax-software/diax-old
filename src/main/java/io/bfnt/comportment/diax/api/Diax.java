@@ -21,6 +21,7 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import net.dv8tion.jda.core.managers.AudioManager;
 import net.dv8tion.jda.core.utils.PermissionUtil;
@@ -36,6 +37,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class Diax extends ListenerAdapter
 {
+    public void onGuildJoin(GuildJoinEvent event)
+    {
+        System.out.println("Joined: " + event.getGuild().getName() + " +" + event.getGuild().getMembers().size() + " more users.");
+    }
     protected MessageBuilder makeMessage(String title, String content)
     {
         return new MessageBuilder().append(String.format("__**%s**__\n\n%s", title, content));
