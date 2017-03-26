@@ -13,6 +13,6 @@ public class Invite extends DiaxCommand
 {
     public void execute(Message trigger)
     {
-        trigger.getChannel().sendMessage(makeMessage("Invite Me!", "Invite me to your server using these links:\nhttps://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=3148801 <-- Basic required permissions\nhttps://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=3148815 <-- Administrative commands\n\nhttps://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=-1 <-- You decide.").build()).queue();
+        trigger.getChannel().sendMessage(makeMessage("Invite Me!", "Invite me to your server using these links:\n\nhttps://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=3148801 <-- Basic required permissions\n\nhttps://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=3148815 <-- Administrative commands\n\nhttps://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=-1 <-- You decide.\n\nhttps://discord.gg/c6M8PJZ <-- My server").build()).queue();
     }
 }
