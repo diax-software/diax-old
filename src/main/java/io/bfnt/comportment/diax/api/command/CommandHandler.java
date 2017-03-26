@@ -13,11 +13,6 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 public final class CommandHandler extends Diax
 {
     @Override
-    public void onGuildVoiceLeave(GuildVoiceLeaveEvent event)
-    {
-
-    }
-    @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {
         if (!event.getMessage().getRawContent().startsWith(prefix())) return;
