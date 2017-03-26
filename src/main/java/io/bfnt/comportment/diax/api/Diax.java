@@ -11,6 +11,7 @@ import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import io.bfnt.comportment.diax.api.command.ErrorType;
 import io.bfnt.comportment.diax.api.music.GuildMusicManager;
 import io.bfnt.comportment.diax.commands.information.*;
+import io.bfnt.comportment.diax.commands.information.Invite;
 import io.bfnt.comportment.diax.commands.moderation.Ban;
 import io.bfnt.comportment.diax.commands.moderation.Kick;
 import io.bfnt.comportment.diax.commands.moderation.Purge;
@@ -76,6 +77,7 @@ public class Diax extends ListenerAdapter
                 add(new Bump());
                 add(new Play());
                 add(new Ping());
+                add(new Invite());
             }
         };
     }
