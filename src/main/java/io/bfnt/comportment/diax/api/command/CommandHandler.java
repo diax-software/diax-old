@@ -1,11 +1,8 @@
 package io.bfnt.comportment.diax.api.command;
 
 import io.bfnt.comportment.diax.api.Diax;
-import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
-import net.dv8tion.jda.core.events.guild.GuildUnavailableEvent;
-import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent;
-import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent;
+import net.dv8tion.jda.core.entities.ChannelType;
+import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.PermissionException;
 /**
@@ -52,7 +49,7 @@ public final class CommandHandler extends Diax
                 }
                 else
                 {
-                    makeError(channel, ErrorType.SELF_NO_PERMISSION);
+                    makeError(channel, ErrorType.NO_PERMISSION);
                 }
                 return;
             }
