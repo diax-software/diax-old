@@ -2,7 +2,7 @@ package io.bfnt.comportment.diax.api;
 
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import io.bfnt.comportment.diax.api.command.ErrorType;
-import io.bfnt.comportment.diax.commands.Bump;
+import io.bfnt.comportment.diax.commands.information.Bump;
 import io.bfnt.comportment.diax.commands.information.Ginfo;
 import io.bfnt.comportment.diax.commands.information.Help;
 import io.bfnt.comportment.diax.commands.information.WhoAmI;
