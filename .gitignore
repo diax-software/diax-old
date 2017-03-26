@@ -9,4 +9,3 @@ token/
 # Specific files.
 *.iml
 dependency-reduced-pom.xml
-src/main/resources/
