@@ -27,7 +27,12 @@ public final class CommandHandler extends Diax
                 {
                     makeError(channel, ErrorType.NOT_ENOUGH_ARGS);
                 }
-                else if (cd.guildOnly() && channel.getType().equals(ChannelType.PRIVATE))
+                else if (!cd.guildOnly() && channel.getType().equals(ChannelType.PRIVATE))
+                {
+                    i.execute(event.getMessage());
+                    return;
+                }
+                else if (cd.guildOnly() && (channel.getType().equals(ChannelType.PRIVATE)))
                 {
                     makeError(channel, ErrorType.NOT_IN_GUILD);
                 }
