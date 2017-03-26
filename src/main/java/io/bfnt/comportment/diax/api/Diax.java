@@ -85,10 +85,6 @@ public class Diax extends ListenerAdapter
     {
         return PermissionUtil.checkPermission(member.getGuild(), member, permission);
     }
-    protected Main getMain()
-    {
-        return new Main();
-    }
     public Diax() {
         this.musicManagers = new HashMap<>();
 
