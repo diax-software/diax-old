@@ -16,26 +16,6 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 public final class CommandHandler extends Diax
 {
     @Override
-    public void onGuildUnavailable(GuildUnavailableEvent event)
-    {
-        event.getGuild().getAudioManager().closeAudioConnection();
-    }
-    @Override
-    public void onGuildLeave(GuildLeaveEvent event)
-    {
-        event.getGuild().getAudioManager().closeAudioConnection();
-    }
-    @Override
-    public void onGuildVoiceMove(GuildVoiceMoveEvent event)
-    {
-        if (event.getChannelLeft().getMembers().contains(event.getGuild().getMember(event.getJDA().getSelfUser())) && event.getChannelLeft().getMembers().size() < 2) event.getChannelLeft().getGuild().getAudioManager().closeAudioConnection();
-    }
-    @Override
-    public void onGuildVoiceLeave(GuildVoiceLeaveEvent event)
-    {
-        if (event.getChannelLeft().getMembers().contains(event.getGuild().getMember(event.getJDA().getSelfUser())) && event.getChannelLeft().getMembers().size() < 2) event.getChannelLeft().getGuild().getAudioManager().closeAudioConnection();
-    }
-    @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {
         if (!event.getMessage().getRawContent().startsWith(prefix())) return;

@@ -10,6 +10,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import io.bfnt.comportment.diax.api.Diax;
 import io.bfnt.comportment.diax.api.command.CommandHandler;
+import io.bfnt.comportment.diax.api.music.DisconnectListener;
 import io.bfnt.comportment.diax.api.music.GuildMusicManager;
 import io.bfnt.comportment.diax.token.Token;
 import net.dv8tion.jda.core.AccountType;
@@ -37,7 +38,7 @@ public final class Main extends Diax
         {
             JDA jda = new JDABuilder(AccountType.BOT)
                     .setToken(Token.main())
-                    .addListener(new CommandHandler())
+                    .addListener(new CommandHandler(), new DisconnectListener())
                     .setAudioEnabled(true)
                     .setGame(Game.of("<>help", "https://twitch.tv/skiletro"))
                     .buildBlocking();
