@@ -7,7 +7,6 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import io.bfnt.comportment.diax.Main;
 import io.bfnt.comportment.diax.api.command.DiaxCommand;
 import io.bfnt.comportment.diax.api.command.ErrorType;
 import io.bfnt.comportment.diax.api.music.GuildMusicManager;
@@ -31,6 +30,7 @@ import net.dv8tion.jda.core.utils.PermissionUtil;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Comporment on 23/03/2017 at 16:41
@@ -100,7 +100,8 @@ public class Diax extends ListenerAdapter
             @Override
             public void trackLoaded(AudioTrack track)
             {
-                channel.sendMessage(makeMessage("Music", String.format("Adding `%s` by `%s` to the queue. [%d]", track.getInfo().title, track.getInfo().author, track.getInfo().length)).build()).queue();
+                long millis = track.getDuration();
+                channel.sendMessage(makeMessage("Music", String.format("Adding `%s` by `%s` to the queue. [%02d:%02d:%02d]", track.getInfo().title, track.getInfo().author, TimeUnit.MILLISECONDS.toHours(millis), TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)))).build()).queue();
                 play(channel.getGuild(), musicManager, track);
             }
             @Override
@@ -109,7 +110,8 @@ public class Diax extends ListenerAdapter
                 AudioTrack firstTrack = playlist.getSelectedTrack();
                 if (firstTrack == null) firstTrack = playlist.getTracks().get(0);
                 channel.sendMessage(makeMessage("Music", String.format("Added the playlist `%s` to the queue.", playlist.getName())).build()).queue();
-                channel.sendMessage(makeMessage("Music", String.format("Adding `%s` by `%s` to the queue. [%d]", firstTrack.getInfo().title, firstTrack.getInfo().author, firstTrack.getInfo().length)).build()).queue();
+                long millis = firstTrack.getDuration();
+                channel.sendMessage(makeMessage("Music", String.format("Adding `%s` by `%s` to the queue. [%02d:%02d:%02d]", firstTrack.getInfo().title, firstTrack.getInfo().author, TimeUnit.MILLISECONDS.toHours(millis), TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)))).build()).queue();
                 play(channel.getGuild(), musicManager, firstTrack);
             }
             @Override
@@ -128,6 +130,7 @@ public class Diax extends ListenerAdapter
     {
         long guildId = Long.parseLong(guild.getId());
         GuildMusicManager musicManager = musicManagers.get(guildId);
+        musicManagers.putIfAbsent(guildId, musicManager);
         if (musicManager == null)
         {
             musicManager = new GuildMusicManager(playerManager);
