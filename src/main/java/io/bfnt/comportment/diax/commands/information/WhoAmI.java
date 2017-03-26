@@ -35,6 +35,6 @@ public class WhoAmI extends DiaxCommand
                 }
             }
         }
-        trigger.getChannel().sendMessage(makeMessage("About You:", String.format("Your name is %s-senpai\nWe are in %d mutual guild(s).\n%sa bot. I can see %d other people with the same discriminator as you.", getNiceName(user), user.getMutualGuilds().size(), bot, count)).build()).queue();
+        trigger.getChannel().sendMessage(makeMessage("About You:", String.format("Your name is `%s`-senpai\nWe are in `%d` mutual guild(s).\n%sa bot.\nI can see `%d` other people with the same discriminator as you.", getNiceName(user), user.getMutualGuilds().size(), bot, count)).build()).queue();
     }
 }
