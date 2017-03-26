@@ -25,7 +25,10 @@ public class Purge extends DiaxCommand
         if (amount > 100) amount = 100;
         if (amount < 2) amount = 2;
         trigger.getTextChannel().getHistory().retrievePast(amount).queue(history ->
-                trigger.getTextChannel().deleteMessages(history).queue(_void ->
-                    trigger.getTextChannel().sendMessage(makeMessage("Deleted!", history.size() + " messages have been deleted.").build()).queue()));
+        {
+            history.removeIf(Message::isPinned);
+            trigger.getTextChannel().deleteMessages(history).queue(_void ->
+                    trigger.getTextChannel().sendMessage(makeMessage("Deleted!", history.size() + " messages have been deleted.").build()).queue());
+        });
     }
 }
