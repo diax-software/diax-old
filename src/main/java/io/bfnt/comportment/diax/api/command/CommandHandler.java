@@ -2,6 +2,7 @@ package io.bfnt.comportment.diax.api.command;
 
 import io.bfnt.comportment.diax.api.Diax;
 import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.PermissionException;
 /**
@@ -11,6 +12,11 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 
 public final class CommandHandler extends Diax
 {
+    @Override
+    public void onGuildVoiceLeave(GuildVoiceLeaveEvent event)
+    {
+
+    }
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {

@@ -4,7 +4,7 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 
 /**
- * Created by Comporment on 25/03/2017 at 22:12
+ * Created by Comporment on 26/03/2017 at 11:12
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 public class GuildMusicManager
