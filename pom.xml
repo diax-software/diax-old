@@ -6,7 +6,7 @@
     <!--File declaration.-->
     <groupId>io.bfnt.comportment</groupId>
     <artifactId>Diax</artifactId>
-    <version>0.0.2</version>
+    <version>Azote</version>
     <build>
         <plugins>
             <!--Shades the .jar file-->
