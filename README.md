@@ -2,11 +2,11 @@
 <div align = "center">
   <a href="https://github.com/Comportment/Diax/tree/Diax-Azote"><img src="https://camo.githubusercontent.com/aae645921623a8d2c36742582d3dd3598bd219ed/687474703a2f2f666f6e746d656d652e636f6d2f7065726d616c696e6b2f3137303332382f34386664663364303837373263636166653639363536356630323936616465392e706e67"></a>
   <hr>
-  <a href="https://bfnt.io/"><img src = "https://img.shields.io/badge/Supported_By-Blackfields_Network-red.svg"></a>
-  <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Made_By-Comportment-green.svg"></a>
-  <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Version_Number-0.0.3-yellow.svg"></a>
-  <a href="https://github.com/Truency"><img src="https://img.shields.io/badge/Inspired_By-Nomsy-lightgrey.svg"></a>
-  <a href="https://PayPal.me/Comportment"><img src="https://img.shields.io/badge/Donate-PayPal-blue.svg"></a>
+  <a href="https://bfnt.io/"><img src = "https://img.shields.io/badge/Supported_By-Blackfields_Network-red.svg?style=plastic"></a>
+  <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Made_By-Comportment-green.svg?style=plastic"></a>
+  <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Version_Number-0.0.3-yellow.svg?style=plastic"></a>
+  <a href="https://github.com/Truency"><img src="https://img.shields.io/badge/Inspired_By-Nomsy-lightgrey.svg?style=plastic"></a>
+  <a href="https://PayPal.me/Comportment"><img src="https://img.shields.io/badge/Donate-PayPal-blue.svg?style=plastic"></a>
   <br>
   <a href="https://discord.gg/c6M8PJZ"><img src="https://discordapp.com/api/guilds/293889712014360586/embed.png"></a>
   <hr>
