@@ -22,6 +22,7 @@ public final class Main extends Diax
      *
      * @param args Doesn't matter what they are, no usage.
      * @throws Exception JDABuilder will throw something.
+     * @since Azote
      */
     public static void main(String[] args) throws Exception
     {
@@ -33,6 +34,7 @@ public final class Main extends Diax
      * Method fired to start a JDA instance.
      *
      * @throws Exception Can throw multiple exceptions.
+     * @since Azote
      */
     private static void init(int shards) throws Exception
     {
@@ -53,6 +55,6 @@ public final class Main extends Diax
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {
-        if (event.getMessage().getRawContent().startsWith("<<")) event.getChannel().sendMessage("Shard ID: " + event.getJDA().getShardInfo().getShardId() + "/" + (event.getJDA().getShardInfo().getShardTotal() - 1)).queue();
+       // if (event.getMessage().getRawContent().startsWith("<<")) event.getChannel().sendMessage("Shard ID: " + event.getJDA().getShardInfo().getShardId() + "/" + (event.getJDA().getShardInfo().getShardTotal() - 1)).queue();
     }
 }
