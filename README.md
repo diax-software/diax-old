@@ -38,3 +38,10 @@
 </table>
 </div>
 <hr>
+<div align="center">
+<h2>Friends</h2>
+<hr>
+<a href = "https://chromaryu.net"><img src="https://chromaryu.net/images/banners/chromaryuuuuuuuuuu.png"></a>
+<br>
+</div>
+<hr>
