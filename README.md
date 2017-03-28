@@ -4,13 +4,14 @@
 <hr>
 <a href="https://bfnt.io/"><img src = "https://img.shields.io/badge/Supported_By-Blackfields_Network-red.svg"></a>
 <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Made_By-Comportment-green.svg"></a>
-<a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Code_Name-Azote-blue.svg"></a>
+<a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Version_Number-0.0.3-yellow.svg"></a>
 <a href="https://github.com/Truency"><img src="https://img.shields.io/badge/Inspired_By-Nomsy-lightgrey.svg"></a>
+<a href="https://PayPal.me/Comportment"><img src="https://img.shields.io/badge/Donate-PayPal-blue.svg"
 <br>
 <a href="https://discord.gg/c6M8PJZ"><img src="https://discordapp.com/api/guilds/293889712014360586/embed.png"></a>
 <hr>
 </div>
-<div style="width:100%;">
+<div>
 <table>
   <tr>
     <th>Feature Name</th>
@@ -41,8 +42,6 @@
 </div>
 <hr>
 <div align="center">
-<h2>Friends</h2>
-<hr>
 <a href="https://chromaryu.net"><img src="https://chromaryu.net/images/banners/chromaryuuuuuuuuuu.png"></a>
 <br>
 </div>
