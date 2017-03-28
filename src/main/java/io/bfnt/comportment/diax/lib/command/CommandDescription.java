@@ -51,7 +51,7 @@ public @interface CommandDescription
     /**
      * The minimum args that a {@link DiaxCommand} must have to be executed.
      *
-     * @return If amount of minimum args a {@link DiaxCommand} must have.
+     * @return Tye amount of minimum args the {@link DiaxCommand} must have.
      * @since Azote
      */
     int minimumArgs() default 0;

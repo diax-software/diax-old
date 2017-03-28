@@ -1,9 +1,14 @@
 package io.bfnt.comportment.diax.lib;
 
+import io.bfnt.comportment.diax.commands.Help;
+import io.bfnt.comportment.diax.lib.command.DiaxCommand;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TreeSet;
 
 /**
  * Created by Comporment on 28/03/2017 at 12:09
@@ -55,5 +60,29 @@ public class Diax extends ListenerAdapter
     protected String getPrefix()
     {
         return "<<";
+    }
+
+    /**
+     * Method to get the commands currently being used.
+     *
+     * @return A TreeSet containing all of the {@link DiaxCommand}s which can be used.
+     * @since Azote
+     */
+    public TreeSet<DiaxCommand> getCommands()
+    {
+        return new TreeSet<DiaxCommand>()
+        {{
+            add(new Help());
+        }};
+    }
+
+    /**
+     * Method to have a global way to make a {@link net.dv8tion.jda.core.entities.MessageEmbed}
+     *
+     * @return A {@link EmbedBuilder} containing Diax's defaults for the {@link net.dv8tion.jda.core.entities.MessageEmbed}
+     */
+    public EmbedBuilder makeEmbed()
+    {
+        return new EmbedBuilder().setColor(new Color(114,137,218));
     }
 }
