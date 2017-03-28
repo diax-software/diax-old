@@ -1,6 +1,6 @@
 <!--TODO: Make this look pretty-->
 <div align = "center">
-<h1>Diax-0.0.3</h1>
+<img src="http://fontmeme.com/permalink/170328/48fdf3d08772ccafe696565f0296ade9.png">
 <hr>
 <a href="https://bfnt.io/"><img src = "https://img.shields.io/badge/Supported_By-Blackfields_Network-red.svg"></a>
 <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Made_By-Comportment-green.svg"></a>
