@@ -7,7 +7,7 @@
 <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Code_Name-Azote-blue.svg"></a>
 <a href="https://github.com/Truency"><img src="https://img.shields.io/badge/Inspired_By-Nomsy-lightgrey.svg"></a>
 <br>
-<a href="https://discord.gg/c6M8PJZ"><img src="https://discordapp.com/api/guilds/293889712014360586/embed.png">
+<a href="https://discord.gg/c6M8PJZ"><img src="https://discordapp.com/api/guilds/293889712014360586/embed.png"></a>
 <hr>
 </div>
 <div style="width:100%;">
