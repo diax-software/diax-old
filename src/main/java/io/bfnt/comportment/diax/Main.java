@@ -1,14 +1,20 @@
 package io.bfnt.comportment.diax;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import io.bfnt.comportment.diax.lib.Diax;
 import io.bfnt.comportment.diax.lib.Token;
+import io.bfnt.comportment.diax.lib.command.CommandHandler;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
-import java.util.Scanner;
+import javax.security.auth.login.LoginException;
 
 /**
  * Created by Comporment on 22/03/2017 at 19:09
@@ -16,6 +22,31 @@ import java.util.Scanner;
  */
 public final class Main extends Diax
 {
+
+    static JDA[] shards;
+
+    /**
+     * Method to query Discord to see how many shards the bot should use when making a {@link JDA}
+     *
+     * @return the amount of shards the bot should use.
+     * @since Azote
+     */
+    private static int getRecommendedShards()
+    {
+        try
+        {
+            HttpResponse<JsonNode> request = Unirest.get("https://discordapp.com/api/gateway/bot")
+                    .header("Authorization", "Bot " + Token.mainToken())
+                    .header("Content-Type", "application/json")
+                    .asJson();
+            return Integer.parseInt(request.getBody().getObject().get("shards").toString());
+        }
+        catch (UnirestException e)
+        {
+            e.printStackTrace();
+        }
+        return 1;
+    }
 
     /**
      * Method fired when the bot is started up.
@@ -26,23 +57,53 @@ public final class Main extends Diax
      */
     public static void main(String[] args) throws Exception
     {
-        System.out.print("Shard count > ");
-        init((new Scanner(System.in)).nextInt() + 1);
+        int shards = getRecommendedShards();
+        staticLog(String.format("Starting with %d shard(s).", shards));
+        init(shards);
     }
 
     /**
-     * Method fired to start a JDA instance.
+     * Method fired to start a JDA instance, uses sharding if needed.
      *
-     * @throws Exception Can throw multiple exceptions.
      * @since Azote
      */
-    private static void init(int shards) throws Exception
+    private static void init(int amount)
     {
-        for (int i = 0; i < shards; i++)
+        shards = new JDA[amount];
+
+        for (int i = 0; i < amount; i++)
         {
-            staticLog(String.format("Shard %d is starting.", i));
-            JDA jda = new JDABuilder(AccountType.BOT).setToken(Token.mainToken()).useSharding(i, shards).setGame(Game.of(String.format("%shelp | Shards: %s", staticPrefix(), shards - 1))).addListener(new Main()).buildAsync();
-            staticLog(String.format("Shard %d has been started.", i));
+            JDA jda = null;
+            try
+            {
+                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Token.mainToken()).setGame(Game.of("<>help | Shards: 2")).addListener(new CommandHandler());
+
+                if (amount > 1)
+                {
+                    jda = builder.useSharding(i, amount).buildBlocking();
+                }
+                else
+                {
+                    jda = builder.buildBlocking();
+                }
+            }
+            catch (LoginException|RateLimitedException|InterruptedException exception)
+            {
+                exception.printStackTrace();
+            }
+            if (jda != null)
+            {
+                shards[i] = jda;
+                staticLog("Loaded shard: " + i);
+            }
+            try
+            {
+                Thread.sleep(5000);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 
