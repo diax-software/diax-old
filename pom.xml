@@ -6,7 +6,7 @@
     <!--File declaration.-->
     <groupId>io.bfnt.comportment</groupId>
     <artifactId>Diax</artifactId>
-    <version>0.0.2</version>
+    <version>Azote</version>
     <build>
         <plugins>
             <!--Shades the .jar file-->
@@ -63,7 +63,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>3.0.0_161</version>
+            <version>3.0.0_165</version>
         </dependency>
         <!--Music: https://github.com/sedmelluq/lavaplayer-->
         <dependency>
@@ -76,6 +76,12 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>1.4.9</version>
         </dependency>
         <dependency>
             <groupId> org.apache.cassandra</groupId>

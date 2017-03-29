@@ -9,3 +9,4 @@ token/
 # Specific files.
 *.iml
 dependency-reduced-pom.xml
+Token.java
