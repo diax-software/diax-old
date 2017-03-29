@@ -3,6 +3,7 @@ package io.bfnt.comportment.diax.lib;
 import io.bfnt.comportment.diax.commands.Help;
 import io.bfnt.comportment.diax.lib.command.DiaxCommand;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.awt.*;
@@ -59,5 +60,16 @@ public class Diax extends ListenerAdapter
     protected EmbedBuilder makeEmbed()
     {
         return new EmbedBuilder().setColor(new Color(114,137,218));
+    }
+
+    /**
+     * Method to get a less ugly version of the {@link User}'s name, as displayed in the client.
+     *
+     * @param user The {@link User}'s name to convert into a nicer name.
+     * @return A string in the format: username#discriminator
+     */
+    protected String makeName(User user)
+    {
+        return String.format("%s#%s", user.getName(), user.getDiscriminator());
     }
 }

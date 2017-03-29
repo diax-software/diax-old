@@ -22,7 +22,7 @@ import javax.security.auth.login.LoginException;
  */
 public final class Main extends Diax
 {
-    static JDA[] shards;
+    private static JDA[] shards;
 
     /**
      * Method to query Discord to see how many shards the bot should use when making a {@link JDA}

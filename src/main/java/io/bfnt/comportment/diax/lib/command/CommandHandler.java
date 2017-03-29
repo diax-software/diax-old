@@ -21,6 +21,6 @@ public class CommandHandler extends Diax
         //TODO: Implement command handler.
         String message = event.getMessage().getRawContent();
         if (!message.startsWith(getPrefix())) return;
-        log("meow");
+        log(String.format("%s | %s", makeName(event.getAuthor()), event.getMessage().getRawContent()));
     }
 }
