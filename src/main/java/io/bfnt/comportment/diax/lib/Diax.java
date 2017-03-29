@@ -28,36 +28,11 @@ public class Diax extends ListenerAdapter
     }
 
     /**
-     * Logging from within normal methods.
-     *
-     * @param message Message to timestamp and then print to console.
-     * @since Azote
-     * @deprecated use {@link #log(String)} instead.
-     */
-    @Deprecated
-    protected void oldLog(String message)
-    {
-        System.out.println(new SimpleDateFormat("[HH:mm:ss] ").format(new Date()) + message);
-    }
-
-    /**
      * Method to get a static version of the prefix.
      *
      * @since Azote
      */
     protected static String getPrefix()
-    {
-        return "<<";
-    }
-
-    /**
-     * Method to get the prefix that is used to trigger a {@link DiaxCommand}
-     *
-     * @since Azote
-     * @deprecated Use {@link #getPrefix()} instead
-     */
-    @Deprecated
-    protected String oldPrefix()
     {
         return "<<";
     }

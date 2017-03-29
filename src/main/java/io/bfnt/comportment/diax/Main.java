@@ -11,8 +11,8 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
+import org.json.JSONException;
 
 import javax.security.auth.login.LoginException;
 
@@ -22,7 +22,6 @@ import javax.security.auth.login.LoginException;
  */
 public final class Main extends Diax
 {
-
     static JDA[] shards;
 
     /**
@@ -41,7 +40,7 @@ public final class Main extends Diax
                     .asJson();
             return Integer.parseInt(request.getBody().getObject().get("shards").toString());
         }
-        catch (UnirestException e)
+        catch (UnirestException|JSONException e)
         {
             e.printStackTrace();
         }
@@ -70,14 +69,12 @@ public final class Main extends Diax
     private static void init(int amount)
     {
         shards = new JDA[amount];
-
         for (int i = 0; i < amount; i++)
         {
             JDA jda = null;
             try
             {
                 JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Token.mainToken()).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler());
-
                 if (amount > 1)
                 {
                     jda = builder.useSharding(i, amount).buildBlocking();
@@ -105,17 +102,5 @@ public final class Main extends Diax
                 e.printStackTrace();
             }
         }
-    }
-
-    /**
-     * Test command to tell which shard Diax is on.
-     *
-     * @param event Method fired when bot receives a message.
-     * @since Azote
-     */
-    @Override
-    public void onMessageReceived(MessageReceivedEvent event)
-    {
-       // if (event.getMessage().getRawContent().startsWith("<<")) event.getChannel().sendMessage("Shard ID: " + event.getJDA().getShardInfo().getShardId() + "/" + (event.getJDA().getShardInfo().getShardTotal() - 1)).queue();
     }
 }
