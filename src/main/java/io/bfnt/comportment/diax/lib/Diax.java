@@ -22,7 +22,7 @@ public class Diax extends ListenerAdapter
      * @param message Message to timestamp and then print to console.
      * @since Azote
      */
-    protected static void staticLog(String message)
+    protected static void log(String message)
     {
         System.out.println(new SimpleDateFormat("[HH:mm:ss] ").format(new Date()) + message);
     }
@@ -32,10 +32,10 @@ public class Diax extends ListenerAdapter
      *
      * @param message Message to timestamp and then print to console.
      * @since Azote
-     * @deprecated
+     * @deprecated use {@link #log(String)} instead.
      */
     @Deprecated
-    protected void log(String message)
+    protected void oldLog(String message)
     {
         System.out.println(new SimpleDateFormat("[HH:mm:ss] ").format(new Date()) + message);
     }
@@ -45,7 +45,7 @@ public class Diax extends ListenerAdapter
      *
      * @since Azote
      */
-    protected static String staticPrefix()
+    protected static String getPrefix()
     {
         return "<<";
     }
@@ -54,8 +54,10 @@ public class Diax extends ListenerAdapter
      * Method to get the prefix that is used to trigger a {@link DiaxCommand}
      *
      * @since Azote
+     * @deprecated Use {@link #getPrefix()} instead
      */
-    protected String getPrefix()
+    @Deprecated
+    protected String oldPrefix()
     {
         return "<<";
     }

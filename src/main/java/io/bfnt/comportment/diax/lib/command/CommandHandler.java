@@ -19,5 +19,8 @@ public class CommandHandler extends Diax
     public void onMessageReceived(MessageReceivedEvent event)
     {
         //TODO: Implement command handler.
+        String message = event.getMessage().getRawContent();
+        if (!message.startsWith(getPrefix())) return;
+        log("meow");
     }
 }

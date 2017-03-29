@@ -58,7 +58,7 @@ public final class Main extends Diax
     public static void main(String[] args) throws Exception
     {
         int shards = getRecommendedShards();
-        staticLog(String.format("Starting with %d shard(s).", shards));
+        log(String.format("Starting with %d shard(s).", shards));
         init(shards);
     }
 
@@ -76,7 +76,7 @@ public final class Main extends Diax
             JDA jda = null;
             try
             {
-                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Token.mainToken()).setGame(Game.of("<>help | Shards: 2")).addListener(new CommandHandler());
+                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Token.mainToken()).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler());
 
                 if (amount > 1)
                 {
@@ -94,7 +94,7 @@ public final class Main extends Diax
             if (jda != null)
             {
                 shards[i] = jda;
-                staticLog("Loaded shard: " + i);
+                log("Loaded shard: " + i);
             }
             try
             {
