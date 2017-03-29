@@ -96,4 +96,9 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
     {
         return (getTrigger() + getDescription()).compareTo(command.getTrigger() + command.getDescription());
     }
+
+    public String getHelpFormat()
+    {
+        return String.format("%s%s | %s", getPrefix(), getTrigger(), getDescription());
+    }
 }

@@ -41,7 +41,7 @@ public class Diax extends ListenerAdapter
     }
 
     /**
-     * Getting a static version of the prefix.
+     * Method to get a static version of the prefix.
      *
      * @since Azote
      */
@@ -51,12 +51,10 @@ public class Diax extends ListenerAdapter
     }
 
     /**
-     * Getting the prefix.
+     * Method to get the prefix that is used to trigger a {@link DiaxCommand}
      *
      * @since Azote
-     * @deprecated
      */
-    @Deprecated
     protected String getPrefix()
     {
         return "<<";
@@ -68,7 +66,7 @@ public class Diax extends ListenerAdapter
      * @return A TreeSet containing all of the {@link DiaxCommand}s which can be used.
      * @since Azote
      */
-    public TreeSet<DiaxCommand> getCommands()
+    protected TreeSet<DiaxCommand> getCommands()
     {
         return new TreeSet<DiaxCommand>()
         {{
@@ -81,7 +79,7 @@ public class Diax extends ListenerAdapter
      *
      * @return A {@link EmbedBuilder} containing Diax's defaults for the {@link net.dv8tion.jda.core.entities.MessageEmbed}
      */
-    public EmbedBuilder makeEmbed()
+    protected EmbedBuilder makeEmbed()
     {
         return new EmbedBuilder().setColor(new Color(114,137,218));
     }

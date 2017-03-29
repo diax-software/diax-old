@@ -41,7 +41,7 @@ public final class Main extends Diax
         for (int i = 0; i < shards; i++)
         {
             staticLog(String.format("Shard %d is starting.", i));
-            JDA jda = new JDABuilder(AccountType.BOT).setToken(Token.mainToken()).useSharding(i, shards).setGame(Game.of(String.format("%shelp | Shard %s/%s", staticPrefix(), i, shards - 1))).addListener(new Main()).buildAsync();
+            JDA jda = new JDABuilder(AccountType.BOT).setToken(Token.mainToken()).useSharding(i, shards).setGame(Game.of(String.format("%shelp | Shards: %s", staticPrefix(), shards - 1))).addListener(new Main()).buildAsync();
             staticLog(String.format("Shard %d has been started.", i));
         }
     }
