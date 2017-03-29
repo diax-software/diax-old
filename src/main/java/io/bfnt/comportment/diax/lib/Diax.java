@@ -1,6 +1,5 @@
 package io.bfnt.comportment.diax.lib;
 
-import io.bfnt.comportment.diax.commands.Help;
 import io.bfnt.comportment.diax.lib.command.DiaxCommand;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.User;
@@ -8,6 +7,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.awt.*;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.TreeSet;
 
@@ -17,6 +17,8 @@ import java.util.TreeSet;
  */
 public class Diax extends ListenerAdapter
 {
+    private TreeSet<DiaxCommand> commands = new TreeSet<>();
+
     /**
      * Logging from within static methods.
      *
@@ -25,7 +27,7 @@ public class Diax extends ListenerAdapter
      */
     protected static void log(String message)
     {
-        System.out.println(new SimpleDateFormat("[HH:mm:ss] ").format(new Date()) + message);
+        System.out.println(String.format("%s [Log] %s", new SimpleDateFormat("[HH:mm:ss]").format(new Date()), message));
     }
 
     /**
@@ -46,10 +48,23 @@ public class Diax extends ListenerAdapter
      */
     protected TreeSet<DiaxCommand> getCommands()
     {
-        return new TreeSet<DiaxCommand>()
-        {{
-            add(new Help());
-        }};
+        return commands;
+    }
+
+    /**
+     * Method that should only be called once and is used to register all of the {@link DiaxCommand}s that can be used.
+     *
+     * @param diaxCommands Tbe {@link DiaxCommand}s to be registered.
+     * @since Azote
+     */
+    protected void registerCommands(DiaxCommand... diaxCommands)
+    {
+        commands.clear();
+        Arrays.stream(diaxCommands).forEach(command ->
+        {
+            log("Registering: " + command.getTrigger());
+            commands.add(command);
+        });
     }
 
     /**

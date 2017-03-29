@@ -4,6 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import io.bfnt.comportment.diax.commands.Help;
 import io.bfnt.comportment.diax.lib.Diax;
 import io.bfnt.comportment.diax.lib.Token;
 import io.bfnt.comportment.diax.lib.command.CommandHandler;
@@ -15,6 +16,8 @@ import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import org.json.JSONException;
 
 import javax.security.auth.login.LoginException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Comporment on 22/03/2017 at 19:09
@@ -23,6 +26,24 @@ import javax.security.auth.login.LoginException;
 public final class Main extends Diax
 {
     private static JDA[] shards;
+
+    /**
+     * Method fired when the bot is started up.
+     *
+     * @param args Doesn't matter what they are, no usage.
+     * @throws Exception JDABuilder will throw something.
+     * @since Azote
+     */
+    public static void main(String[] args) throws Exception
+    {
+        int recommendedShards = getRecommendedShards();
+        log(String.format("Starting with %d shard(s).", recommendedShards));
+        new Main().registerCommands(new Help());
+        init(recommendedShards);
+        List<JDA> jdas = Arrays.asList(shards);
+        log("Users on startup: " + jdas.stream().flatMap(shard -> shard.getUsers().stream().distinct()).count());
+        log("Guilds on startup: " + jdas.stream().flatMap(shard -> shard.getGuilds().stream()).distinct().count());
+    }
 
     /**
      * Method to query Discord to see how many shards the bot should use when making a {@link JDA}
@@ -36,8 +57,7 @@ public final class Main extends Diax
         {
             HttpResponse<JsonNode> request = Unirest.get("https://discordapp.com/api/gateway/bot")
                     .header("Authorization", "Bot " + Token.mainToken())
-                    .header("Content-Type", "application/json")
-                    .asJson();
+                    .header("Content-Type", "application/json").asJson();
             return Integer.parseInt(request.getBody().getObject().get("shards").toString());
         }
         catch (UnirestException|JSONException e)
@@ -45,20 +65,6 @@ public final class Main extends Diax
             e.printStackTrace();
         }
         return 1;
-    }
-
-    /**
-     * Method fired when the bot is started up.
-     *
-     * @param args Doesn't matter what they are, no usage.
-     * @throws Exception JDABuilder will throw something.
-     * @since Azote
-     */
-    public static void main(String[] args) throws Exception
-    {
-        int shards = getRecommendedShards();
-        log(String.format("Starting with %d shard(s).", shards));
-        init(shards);
     }
 
     /**
@@ -102,5 +108,6 @@ public final class Main extends Diax
                 e.printStackTrace();
             }
         }
+        log(String.format("Finished loading with %d shard(s).", amount));
     }
 }

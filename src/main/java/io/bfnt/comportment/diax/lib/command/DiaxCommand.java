@@ -37,7 +37,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return An array of the Strings which will trigger the {@link DiaxCommand}
      * @since Azote
      */
-    private String[] getTriggers()
+    public String[] getTriggers()
     {
         return getCommandDescription().triggers();
     }
@@ -48,7 +48,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return A string containing the description of the {@link DiaxCommand}
      * @since Azote
      */
-    private String getDescription()
+    public String getDescription()
     {
         return getCommandDescription().description();
     }
@@ -70,7 +70,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return An int which has the minimum amount of args to use the {@link DiaxCommand}
      * @since Azote
      */
-    private int getDefaultArgs()
+    public int getDefaultArgs()
     {
         return getCommandDescription().minimumArgs();
     }
@@ -81,7 +81,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return A string which will mainly be used to trigger the {@link DiaxCommand}
      * @since Azote
      */
-    private String getTrigger()
+    public String getTrigger()
     {
         return getTriggers()[0];
     }
