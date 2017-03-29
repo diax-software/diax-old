@@ -6,7 +6,7 @@
   <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Made_By-Comportment-green.svg?style=plastic"></a>
   <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Version_Number-0.0.3-yellow.svg?style=plastic"></a>
   <a href="https://github.com/Truency"><img src="https://img.shields.io/badge/Inspired_By-Nomsy-lightgrey.svg?style=plastic"></a>
-  <a href="https://PayPal.me/Comportment"><img src="https://img.shields.io/badge/Donate-PayPal-blue.svg?style=plastic"></a>
+  <a href="https://www.patreon.com/Diax"><img src="https://img.shields.io/badge/Donate-Patreon-blue.svg?style=plastic"></a>
   <br>
   <a href="https://discord.gg/c6M8PJZ"><img src="https://discordapp.com/api/guilds/293889712014360586/embed.png"></a>
   <hr>
