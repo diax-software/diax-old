@@ -43,21 +43,27 @@ public class CommandHandler extends Diax
      * @param message   The {@link Message}
      * @param truncated The truncated version of the message content without the prefix or the command trigger.
      */
-    private void execute(DiaxCommand command, Message message, String truncated) {
-        if (truncated.split(" ").length < command.getMinimumArgs()) {
+    private void execute(DiaxCommand command, Message message, String truncated)
+    {
+        if (truncated.split(" ").length < command.getMinimumArgs())
+        {
             message.getChannel().sendMessage(makeEmbed().addField("Error!", "You did not specify enough args!", false).build()).queue();
             return;
         }
-        switch (message.getChannelType()) {
+        switch (message.getChannelType())
+        {
             case TEXT: {
-                if (!checkPermission(message.getAuthor(), message.getGuild(), command.getPermission())) {
+                if (!checkPermission(message.getAuthor(), message.getGuild(), command.getPermission()))
+                {
                     message.getChannel().sendMessage(makeEmbed().addField("Error!", "You do not have enough permission to do that.", false).build()).queue();
                     return;
                 }
                 break;
             }
-            default: {
-                if (command.getGuildOnly()) {
+            default:
+                {
+                if (command.getGuildOnly())
+                {
                     message.getChannel().sendMessage(makeEmbed().addField("Error!", "This command can not be used in a private message.", false).build()).queue();
                     return;
                 }
