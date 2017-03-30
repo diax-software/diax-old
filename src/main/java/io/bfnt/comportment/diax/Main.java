@@ -10,6 +10,7 @@ import io.bfnt.comportment.diax.lib.command.CommandHandler;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import org.json.JSONException;
@@ -80,7 +81,7 @@ public final class Main extends Diax
             JDA jda = null;
             try
             {
-                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler());
+                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setStatus(OnlineStatus.IDLE).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler());
                 if (amount > 1)
                 {
                     jda = builder.useSharding(i, amount).buildBlocking();

@@ -1,5 +1,6 @@
 package io.bfnt.comportment.diax.lib.command;
 
+import io.bfnt.comportment.diax.commands.Embed;
 import io.bfnt.comportment.diax.commands.Help;
 
 import java.util.TreeSet;
@@ -19,7 +20,8 @@ public class Commands
     private TreeSet<DiaxCommand> commands = new TreeSet<DiaxCommand>()
     {
         {
-        add(new Help());
+            add(new Help());
+            add(new Embed());
         }
     };
 

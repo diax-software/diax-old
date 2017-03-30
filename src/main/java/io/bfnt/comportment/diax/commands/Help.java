@@ -21,6 +21,6 @@ public class Help extends DiaxCommand
      */
     public void execute(Message trigger)
     {
-        trigger.getChannel().sendMessage(makeEmbed().addField("Commands", getCommands().stream().map(DiaxCommand::getHelpFormat).collect(Collectors.joining("\n")), false).build()).queue();
+        trigger.getChannel().sendMessage(makeEmbed().addField("Commands", getCommands().descendingSet().stream().map(DiaxCommand::getHelpFormat).collect(Collectors.joining("\n")), false).build()).queue();
     }
 }
