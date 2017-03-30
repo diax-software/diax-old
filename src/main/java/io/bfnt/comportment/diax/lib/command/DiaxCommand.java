@@ -103,6 +103,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * Method to get the format of the command as used in {@link io.bfnt.comportment.diax.commands.Help}
      *
      * @return A string containing the format of the command used in {@link io.bfnt.comportment.diax.commands.Help}
+     * @since Azote
      */
     public String getHelpFormat()
     {

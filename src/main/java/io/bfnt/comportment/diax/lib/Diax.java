@@ -1,5 +1,6 @@
 package io.bfnt.comportment.diax.lib;
 
+import io.bfnt.comportment.diax.lib.command.Commands;
 import io.bfnt.comportment.diax.lib.command.DiaxCommand;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
@@ -10,7 +11,6 @@ import net.dv8tion.jda.core.utils.PermissionUtil;
 
 import java.awt.*;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.TreeSet;
 
@@ -20,7 +20,6 @@ import java.util.TreeSet;
  */
 public class Diax extends ListenerAdapter
 {
-    private TreeSet<DiaxCommand> commands = new TreeSet<>();
 
     /**
      * Logging from within static methods.
@@ -51,23 +50,7 @@ public class Diax extends ListenerAdapter
      */
     protected TreeSet<DiaxCommand> getCommands()
     {
-        return commands;
-    }
-
-    /**
-     * Method that should only be called once and is used to register all of the {@link DiaxCommand}s that can be used.
-     *
-     * @param diaxCommands Tbe {@link DiaxCommand}s to be registered.
-     * @since Azote
-     */
-    protected void registerCommands(DiaxCommand... diaxCommands)
-    {
-        commands.clear();
-        Arrays.stream(diaxCommands).forEach(command ->
-        {
-            log("Registering: " + command.getTrigger());
-            commands.add(command);
-        });
+        return new Commands().getCommands();
     }
 
     /**

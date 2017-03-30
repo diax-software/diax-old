@@ -4,7 +4,6 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import io.bfnt.comportment.diax.commands.Help;
 import io.bfnt.comportment.diax.lib.Diax;
 import io.bfnt.comportment.diax.lib.Token;
 import io.bfnt.comportment.diax.lib.command.CommandHandler;
@@ -39,7 +38,6 @@ public final class Main extends Diax
     {
         int recommendedShards = getRecommendedShards();
         log(String.format("Starting with %d shard(s).", recommendedShards));
-        new Main().registerCommands(new Help());
         init(recommendedShards);
         List<JDA> jdas = Arrays.asList(shards);
         log("Unique users on startup: " + jdas.stream().flatMap(shard -> shard.getUsers().stream().distinct()).count());

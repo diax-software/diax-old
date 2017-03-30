@@ -1,7 +1,6 @@
 package io.bfnt.comportment.diax.lib.command;
 
 import io.bfnt.comportment.diax.lib.Diax;
-import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -25,38 +24,46 @@ public class CommandHandler extends Diax
         if (!content.startsWith(getPrefix())) return;
         log(String.format("%s | %s", makeName(event.getAuthor()), content));
         content = content.replaceFirst(getPrefix(), "").trim().toLowerCase();
-        for (DiaxCommand command : getCommands())
+        String msg = content;
+        getCommands().forEach(command ->
         {
-            if (content.split(" ").length < command.getMinimumArgs())
+            for (String s : command.getTriggers())
+                if (msg.startsWith(s))
             {
-                message.getChannel().sendMessage("Nope").queue();
+                execute(command, event.getMessage(), msg);
+                return;
             }
-            if (command.getTrigger().equals(content.split(" ", 1)[0]))
-            {
+        });
+    }
 
-                if (!event.getChannelType().equals(ChannelType.TEXT))
-                {
-                    if (command.getGuildOnly())
-                    {
-                        message.getChannel().sendMessage("Nope").queue();
-                    }
-                    else
-                    {
-                        message.getChannel().sendMessage("yep").queue();
-                    }
+    /**
+     * Method that attempts to execute a {@link DiaxCommand} if the content if contents have been met.
+     *
+     * @param command   The {@link DiaxCommand} to execute.
+     * @param message   The {@link Message}
+     * @param truncated The truncated version of the message content without the prefix or the command trigger.
+     */
+    private void execute(DiaxCommand command, Message message, String truncated) {
+        if (truncated.split(" ").length < command.getMinimumArgs()) {
+            message.getChannel().sendMessage(makeEmbed().addField("Error!", "You did not specify enough args!", false).build()).queue();
+            return;
+        }
+        switch (message.getChannelType()) {
+            case TEXT: {
+                if (!checkPermission(message.getAuthor(), message.getGuild(), command.getPermission())) {
+                    message.getChannel().sendMessage(makeEmbed().addField("Error!", "You do not have enough permission to do that.", false).build()).queue();
+                    return;
                 }
-                else
-                {
-                    if (!checkPermission(message.getAuthor(), message.getGuild(), command.getPermission()))
-                    {
-                        message.getChannel().sendMessage("nope").queue();
-                    }
-                    else
-                    {
-                        message.getChannel().sendMessage("yep").queue();
-                    }
+                break;
+            }
+            default: {
+                if (command.getGuildOnly()) {
+                    message.getChannel().sendMessage(makeEmbed().addField("Error!", "This command can not be used in a private message.", false).build()).queue();
+                    return;
                 }
+                break;
             }
         }
+        command.execute(message);
     }
 }
