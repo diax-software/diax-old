@@ -70,6 +70,13 @@ public class CommandHandler extends Diax
                 break;
             }
         }
-        command.execute(message);
+        try
+        {
+            command.execute(message);
+        }
+        catch (Exception e)
+        {
+            message.getChannel().sendMessage("An error occurred, please contact Comportment#9489 with more info.").queue();
+        }
     }
 }

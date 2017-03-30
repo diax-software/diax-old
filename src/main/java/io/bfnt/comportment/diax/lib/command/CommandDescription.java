@@ -22,7 +22,7 @@ public @interface CommandDescription
      * @return If the {@link DiaxCommand} is only allowed to be used in a {@link net.dv8tion.jda.core.entities.Guild}
      * @since Azote
      */
-    boolean guildOnly() default true;
+    boolean guildOnly() default false;
 
     /**
      * An array of Strings which describe what will trigger a {@link DiaxCommand}

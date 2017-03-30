@@ -1,5 +1,6 @@
 package io.bfnt.comportment.diax.lib.command;
 
+import io.bfnt.comportment.diax.commands.Ban;
 import io.bfnt.comportment.diax.commands.Embed;
 import io.bfnt.comportment.diax.commands.Help;
 
@@ -22,6 +23,7 @@ public class Commands
         {
             add(new Help());
             add(new Embed());
+            add(new Ban());
         }
     };
 
