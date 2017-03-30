@@ -2,8 +2,11 @@ package io.bfnt.comportment.diax.lib;
 
 import io.bfnt.comportment.diax.lib.command.DiaxCommand;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.core.utils.PermissionUtil;
 
 import java.awt.*;
 import java.text.SimpleDateFormat;
@@ -86,5 +89,18 @@ public class Diax extends ListenerAdapter
     protected String makeName(User user)
     {
         return String.format("%s#%s", user.getName(), user.getDiscriminator());
+    }
+
+    /**
+     * Returns true if the {@link User} has the permission in the guild to use the command, or is Comportment himself.
+     *
+     * @param user The {@link User} to check the permission of.
+     * @param guild The {@link Guild} to see if the user has the permission there.
+     * @param permission The {@link Permission} to check.
+     * @return If the {@link User} is Comportment or has the required {@link Permission}
+     */
+    protected boolean checkPermission(User user, Guild guild, Permission permission)
+    {
+        return user.getId().equals("293884638101897216") | PermissionUtil.checkPermission(guild, guild.getMember(user), permission);
     }
 }

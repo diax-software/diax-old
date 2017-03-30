@@ -26,6 +26,7 @@ import java.util.List;
 public final class Main extends Diax
 {
     private static JDA[] shards;
+    private static String login = Token.mainToken();
 
     /**
      * Method fired when the bot is started up.
@@ -41,8 +42,8 @@ public final class Main extends Diax
         new Main().registerCommands(new Help());
         init(recommendedShards);
         List<JDA> jdas = Arrays.asList(shards);
-        log("Users on startup: " + jdas.stream().flatMap(shard -> shard.getUsers().stream().distinct()).count());
-        log("Guilds on startup: " + jdas.stream().flatMap(shard -> shard.getGuilds().stream()).distinct().count());
+        log("Unique users on startup: " + jdas.stream().flatMap(shard -> shard.getUsers().stream().distinct()).count());
+        log("Guilds on startup: " +  jdas.stream().flatMap(shard -> shard.getGuilds().stream()).distinct().count());
     }
 
     /**
@@ -56,7 +57,7 @@ public final class Main extends Diax
         try
         {
             HttpResponse<JsonNode> request = Unirest.get("https://discordapp.com/api/gateway/bot")
-                    .header("Authorization", "Bot " + Token.mainToken())
+                    .header("Authorization", "Bot " + login)
                     .header("Content-Type", "application/json").asJson();
             return Integer.parseInt(request.getBody().getObject().get("shards").toString());
         }
@@ -80,7 +81,7 @@ public final class Main extends Diax
             JDA jda = null;
             try
             {
-                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(Token.mainToken()).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler());
+                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler());
                 if (amount > 1)
                 {
                     jda = builder.useSharding(i, amount).buildBlocking();
@@ -97,7 +98,7 @@ public final class Main extends Diax
             if (jda != null)
             {
                 shards[i] = jda;
-                log("Loaded shard: " + i);
+                log(String.format("Shard %d has been loaded successfully.", i + 1));
             }
             try
             {

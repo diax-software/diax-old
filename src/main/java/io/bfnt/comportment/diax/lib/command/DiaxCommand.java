@@ -70,13 +70,13 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return An int which has the minimum amount of args to use the {@link DiaxCommand}
      * @since Azote
      */
-    public int getDefaultArgs()
+    public int getMinimumArgs()
     {
         return getCommandDescription().minimumArgs();
     }
 
     /**
-     * Method to get the main String which will trigger the {@link DiaxCommand} (The first item from {@link #getDefaultArgs()}
+     * Method to get the main String which will trigger the {@link DiaxCommand} (The first item from {@link #getMinimumArgs()}
      *
      * @return A string which will mainly be used to trigger the {@link DiaxCommand}
      * @since Azote
@@ -87,6 +87,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
     }
 
     /**
+     * Method to see what order the commands should go in when sorted.
      *
      * @param command {@link DiaxCommand} to compare the to order.
      * @return an int describing the order that the command goes in.
@@ -97,6 +98,12 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
         return (getTrigger() + getDescription()).compareTo(command.getTrigger() + command.getDescription());
     }
 
+
+    /**
+     * Method to get the format of the command as used in {@link io.bfnt.comportment.diax.commands.Help}
+     *
+     * @return A string containing the format of the command used in {@link io.bfnt.comportment.diax.commands.Help}
+     */
     public String getHelpFormat()
     {
         return String.format("%s%s | %s", getPrefix(), getTrigger(), getDescription());

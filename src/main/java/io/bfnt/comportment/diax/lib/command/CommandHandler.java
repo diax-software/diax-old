@@ -1,6 +1,8 @@
 package io.bfnt.comportment.diax.lib.command;
 
 import io.bfnt.comportment.diax.lib.Diax;
+import net.dv8tion.jda.core.entities.ChannelType;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 /**
@@ -18,9 +20,43 @@ public class CommandHandler extends Diax
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {
-        //TODO: Implement command handler.
-        String message = event.getMessage().getRawContent();
-        if (!message.startsWith(getPrefix())) return;
-        log(String.format("%s | %s", makeName(event.getAuthor()), event.getMessage().getRawContent()));
+        Message message = event.getMessage();
+        String content = message.getRawContent();
+        if (!content.startsWith(getPrefix())) return;
+        log(String.format("%s | %s", makeName(event.getAuthor()), content));
+        content = content.replaceFirst(getPrefix(), "").trim().toLowerCase();
+        for (DiaxCommand command : getCommands())
+        {
+            if (content.split(" ").length < command.getMinimumArgs())
+            {
+                message.getChannel().sendMessage("Nope").queue();
+            }
+            if (command.getTrigger().equals(content.split(" ", 1)[0]))
+            {
+
+                if (!event.getChannelType().equals(ChannelType.TEXT))
+                {
+                    if (command.getGuildOnly())
+                    {
+                        message.getChannel().sendMessage("Nope").queue();
+                    }
+                    else
+                    {
+                        message.getChannel().sendMessage("yep").queue();
+                    }
+                }
+                else
+                {
+                    if (!checkPermission(message.getAuthor(), message.getGuild(), command.getPermission()))
+                    {
+                        message.getChannel().sendMessage("nope").queue();
+                    }
+                    else
+                    {
+                        message.getChannel().sendMessage("yep").queue();
+                    }
+                }
+            }
+        }
     }
 }
