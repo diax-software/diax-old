@@ -60,7 +60,7 @@ public class Diax extends ListenerAdapter
      */
     protected EmbedBuilder makeEmbed()
     {
-        return new EmbedBuilder().setColor(new Color(114,137,218));
+        return new EmbedBuilder().setColor(new Color(114,137,218)).setFooter(getVersion(), "https://cdn.discordapp.com/avatars/295500621862404097/07aa17a7391dbec5c3490e4975cc40e7.webp?size=1024");
     }
 
     /**
@@ -85,5 +85,16 @@ public class Diax extends ListenerAdapter
     protected boolean checkPermission(User user, Guild guild, Permission permission)
     {
         return user.getId().equals("293884638101897216") | PermissionUtil.checkPermission(guild, guild.getMember(user), permission);
+    }
+
+    /**
+     * A method to get the version number and name of Diax.
+     *
+     * @return The version name and number of the current version of Diax.
+     * @since Azote
+     */
+    private String getVersion()
+    {
+        return "Version: Diax-Azote 0.0.3-BETA";
     }
 }
