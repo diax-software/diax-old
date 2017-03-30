@@ -1,9 +1,6 @@
 package io.bfnt.comportment.diax.lib.command;
 
-import io.bfnt.comportment.diax.commands.Ban;
-import io.bfnt.comportment.diax.commands.Embed;
-import io.bfnt.comportment.diax.commands.Help;
-import io.bfnt.comportment.diax.commands.Kick;
+import io.bfnt.comportment.diax.commands.*;
 
 import java.util.TreeSet;
 
@@ -26,6 +23,7 @@ public class Commands
             add(new Embed());
             add(new Ban());
             add(new Kick());
+            add(new Softban());
         }
     };
 
