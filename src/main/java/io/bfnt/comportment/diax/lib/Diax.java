@@ -93,7 +93,7 @@ public class Diax extends ListenerAdapter
      * @return The version name and number of the current version of Diax.
      * @since Azote
      */
-    private String getVersion()
+    protected static String getVersion()
     {
         return "Version: Diax-Azote 0.0.3-BETA";
     }

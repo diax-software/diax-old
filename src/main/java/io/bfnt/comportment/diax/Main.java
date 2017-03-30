@@ -36,6 +36,7 @@ public final class Main extends Diax
      */
     public static void main(String[] args) throws Exception
     {
+        log("Loading with " + getVersion().toLowerCase());
         int recommendedShards = getRecommendedShards();
         log(String.format("Starting with %d shard(s).", recommendedShards));
         init(recommendedShards);
