@@ -14,13 +14,13 @@ import java.util.stream.Collectors;
 public class Help extends DiaxCommand
 {
     /**
-     * The help command which displays all of the other commands.
+     * A command which displays all of the other registered {@link DiaxCommand} in the {@link io.bfnt.comportment.diax.lib.command.Commands} class.
      *
      * @param trigger The {@link Message} which triggered the command.
      * @since Azote
      */
     public void execute(Message trigger)
     {
-        trigger.getChannel().sendMessage(makeEmbed().addField("Commands", getCommands().stream().map(DiaxCommand::getHelpFormat).collect(Collectors.joining("\n")), false).addField("Links", "[My Discord server](https://discord.gg/c6M8PJZ)\n[My Patreon](https://www.patreon.com/Diax)", false).build()).queue();
+        trigger.getChannel().sendMessage(makeEmbed().addField("Commands", getCommands().stream().map(DiaxCommand::getHelpFormat).collect(Collectors.joining("\n")), false).addField("Links", "[Invite me to your server](https://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=8)\n[My Discord server](https://discord.gg/c6M8PJZ)\n[My Patreon](https://www.patreon.com/Diax)", false).build()).queue();
     }
 }

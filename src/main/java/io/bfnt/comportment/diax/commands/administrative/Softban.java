@@ -10,9 +10,15 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
  * Created by Comporment on 30/03/2017 at 21:32
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-@CommandDescription(triggers = {"softban"}, description = "Softbans the mentioned users from the guild.", guildOnly = true, permission = Permission.KICK_MEMBERS, minimumArgs = 1)
+@CommandDescription(triggers = {"softban"}, description = "Soft-bans the mentioned users from the guild.", guildOnly = true, permission = Permission.KICK_MEMBERS, minimumArgs = 1)
 public class Softban extends DiaxCommand
 {
+    /**
+     * A command which bans and then unbans all of the mentioned {@link net.dv8tion.jda.core.entities.Member}s
+     *
+     * @param trigger The {@link Message} which triggered the command.
+     * @since Azote
+     */
     public void execute(Message trigger)
     {
         trigger.getMentionedUsers().forEach(user ->

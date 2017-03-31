@@ -57,6 +57,7 @@ public class Diax extends ListenerAdapter
      * Method to have a global way to make a {@link net.dv8tion.jda.core.entities.MessageEmbed}
      *
      * @return A {@link EmbedBuilder} containing Diax's defaults for the {@link net.dv8tion.jda.core.entities.MessageEmbed}
+     * @since Azote
      */
     protected EmbedBuilder makeEmbed()
     {
@@ -68,6 +69,7 @@ public class Diax extends ListenerAdapter
      *
      * @param user The {@link User}'s name to convert into a nicer name.
      * @return A string in the format: username#discriminator
+     * @since Azote
      */
     protected String makeName(User user)
     {

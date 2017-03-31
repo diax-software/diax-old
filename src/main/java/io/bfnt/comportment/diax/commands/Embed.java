@@ -4,6 +4,7 @@ import io.bfnt.comportment.diax.lib.command.CommandDescription;
 import io.bfnt.comportment.diax.lib.command.DiaxCommand;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.exceptions.PermissionException;
 
 /**
  * Created by Comporment on 30/03/2017 at 17:23
@@ -13,14 +14,18 @@ import net.dv8tion.jda.core.entities.Message;
 public class Embed extends DiaxCommand
 {
     /**
-     * The embed command which embeds the content of the given message.
+     * A command which embeds the content of the {@link Message} which triggered the command.
      *
      * @param trigger The {@link Message} which triggered the command.
      * @since Azote
      */
     public void execute(Message trigger)
     {
-        trigger.delete().queue(_void
-                -> trigger.getChannel().sendMessage(makeEmbed().setAuthor(makeName(trigger.getAuthor()), trigger.getAuthor().getEffectiveAvatarUrl(), trigger.getAuthor().getEffectiveAvatarUrl()).setDescription(trigger.getRawContent().replaceFirst(trigger.getRawContent().split(" ")[0], "")).build()).queue());
+        try
+        {
+            trigger.delete().queue();
+        }
+        catch (PermissionException ignored) {}
+        trigger.getChannel().sendMessage(makeEmbed().setAuthor(makeName(trigger.getAuthor()), trigger.getAuthor().getEffectiveAvatarUrl(), trigger.getAuthor().getEffectiveAvatarUrl()).setDescription(trigger.getRawContent().replaceFirst(trigger.getRawContent().split(" ")[0], "")).build()).queue();
     }
 }
