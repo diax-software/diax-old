@@ -2,11 +2,11 @@ package io.bfnt.comportment.diax.lib.command;
 
 import io.bfnt.comportment.diax.commands.Embed;
 import io.bfnt.comportment.diax.commands.Help;
-import io.bfnt.comportment.diax.commands.Testing;
 import io.bfnt.comportment.diax.commands.administrative.Ban;
 import io.bfnt.comportment.diax.commands.administrative.Kick;
 import io.bfnt.comportment.diax.commands.administrative.Purge;
 import io.bfnt.comportment.diax.commands.administrative.Softban;
+import io.bfnt.comportment.diax.commands.owner.Eval;
 
 import java.util.TreeSet;
 
@@ -31,7 +31,7 @@ public class Commands
             add(new Kick());
             add(new Softban());
             add(new Purge());
-            add(new Testing());
+            add(new Eval());
         }
     };
 
