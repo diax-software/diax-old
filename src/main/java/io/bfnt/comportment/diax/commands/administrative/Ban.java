@@ -13,6 +13,12 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 @CommandDescription(triggers = {"ban", "banne"}, minimumArgs = 1, permission = Permission.BAN_MEMBERS, description = "Bans the mentioned users from a guild.", guildOnly = true)
 public class Ban extends DiaxCommand
 {
+    /**
+     * A command which bans all of the mentioned {@link net.dv8tion.jda.core.entities.Member}s from the {@link net.dv8tion.jda.core.entities.Guild} the command was used in.
+     *
+     * @param trigger The {@link Message} which triggered the command.
+     * @since Azote
+     */
     public void execute(Message trigger)
     {
         trigger.getMentionedUsers().forEach(user ->

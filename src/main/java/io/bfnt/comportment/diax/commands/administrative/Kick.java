@@ -15,6 +15,12 @@ public class Kick extends DiaxCommand
 {
     public void execute(Message trigger)
     {
+        /**
+         * A command which kicks all of the mentioned {@link net.dv8tion.jda.core.entities.Member}s from the {@link net.dv8tion.jda.core.entities.Guild} the command was used in.
+         *
+         * @param trigger The {@link Message} which triggered the command.
+         * @since Azote
+         */
         trigger.getMentionedUsers().forEach(user ->
         {
             try

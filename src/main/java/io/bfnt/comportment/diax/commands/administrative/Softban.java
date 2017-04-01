@@ -14,7 +14,7 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 public class Softban extends DiaxCommand
 {
     /**
-     * A command which bans and then unbans all of the mentioned {@link net.dv8tion.jda.core.entities.Member}s
+     * A command which bans, and then unbans all of the mentioned {@link net.dv8tion.jda.core.entities.Member}s from the {@link net.dv8tion.jda.core.entities.Guild} the command was used in.
      *
      * @param trigger The {@link Message} which triggered the command.
      * @since Azote
