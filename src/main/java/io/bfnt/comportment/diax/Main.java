@@ -25,8 +25,8 @@ import java.util.List;
  */
 public final class Main extends Diax
 {
-    private static JDA[] shards;
-    private static String login = Token.mainToken();
+    private JDA[] shards;
+    private String login = new Token().mainToken();
 
     /**
      * Method fired when the bot is started up.
@@ -37,10 +37,21 @@ public final class Main extends Diax
      */
     public static void main(String[] args) throws Exception
     {
+        new Main().main();
+    }
+
+    /**
+     * The main method which is triggered on the startup of the bot.
+     *
+     * @since Azote
+     */
+    private void main()
+    {
         log("Loading with " + getVersion().toLowerCase());
         int recommendedShards = getRecommendedShards();
         log(String.format("Starting with %d shard(s).", recommendedShards));
         init(recommendedShards);
+        if (shards == null) return;
         List<JDA> jdas = Arrays.asList(shards);
         log("Unique users on startup: " + jdas.stream().flatMap(shard -> shard.getUsers().stream().distinct()).count());
         log("Guilds on startup: " +  jdas.stream().flatMap(shard -> shard.getGuilds().stream()).distinct().count());
@@ -52,7 +63,7 @@ public final class Main extends Diax
      * @return the amount of shards the bot should use.
      * @since Azote
      */
-    private static int getRecommendedShards()
+    private int getRecommendedShards()
     {
         try
         {
@@ -73,7 +84,7 @@ public final class Main extends Diax
      *
      * @since Azote
      */
-    private static void init(int amount)
+    private void init(int amount)
     {
         shards = new JDA[amount];
         for (int i = 0; i < amount; i++)

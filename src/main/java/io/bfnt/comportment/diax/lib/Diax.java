@@ -27,7 +27,7 @@ public class Diax extends ListenerAdapter
      * @param message Message to timestamp and then print to console.
      * @since Azote
      */
-    protected static void log(String message)
+    protected void log(String message)
     {
         System.out.println(String.format("%s [Log] %s", new SimpleDateFormat("[HH:mm:ss]").format(new Date()), message));
     }
@@ -37,7 +37,7 @@ public class Diax extends ListenerAdapter
      *
      * @since Azote
      */
-    protected static String getPrefix()
+    protected String getPrefix()
     {
         return "<<";
     }
@@ -95,8 +95,8 @@ public class Diax extends ListenerAdapter
      * @return The version name and number of the current version of Diax.
      * @since Azote
      */
-    protected static String getVersion()
+    protected String getVersion()
     {
-        return "Version: Diax-Azote 0.0.3-BETA";
+        return "Version: Diax Azote-0.0.3-BETA";
     }
 }
