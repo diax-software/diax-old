@@ -4,6 +4,7 @@ import io.bfnt.comportment.diax.commands.administrative.Ban;
 import io.bfnt.comportment.diax.commands.administrative.Kick;
 import io.bfnt.comportment.diax.commands.administrative.Purge;
 import io.bfnt.comportment.diax.commands.administrative.Softban;
+import io.bfnt.comportment.diax.commands.informative.Ginfo;
 import io.bfnt.comportment.diax.commands.informative.Help;
 import io.bfnt.comportment.diax.commands.miscellaneous.Embed;
 import io.bfnt.comportment.diax.commands.owner.Eval;
@@ -32,6 +33,7 @@ public class Commands
             add(new Softban());
             add(new Purge());
             add(new Eval());
+            add(new Ginfo());
         }
     };
 
