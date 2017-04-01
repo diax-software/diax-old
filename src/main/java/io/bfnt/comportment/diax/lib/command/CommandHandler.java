@@ -3,6 +3,7 @@ package io.bfnt.comportment.diax.lib.command;
 import io.bfnt.comportment.diax.lib.Diax;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.exceptions.PermissionException;
 
 /**
  * Created by Comporment on 28/03/2017 at 16:49
@@ -43,16 +44,15 @@ public class CommandHandler extends Diax
      * @param message   The {@link Message}
      * @param truncated The truncated version of the message content without the prefix or the command trigger.
      */
-    private void execute(DiaxCommand command, Message message, String truncated)
-    {
-        if (truncated.split(" ").length < command.getMinimumArgs())
-        {
+    private void execute(DiaxCommand command, Message message, String truncated) {
+        if (truncated.split(" ").length < command.getMinimumArgs()) {
             message.getChannel().sendMessage(makeEmbed().addField("Error!", "You did not specify enough args!", false).build()).queue();
             return;
         }
         switch (message.getChannelType())
         {
-            case TEXT: {
+            case TEXT:
+            {
                 if (!checkPermission(message.getAuthor(), message.getGuild(), command.getPermission()))
                 {
                     message.getChannel().sendMessage(makeEmbed().addField("Error!", "You do not have enough permission to do that.", false).build()).queue();
@@ -61,7 +61,7 @@ public class CommandHandler extends Diax
                 break;
             }
             default:
-                {
+            {
                 if (command.getGuildOnly())
                 {
                     message.getChannel().sendMessage(makeEmbed().addField("Error!", "This command can not be used in a private message.", false).build()).queue();
@@ -70,9 +70,21 @@ public class CommandHandler extends Diax
                 break;
             }
         }
+        if (command.getOwnerOnly())
+        {
+            if (!message.getAuthor().getId().equals(getOwnerId()))
+            {
+                message.getChannel().sendMessage(makeEmbed().addField("Error!", "Like I would give you permission to do this.", false).build()).queue();
+                return;
+            }
+        }
         try
         {
             command.execute(message);
+        }
+        catch (PermissionException e)
+        {
+            message.getChannel().sendMessage(makeEmbed().addField("Error!", "I do not have permission to do this.", false).build()).queue();
         }
         catch (Exception e)
         {

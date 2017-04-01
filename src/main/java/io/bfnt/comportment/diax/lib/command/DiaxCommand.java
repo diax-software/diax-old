@@ -98,9 +98,8 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
         return (getTrigger() + getDescription()).compareTo(command.getTrigger() + command.getDescription());
     }
 
-
     /**
-     * Method to get the format of the command as used in {@link io.bfnt.comportment.diax.commands.Help}
+     * Method to get the format of the {@link DiaxCommand} as used in {@link io.bfnt.comportment.diax.commands.Help}
      *
      * @return A string containing the format of the command used in {@link io.bfnt.comportment.diax.commands.Help}
      * @since Azote
@@ -108,5 +107,16 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
     public String getHelpFormat()
     {
         return String.format("%s%s | %s", getPrefix(), getTrigger(), getDescription());
+    }
+
+    /**
+     * Method to get if only the bot owner can use the {@link DiaxCommand}
+     *
+     * @return A boolean that describes if only the owner can use the command.
+     * @since Azote
+     */
+    public boolean getOwnerOnly()
+    {
+        return getCommandDescription().ownerOnly();
     }
 }

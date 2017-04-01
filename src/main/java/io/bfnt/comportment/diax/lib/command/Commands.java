@@ -2,6 +2,7 @@ package io.bfnt.comportment.diax.lib.command;
 
 import io.bfnt.comportment.diax.commands.Embed;
 import io.bfnt.comportment.diax.commands.Help;
+import io.bfnt.comportment.diax.commands.Testing;
 import io.bfnt.comportment.diax.commands.administrative.Ban;
 import io.bfnt.comportment.diax.commands.administrative.Kick;
 import io.bfnt.comportment.diax.commands.administrative.Purge;
@@ -30,6 +31,7 @@ public class Commands
             add(new Kick());
             add(new Softban());
             add(new Purge());
+            add(new Testing());
         }
     };
 

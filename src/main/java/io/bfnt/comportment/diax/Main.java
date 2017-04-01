@@ -47,11 +47,11 @@ public final class Main extends Diax
      */
     private void main()
     {
-        log("Loading with " + getVersion().toLowerCase());
+        log("Loading with version " + getVersion().toLowerCase());
         int recommendedShards = getRecommendedShards();
         log(String.format("Starting with %d shard(s).", recommendedShards));
         init(recommendedShards);
-        if (shards == null) return;
+        if (shards == null) System.exit(1);
         List<JDA> jdas = Arrays.asList(shards);
         log("Unique users on startup: " + jdas.stream().flatMap(shard -> shard.getUsers().stream().distinct()).count());
         log("Guilds on startup: " +  jdas.stream().flatMap(shard -> shard.getGuilds().stream()).distinct().count());

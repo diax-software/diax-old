@@ -5,6 +5,7 @@ import io.bfnt.comportment.diax.lib.command.DiaxCommand;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.ISnowflake;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import net.dv8tion.jda.core.utils.PermissionUtil;
@@ -97,6 +98,17 @@ public class Diax extends ListenerAdapter
      */
     protected String getVersion()
     {
-        return "Version: Diax Azote-0.0.3-BETA";
+        return "Diax Azote-0.0.3-BETA";
+    }
+
+    /**
+     * Method to get the ID of Comportment (the bot owner)
+     *
+     * @return The ID of Comportment as described in {@link ISnowflake#getId()}
+     * @since Azote
+     */
+    protected String getOwnerId()
+    {
+        return "293884638101897216";
     }
 }

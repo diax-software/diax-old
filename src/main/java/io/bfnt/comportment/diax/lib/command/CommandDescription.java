@@ -51,8 +51,16 @@ public @interface CommandDescription
     /**
      * The minimum args that a {@link DiaxCommand} must have to be executed.
      *
-     * @return Tye amount of minimum args the {@link DiaxCommand} must have.
+     * @return The amount of minimum args the {@link DiaxCommand} must have.
      * @since Azote
      */
     int minimumArgs() default 0;
+
+    /**
+     * Determines if the {@link DiaxCommand} can only be used by the one and only Comportment-sama
+     *
+     * @return If the {@link DiaxCommand} can only be used by Comportment
+     * @since Azote
+     */
+    boolean ownerOnly() default false;
 }
