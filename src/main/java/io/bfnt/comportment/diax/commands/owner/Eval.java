@@ -2,12 +2,10 @@ package io.bfnt.comportment.diax.commands.owner;
 
 import io.bfnt.comportment.diax.lib.command.CommandDescription;
 import io.bfnt.comportment.diax.lib.command.DiaxCommand;
-import jdk.nashorn.api.scripting.NashornException;
 import net.dv8tion.jda.core.entities.Message;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 
 /**
  * Created by Comporment on 01/04/2017 at 17:48
@@ -34,9 +32,6 @@ public class Eval extends DiaxCommand
             engine.put("channel", trigger.getChannel());
             trigger.getChannel().sendMessage("```" + engine.eval(trigger.getRawContent().replaceFirst(trigger.getRawContent().split(" ")[0], "")) + "```").queue();
         }
-        catch (NashornException|ScriptException e)
-        {
-            e.printStackTrace();
-        }
+        catch (Exception ignored) {}
     }
 }
