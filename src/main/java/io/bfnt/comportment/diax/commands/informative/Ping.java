@@ -16,6 +16,6 @@ public class Ping extends DiaxCommand
     public void execute(Message trigger)
     {
         trigger.getChannel().sendMessage(makeEmbed().setDescription("Pinging...").build()).queue(message
-                -> message.editMessage(makeEmbed().setDescription(String.format("\uD83D\uDCE7 Response: %sms\n❤ Heartbeat: %sms", trigger.getCreationTime().until(message.getCreationTime(), ChronoUnit.MILLIS), trigger.getJDA().getPing())).build()));
+                -> message.editMessage(makeEmbed().addField("Pong!", String.format("\uD83D\uDCE7 Response: %sms\n❤ Heartbeat: %sms", trigger.getCreationTime().until(message.getCreationTime(), ChronoUnit.MILLIS), trigger.getJDA().getPing()), false).build()).queue());
     }
 }
