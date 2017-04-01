@@ -4,6 +4,7 @@ import io.bfnt.comportment.diax.commands.Embed;
 import io.bfnt.comportment.diax.commands.Help;
 import io.bfnt.comportment.diax.commands.administrative.Ban;
 import io.bfnt.comportment.diax.commands.administrative.Kick;
+import io.bfnt.comportment.diax.commands.administrative.Purge;
 import io.bfnt.comportment.diax.commands.administrative.Softban;
 
 import java.util.TreeSet;
@@ -16,7 +17,7 @@ public class Commands
 {
 
     /**
-     * Registers the {@link DiaxCommand}s to be able to be used when the {@link CommandHandler} is searching.
+     * A method which registers the {@link DiaxCommand}s to be able to be used when the {@link CommandHandler} is looking to see if a trigger is valid.
      *
      * @since Azote
      */
@@ -28,6 +29,7 @@ public class Commands
             add(new Ban());
             add(new Kick());
             add(new Softban());
+            add(new Purge());
         }
     };
 
