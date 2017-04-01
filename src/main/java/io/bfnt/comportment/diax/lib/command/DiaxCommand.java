@@ -1,5 +1,6 @@
 package io.bfnt.comportment.diax.lib.command;
 
+import io.bfnt.comportment.diax.commands.informative.Help;
 import io.bfnt.comportment.diax.lib.Diax;
 import net.dv8tion.jda.core.Permission;
 
@@ -99,9 +100,9 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
     }
 
     /**
-     * Method to get the format of the {@link DiaxCommand} as used in {@link io.bfnt.comportment.diax.commands.Help}
+     * Method to get the format of the {@link DiaxCommand} as used in {@link Help}
      *
-     * @return A string containing the format of the command used in {@link io.bfnt.comportment.diax.commands.Help}
+     * @return A string containing the format of the command used in {@link Help}
      * @since Azote
      */
     public String getHelpFormat()
