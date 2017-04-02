@@ -7,6 +7,7 @@ import io.bfnt.comportment.diax.commands.administrative.Softban;
 import io.bfnt.comportment.diax.commands.informative.Ginfo;
 import io.bfnt.comportment.diax.commands.informative.Help;
 import io.bfnt.comportment.diax.commands.informative.Ping;
+import io.bfnt.comportment.diax.commands.informative.Statistics;
 import io.bfnt.comportment.diax.commands.miscellaneous.Embed;
 import io.bfnt.comportment.diax.commands.owner.Eval;
 
@@ -36,6 +37,7 @@ public class Commands
             add(new Eval());
             add(new Ginfo());
             add(new Ping());
+            add(new Statistics());
         }
     };
 
