@@ -9,7 +9,7 @@
   <a href="https://www.patreon.com/Diax"><img src="https://img.shields.io/badge/Donate-Patreon-blue.svg?style=plastic"></a>
   <br>
   <a href="https://discord.gg/c6M8PJZ"><img src="https://discordapp.com/api/guilds/293889712014360586/embed.png"></a>
-  <hr>
+  <hr />
   <table>
     <tr>
       <th>Feature Name</th>
@@ -32,9 +32,8 @@
       <td>80% Done!</td> 
     </tr>
   </table>
-  <hr>
-  <hr>
+  <hr />
   <a href="https://chromaryu.net"><img src="https://camo.githubusercontent.com/f6b5ddf0accb05a51ed1b62d11393576ca83ab64/68747470733a2f2f6368726f6d617279752e6e65742f696d616765732f62616e6e6572732f6368726f6d617279757575757575757575752e706e67"></a>
-  <br>
-  <hr>
+  <br />
+  <hr />
 </div>
