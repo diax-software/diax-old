@@ -12,6 +12,12 @@ public class GuildMusicManager
     public final AudioPlayer player;
     public final TrackScheduler scheduler;
 
+    /**
+     * Constructor which wraps a {@link AudioPlayerManager} to make a {@link GuildMusicManager}
+     *
+     * @param manager The {@link GuildMusicManager} which was created.
+     * @since Azote
+     */
     public GuildMusicManager(AudioPlayerManager manager)
     {
         player = manager.createPlayer();
@@ -19,6 +25,12 @@ public class GuildMusicManager
         player.addListener(scheduler);
     }
 
+    /**
+     * Method which wraps the {@link AudioPlayer} to create a {@link AudioPlayerSendHandler}
+     *
+     * @return The {@link AudioPlayerSendHandler} which was created.
+     * @since Azote
+     */
     public AudioPlayerSendHandler getSendHandler()
     {
         return new AudioPlayerSendHandler(player);
