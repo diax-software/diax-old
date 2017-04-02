@@ -14,6 +14,12 @@ import java.time.temporal.ChronoUnit;
 @CommandDescription(triggers = {"ginfo", "guild", "guildinfo"}, guildOnly = true, description = "Gives you information about the guild.")
 public class Ginfo extends DiaxCommand
 {
+    /**
+     * A command which displays information about the {@link Guild} that the {@link DiaxCommand} was executed in.
+     *
+     * @param trigger The {@link Message} which triggered the command.
+     * @since Azote
+     */
     public void execute(Message trigger)
     {
         Guild guild = trigger.getGuild();
