@@ -25,7 +25,7 @@ import java.util.List;
  */
 public final class Main extends Diax
 {
-    private JDA[] shards;
+    private static JDA[] shards;
     private String login = new Token().mainToken();
 
     /**
@@ -48,7 +48,7 @@ public final class Main extends Diax
     private void main()
     {
         log("Loading with version " + getVersion());
-        int recommendedShards = getRecommendedShards();
+        int recommendedShards = getRecommendedShards() + 1;
         log(String.format("Starting with %d shard(s).", recommendedShards));
         init(recommendedShards);
         if (shards == null) System.exit(1);
@@ -99,7 +99,7 @@ public final class Main extends Diax
                 }
                 else
                 {
-                    jda = builder.buildBlocking();
+                    jda = builder.buildAsync();
                 }
             }
             catch (LoginException|RateLimitedException|InterruptedException exception)
@@ -111,14 +111,6 @@ public final class Main extends Diax
                 shards[i] = jda;
                 log(String.format("Shard %d has been loaded successfully.", i + 1));
             }
-            try
-            {
-                Thread.sleep(5000);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
         }
         log(String.format("Finished loading with %d shard(s).", amount));
     }
@@ -129,7 +121,7 @@ public final class Main extends Diax
      * @return An array containing all of the {@link JDA} shards. (Might be null if no shards)
      * @since Azote
      */
-    public JDA[] getShards()
+    public static JDA[] getShards()
     {
         return shards;
     }
