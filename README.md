@@ -21,7 +21,11 @@
     </tr>
     <tr>
       <td>Command Handler</td>
-      <td>Work in progress.</td>
+      <td>Done!</td>
+    </tr>
+    <tr>
+      <td>Moderation Commands</td>
+      <td>Done!</td>
     </tr>
     <tr>
       <td>Music</td>
@@ -29,18 +33,6 @@
     </tr>
   </table>
   <hr>
-  <table>
-    <tr>
-      <th>Command Name</th>
-      <th>Description</th> 
-      <th>Status</th>
-    </tr>
-    <tr>
-      <td>Help</td>
-      <td>Gives you help about Diax's commands.</td>
-      <td>Not started.</td>
-    </tr>
-  </table>
   <hr>
   <a href="https://chromaryu.net"><img src="https://camo.githubusercontent.com/f6b5ddf0accb05a51ed1b62d11393576ca83ab64/68747470733a2f2f6368726f6d617279752e6e65742f696d616765732f62616e6e6572732f6368726f6d617279757575757575757575752e706e67"></a>
   <br>
