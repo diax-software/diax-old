@@ -11,15 +11,17 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
+import io.bfnt.comportment.diax.lib.Diax;
 import io.bfnt.comportment.diax.lib.music.GuildMusicManager;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.MessageChannel;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MusicUtil extends ListenerAdapter
+public class MusicUtil extends Diax
 {
     private static final AudioPlayerManager playerManager = defaultAudioPlayerManager();
     private static final Map<Long, GuildMusicManager> musicManagers = new HashMap<>();
@@ -53,27 +55,29 @@ public class MusicUtil extends ListenerAdapter
             @Override
             public void trackLoaded(AudioTrack track)
             {
-                channel.sendMessage("loaded...").queue();
+                AudioTrackInfo info = track.getInfo();
+                channel.sendMessage(staticEmbed().addField("Loaded!", String.format("**%s** by **%s** has been added to the queue (%s)", info.title, info.author, getTimestamp(info.length)),false).build()).queue();
+                channel.sendMessage(track.getInfo().author);
                 manager.scheduler.queue(track);
             }
 
             @Override
             public void playlistLoaded(AudioPlaylist playlist)
             {
-                channel.sendMessage("playlist loaded...").queue();
+                channel.sendMessage(staticEmbed().addField("Loaded!", String.format("The playlist **%s** containing **%s** tracks has been added to the queue.", playlist.getName(), playlist.getTracks().size()), false).build()).queue();
                 playlist.getTracks().forEach(manager.scheduler::queue);
             }
 
             @Override
             public void noMatches()
             {
-                channel.sendMessage("no matches...").queue();
+                channel.sendMessage(staticEmbed().addField("Error!", String.format("There were no matches found for **%s**", trackUrl), false).setColor(new Color(255, 0, 0)).build());
             }
 
             @Override
             public void loadFailed(FriendlyException exception)
             {
-                channel.sendMessage("nope...").queue();
+                channel.sendMessage(staticEmbed().addField("Error!", String.format("The track could not be played due to: **%s**", exception.getMessage()), false).build()).queue();
             }
         });
     }
@@ -100,12 +104,11 @@ public class MusicUtil extends ListenerAdapter
     }
 
     /**
-     * Method not wrote by me- could be useful.
+     * Method wrote by dv8tion to get the timestamp from the length in milliseconds.
      *
+     * @return The timestamp in the format HH:mm:ss or mm:ss
      * @since Azote
-     * @deprecated
      */
-    @Deprecated
     private static String getTimestamp(long milliseconds)
     {
         int seconds = (int) (milliseconds / 1000) % 60 ;

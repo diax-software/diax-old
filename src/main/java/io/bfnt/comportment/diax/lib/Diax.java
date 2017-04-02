@@ -66,6 +66,17 @@ public class Diax extends ListenerAdapter
     }
 
     /**
+     * Method to have a global way to make a {@link net.dv8tion.jda.core.entities.MessageEmbed} [in static methods]
+     *
+     * @return A {@link EmbedBuilder} containing Diax's defaults for the {@link net.dv8tion.jda.core.entities.MessageEmbed}
+     * @since Azote
+     */
+    protected static EmbedBuilder staticEmbed()
+    {
+        return new EmbedBuilder().setColor(new Color(114,137,218)).setFooter(new Diax().getVersion(), "https://cdn.discordapp.com/avatars/295500621862404097/07aa17a7391dbec5c3490e4975cc40e7.webp?size=1024");
+    }
+
+    /**
      * Method to get a less ugly version of the {@link User}'s name, as displayed in the client.
      *
      * @param user The {@link User}'s name to convert into a nicer name.
