@@ -47,7 +47,7 @@ public final class Main extends Diax
      */
     private void main()
     {
-        log("Loading with version " + getVersion().toLowerCase());
+        log("Loading with version " + getVersion());
         int recommendedShards = getRecommendedShards();
         log(String.format("Starting with %d shard(s).", recommendedShards));
         init(recommendedShards);
@@ -121,5 +121,16 @@ public final class Main extends Diax
             }
         }
         log(String.format("Finished loading with %d shard(s).", amount));
+    }
+
+    /**
+     * A method to get an array containing all of the {@link JDA} shard instances.
+     *
+     * @return An array containing all of the {@link JDA} shards. (Might be null if no shards)
+     * @since Azote
+     */
+    public JDA[] getShards()
+    {
+        return shards;
     }
 }
