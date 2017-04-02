@@ -12,18 +12,37 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
  */
 public class DisconnectListener extends ListenerAdapter
 {
+
+    /**
+     * A method that is fired when a {@link net.dv8tion.jda.core.entities.Guild} becomes unavailable.
+     *
+     * @param event The {@link GuildUnavailableEvent} which was fired.
+     * @since Azote
+     */
     @Override
     public void onGuildUnavailable(GuildUnavailableEvent event)
     {
         event.getGuild().getAudioManager().closeAudioConnection();
     }
 
+    /**
+     * A method that is fired when Diax is removed from a {@link net.dv8tion.jda.core.entities.Guild}
+     *
+     * @param event The {@link GuildLeaveEvent} which was fired.
+     * @since Azote
+     */
     @Override
     public void onGuildLeave(GuildLeaveEvent event)
     {
         event.getGuild().getAudioManager().closeAudioConnection();
     }
 
+    /**
+     * A method that is fired when a {@link net.dv8tion.jda.core.entities.Member} is moved from one {@link net.dv8tion.jda.core.entities.VoiceChannel} to another {@link net.dv8tion.jda.core.entities.VoiceChannel}
+     *
+     * @param event The {@link GuildVoiceMoveEvent} which was fired.
+     * @since Azote
+     */
     @Override
     public void onGuildVoiceMove(GuildVoiceMoveEvent event)
     {
@@ -31,6 +50,12 @@ public class DisconnectListener extends ListenerAdapter
         if (event.getChannelJoined().getMembers().contains(event.getGuild().getMember(event.getJDA().getSelfUser())) && event.getChannelJoined().getMembers().size() < 2) event.getChannelJoined().getGuild().getAudioManager().closeAudioConnection();
     }
 
+    /**
+     * A method that is fired when a {@link net.dv8tion.jda.core.entities.Member} leaves a {@link net.dv8tion.jda.core.entities.VoiceChannel}
+     *
+     * @param event The {@link GuildVoiceLeaveEvent} which was fired.
+     * @since Azote
+     */
     @Override
     public void onGuildVoiceLeave(GuildVoiceLeaveEvent event)
     {

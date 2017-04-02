@@ -13,11 +13,23 @@ public class AudioPlayerSendHandler implements AudioSendHandler
     private final AudioPlayer audioPlayer;
     private AudioFrame lastFrame;
 
+    /**
+     * Constructor which makes a {@link AudioPlayerSendHandler} using a {@link AudioPlayer}
+     *
+     * @param audioPlayer The {@link AudioPlayer} to wrap.
+     * @since Azote
+     */
     public AudioPlayerSendHandler(AudioPlayer audioPlayer)
     {
         this.audioPlayer = audioPlayer;
     }
 
+    /**
+     * A method to get whether the {@link AudioPlayer} can be provided with audio.
+     *
+     * @return true to continue playback, false to pause playback.
+     * @since Azote
+     */
     @Override
     public boolean canProvide()
     {
@@ -25,6 +37,12 @@ public class AudioPlayerSendHandler implements AudioSendHandler
         return lastFrame != null;
     }
 
+    /**
+     * If the method {@link #canProvide()} is true, then this method will be used to get a byte of 20ms of audio.
+     *
+     * @return A byte containing 20ms of audio.
+     * @since Azote
+     */
     @Override
     public byte[] provide20MsAudio()
     {
@@ -34,6 +52,12 @@ public class AudioPlayerSendHandler implements AudioSendHandler
         return data;
     }
 
+    /**
+     * A method to determine if the audio is opus.
+     *
+     * @return Should always be true.
+     * @since Azote
+     */
     @Override
     public boolean isOpus()
     {
