@@ -1,6 +1,5 @@
 package io.bfnt.comportment.diax.lib.music;
 
-import io.bfnt.comportment.diax.commands.music.MusicUtil;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.events.guild.GuildUnavailableEvent;

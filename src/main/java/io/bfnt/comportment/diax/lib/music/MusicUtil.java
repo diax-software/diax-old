@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax.commands.music;
+package io.bfnt.comportment.diax.lib.music;
 
 /**
  * Created by Connor on 02/04/2017.
@@ -13,7 +13,6 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import io.bfnt.comportment.diax.lib.Diax;
-import io.bfnt.comportment.diax.lib.music.GuildMusicManager;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.MessageChannel;
 
@@ -71,7 +70,7 @@ public class MusicUtil extends Diax
             @Override
             public void noMatches()
             {
-                channel.sendMessage(staticEmbed().addField("Error!", String.format("There were no matches found for **%s**", trackUrl), false).setColor(new Color(255, 0, 0)).build());
+                channel.sendMessage(staticEmbed().addField("Error!", String.format("There were no matches found for **%s**", trackUrl), false).setColor(new Color(255, 0, 0)).build()).queue();
             }
 
             @Override
