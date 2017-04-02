@@ -13,6 +13,13 @@ import java.time.temporal.ChronoUnit;
 @CommandDescription(description = "Tells you the pings for Diax.", triggers = {"ping", "pong", "pang", "peng", "pung"})
 public class Ping extends DiaxCommand
 {
+    /**
+     * A command which displays information about the miscellaneous pings which the {@link DiaxCommand} triggered.
+     *
+     * @param trigger The {@link Message} which triggered the command.
+     * @since Azote
+     */
+    @Override
     public void execute(Message trigger)
     {
         trigger.getChannel().sendMessage(makeEmbed().setDescription("Pinging...").build()).queue(message

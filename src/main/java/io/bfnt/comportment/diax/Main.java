@@ -7,6 +7,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import io.bfnt.comportment.diax.lib.Diax;
 import io.bfnt.comportment.diax.lib.Token;
 import io.bfnt.comportment.diax.lib.command.CommandHandler;
+import io.bfnt.comportment.diax.lib.music.DisconnectListener;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -47,7 +48,7 @@ public final class Main extends Diax
      */
     private void main()
     {
-        log("Loading with version " + getVersion().toLowerCase());
+        log("Loading with version " + getVersion());
         int recommendedShards = getRecommendedShards();
         log(String.format("Starting with %d shard(s).", recommendedShards));
         init(recommendedShards);
@@ -92,7 +93,7 @@ public final class Main extends Diax
             JDA jda = null;
             try
             {
-                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setStatus(OnlineStatus.IDLE).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler());
+                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setStatus(OnlineStatus.IDLE).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler(), new DisconnectListener());
                 if (amount > 1)
                 {
                     jda = builder.useSharding(i, amount).buildBlocking();
@@ -121,5 +122,16 @@ public final class Main extends Diax
             }
         }
         log(String.format("Finished loading with %d shard(s).", amount));
+    }
+
+    /**
+     * A method to get an array containing all of the {@link JDA} shard instances.
+     *
+     * @return An array containing all of the {@link JDA} shards. (Might be null if no shards)
+     * @since Azote
+     */
+    public JDA[] getShards()
+    {
+        return shards;
     }
 }
