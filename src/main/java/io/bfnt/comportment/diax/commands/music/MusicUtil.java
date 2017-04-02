@@ -88,7 +88,7 @@ public class MusicUtil extends ListenerAdapter
     public static GuildMusicManager getMusicManager(Guild guild)
     {
         String guildId = guild.getId();
-        musicManagers.putIfAbsent(guildId, new GuildMusicManager(playerManager));
+        musicManagers.putIfAbsent(guildId, new GuildMusicManager(playerManager, guild));
         return musicManagers.get(guildId);
     }
 

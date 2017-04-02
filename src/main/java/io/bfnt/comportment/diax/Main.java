@@ -93,7 +93,7 @@ public final class Main extends Diax
             JDA jda = null;
             try
             {
-                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setStatus(OnlineStatus.IDLE).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler(), new DisconnectListener());
+                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setAudioEnabled(true).setStatus(OnlineStatus.IDLE).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler(), new DisconnectListener());
                 if (amount > 1)
                 {
                     jda = builder.useSharding(i, amount).buildBlocking();

@@ -2,6 +2,7 @@ package io.bfnt.comportment.diax.lib.music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import net.dv8tion.jda.core.entities.Guild;
 
 /**
  * Created by Comporment on 02/04/2017 at 16:18
@@ -18,11 +19,12 @@ public class GuildMusicManager
      * @param manager The {@link GuildMusicManager} which was created.
      * @since Azote
      */
-    public GuildMusicManager(AudioPlayerManager manager)
+    public GuildMusicManager(AudioPlayerManager manager, Guild guild)
     {
         player = manager.createPlayer();
         scheduler = new TrackScheduler(player);
         player.addListener(scheduler);
+        guild.getAudioManager().setSendingHandler(getSendHandler());
     }
 
     /**
