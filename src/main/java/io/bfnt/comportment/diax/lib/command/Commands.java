@@ -10,6 +10,7 @@ import io.bfnt.comportment.diax.commands.informative.Ping;
 import io.bfnt.comportment.diax.commands.informative.Statistics;
 import io.bfnt.comportment.diax.commands.miscellaneous.Bump;
 import io.bfnt.comportment.diax.commands.miscellaneous.Embed;
+import io.bfnt.comportment.diax.commands.music.Play;
 import io.bfnt.comportment.diax.commands.owner.Eval;
 
 import java.util.TreeSet;
@@ -40,6 +41,7 @@ public class Commands
             add(new Ping());
             add(new Statistics());
             add(new Bump());
+            add(new Play());
         }
     };
 

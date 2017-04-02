@@ -4,7 +4,6 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import io.bfnt.comportment.diax.commands.music.PlayerControl;
 import io.bfnt.comportment.diax.lib.Diax;
 import io.bfnt.comportment.diax.lib.Token;
 import io.bfnt.comportment.diax.lib.command.CommandHandler;
@@ -50,7 +49,7 @@ public final class Main extends Diax
     private void main()
     {
         log("Loading with version " + getVersion());
-        int recommendedShards = getRecommendedShards();
+        int recommendedShards = getRecommendedShards() + 1;
         log(String.format("Starting with %d shard(s).", recommendedShards));
         init(recommendedShards);
         if (shards == null) System.exit(1);
@@ -94,7 +93,7 @@ public final class Main extends Diax
             JDA jda = null;
             try
             {
-                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setStatus(OnlineStatus.IDLE).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler(), new DisconnectListener(), new PlayerControl());
+                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setStatus(OnlineStatus.IDLE).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler(), new DisconnectListener());
                 if (amount > 1)
                 {
                     jda = builder.useSharding(i, amount).buildBlocking();

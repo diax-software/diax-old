@@ -45,7 +45,7 @@ public class CommandHandler extends Diax
      * @param truncated The truncated version of the message content without the prefix or the command trigger.
      */
     private void execute(DiaxCommand command, Message message, String truncated) {
-        if (truncated.split(" ").length < command.getMinimumArgs()) {
+        if (truncated.split(" ").length < 1 + command.getMinimumArgs()) {
             message.getChannel().sendMessage(makeEmbed().addField("Error!", "You did not specify enough args!", false).build()).queue();
             return;
         }
