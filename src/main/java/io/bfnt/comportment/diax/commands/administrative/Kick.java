@@ -13,14 +13,15 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 @CommandDescription(triggers = {"kick"}, minimumArgs = 1, permission = Permission.KICK_MEMBERS, description = "Kicks the mentioned users from a guild.", guildOnly = true)
 public class Kick extends DiaxCommand
 {
+    /**
+     * A command which kicks all of the mentioned {@link net.dv8tion.jda.core.entities.Member}s from the {@link net.dv8tion.jda.core.entities.Guild} the command was used in.
+     *
+     * @param trigger The {@link Message} which triggered the command.
+     * @since Azote
+     */
+    @Override
     public void execute(Message trigger)
     {
-        /**
-         * A command which kicks all of the mentioned {@link net.dv8tion.jda.core.entities.Member}s from the {@link net.dv8tion.jda.core.entities.Guild} the command was used in.
-         *
-         * @param trigger The {@link Message} which triggered the command.
-         * @since Azote
-         */
         trigger.getMentionedUsers().forEach(user ->
         {
             try

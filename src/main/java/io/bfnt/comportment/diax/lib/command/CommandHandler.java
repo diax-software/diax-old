@@ -89,6 +89,7 @@ public class CommandHandler extends Diax
         catch (Exception e)
         {
             message.getChannel().sendMessage("An error occurred, please contact Comportment#9489 with more info.").queue();
+            e.printStackTrace();
         }
     }
 }

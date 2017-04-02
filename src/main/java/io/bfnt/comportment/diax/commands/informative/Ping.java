@@ -19,6 +19,7 @@ public class Ping extends DiaxCommand
      * @param trigger The {@link Message} which triggered the command.
      * @since Azote
      */
+    @Override
     public void execute(Message trigger)
     {
         trigger.getChannel().sendMessage(makeEmbed().setDescription("Pinging...").build()).queue(message
