@@ -29,7 +29,7 @@
     </tr>
     <tr>
       <td>Music</td>
-      <td>Work in progress.</td> 
+      <td>80% Done!</td> 
     </tr>
   </table>
   <hr>
