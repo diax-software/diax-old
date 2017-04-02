@@ -56,6 +56,7 @@ public class TrackScheduler extends AudioEventAdapter
      * @param player The {@link AudioPlayer} playing the {@link AudioTrack}
      * @param track The {@link AudioTrack} that has ended.
      * @param endReason The {@link AudioTrackEndReason} which caused the track to end.
+     * @since Azote
      */
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason)
