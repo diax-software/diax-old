@@ -22,7 +22,7 @@ import java.util.Map;
 public class MusicUtil extends ListenerAdapter
 {
     private static final AudioPlayerManager playerManager = defaultAudioPlayerManager();
-    private static final Map<String, GuildMusicManager> musicManagers = new HashMap<>();
+    private static final Map<Long, GuildMusicManager> musicManagers = new HashMap<>();
 
     /**
      * A method to make the {@link AudioPlayerManager} which has the registered sources.
@@ -85,11 +85,18 @@ public class MusicUtil extends ListenerAdapter
      * @return The {@link GuildMusicManager} for the guild- never null.
      * @since Azote
      */
-    public static GuildMusicManager getMusicManager(Guild guild)
+    public synchronized static GuildMusicManager getMusicManager(Guild guild)
     {
-        String guildId = guild.getId();
-        musicManagers.putIfAbsent(guildId, new GuildMusicManager(playerManager, guild));
-        return musicManagers.get(guildId);
+        long guildId = Long.parseLong(guild.getId());
+        GuildMusicManager musicManager = musicManagers.get(guildId);
+        musicManagers.putIfAbsent(guildId, musicManager);
+        if (musicManager == null)
+        {
+            musicManager = new GuildMusicManager(playerManager, guild);
+            musicManagers.put(guildId, musicManager);
+        }
+        guild.getAudioManager().setSendingHandler(musicManager.getSendHandler());
+        return musicManager;
     }
 
     /**

@@ -22,6 +22,7 @@ public class CommandHandler extends Diax
     {
         Message message = event.getMessage();
         String content = message.getRawContent();
+        if (event.getAuthor().isBot()) return;
         if (!content.startsWith(getPrefix())) return;
         log(String.format("%s | %s", makeName(event.getAuthor()), content));
         content = content.replaceFirst(getPrefix(), "").trim().toLowerCase();

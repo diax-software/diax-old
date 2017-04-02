@@ -41,6 +41,16 @@ public class TrackScheduler extends AudioEventAdapter
     }
 
     /**
+     * Method which clears the tracks in the {@link #queue}
+     *
+     * @since Azote
+     */
+    public void clear()
+    {
+        queue.clear();
+    }
+
+    /**
      * Method which forces the next {@link AudioTrack} in the queue to be played.
      *
      * @since Azote

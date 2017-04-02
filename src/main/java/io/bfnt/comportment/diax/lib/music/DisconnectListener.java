@@ -1,5 +1,7 @@
 package io.bfnt.comportment.diax.lib.music;
 
+import io.bfnt.comportment.diax.commands.music.MusicUtil;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.events.guild.GuildUnavailableEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent;
@@ -22,7 +24,7 @@ public class DisconnectListener extends ListenerAdapter
     @Override
     public void onGuildUnavailable(GuildUnavailableEvent event)
     {
-        event.getGuild().getAudioManager().closeAudioConnection();
+        close(event.getGuild());
     }
 
     /**
@@ -34,7 +36,7 @@ public class DisconnectListener extends ListenerAdapter
     @Override
     public void onGuildLeave(GuildLeaveEvent event)
     {
-        event.getGuild().getAudioManager().closeAudioConnection();
+        close(event.getGuild());
     }
 
     /**
@@ -46,8 +48,8 @@ public class DisconnectListener extends ListenerAdapter
     @Override
     public void onGuildVoiceMove(GuildVoiceMoveEvent event)
     {
-        if (event.getChannelLeft().getMembers().contains(event.getGuild().getMember(event.getJDA().getSelfUser())) && event.getChannelLeft().getMembers().size() < 2) event.getChannelLeft().getGuild().getAudioManager().closeAudioConnection();
-        if (event.getChannelJoined().getMembers().contains(event.getGuild().getMember(event.getJDA().getSelfUser())) && event.getChannelJoined().getMembers().size() < 2) event.getChannelJoined().getGuild().getAudioManager().closeAudioConnection();
+        if ((!event.getChannelLeft().getMembers().contains(event.getGuild().getMember(event.getJDA().getSelfUser())) && event.getChannelLeft().getMembers().size() < 2) | (!event.getChannelJoined().getMembers().contains(event.getGuild().getMember(event.getJDA().getSelfUser())) && event.getChannelJoined().getMembers().size() < 2)) return;
+        close(event.getGuild());
     }
 
     /**
@@ -59,6 +61,18 @@ public class DisconnectListener extends ListenerAdapter
     @Override
     public void onGuildVoiceLeave(GuildVoiceLeaveEvent event)
     {
-        if (event.getChannelLeft().getMembers().contains(event.getGuild().getMember(event.getJDA().getSelfUser())) && event.getChannelLeft().getMembers().size() < 2) event.getChannelLeft().getGuild().getAudioManager().closeAudioConnection();
+        if (!event.getChannelLeft().getMembers().contains(event.getGuild().getMember(event.getJDA().getSelfUser())) && event.getChannelLeft().getMembers().size() < 2) close(event.getGuild());
+    }
+
+    /**
+     * Method which closes the connection to the {@link Guild} and to clear the list.
+     *
+     * @param guild The {@link Guild} to close the connection to and clear the list.
+     * @since Azote
+     */
+    private void close(Guild guild)
+    {
+        guild.getAudioManager().closeAudioConnection();
+        MusicUtil.getMusicManager(guild).scheduler.clear();
     }
 }
