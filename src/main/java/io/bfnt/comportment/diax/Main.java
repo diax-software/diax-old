@@ -26,7 +26,7 @@ import java.util.List;
  */
 public final class Main extends Diax
 {
-    private JDA[] shards;
+    private static JDA[] shards;
     private String login = new Token().mainToken();
 
     /**
@@ -130,7 +130,7 @@ public final class Main extends Diax
      * @return An array containing all of the {@link JDA} shards. (Might be null if no shards)
      * @since Azote
      */
-    public JDA[] getShards()
+    public static JDA[] getShards()
     {
         return shards;
     }
