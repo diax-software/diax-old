@@ -8,6 +8,7 @@ import io.bfnt.comportment.diax.commands.informative.*;
 import io.bfnt.comportment.diax.commands.miscellaneous.Bump;
 import io.bfnt.comportment.diax.commands.miscellaneous.Embed;
 import io.bfnt.comportment.diax.commands.music.*;
+import io.bfnt.comportment.diax.commands.owner.Announce;
 import io.bfnt.comportment.diax.commands.owner.Eval;
 
 import java.util.TreeSet;
@@ -44,6 +45,7 @@ public class Commands {
             add(new WhoAmI());
             add(new Song());
             add(new Pause());
+            add(new Announce());
         }
     };
 

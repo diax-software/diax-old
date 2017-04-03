@@ -7,7 +7,6 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Message;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,12 +17,7 @@ import java.util.List;
 public class Statistics extends DiaxCommand {
     @Override
     public void execute(Message trigger) {
-        List<JDA> shards;
-        try {
-            shards = Arrays.asList(Main.getShards());
-        } catch (NullPointerException e) {
-            shards = Collections.singletonList(trigger.getJDA());
-        }
+        List<JDA> shards = Arrays.asList(Main.getShards());
         trigger.getChannel().sendMessage(makeEmbed().setDescription(String.format("Statistics for Diax!\n\nUsers: %s\n\nUnique: %s\n\nGuilds: %s", shards.stream().mapToLong(shard -> shard.getUsers().size()).sum(), shards.stream().mapToLong(shard -> shard.getUsers().stream().distinct().count()).sum(), shards.stream().mapToLong(shard -> shard.getGuilds().size()).sum())).build()).queue();
     }
 }
