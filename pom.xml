@@ -7,7 +7,17 @@
     <groupId>io.bfnt.comportment</groupId>
     <artifactId>Diax</artifactId>
     <version>Azote</version>
+    <properties>
+        <diax.version>Diax ${project.version}</diax.version>
+    </properties>
     <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <!-- Shades the .jar file-->
             <plugin>
@@ -77,10 +87,17 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- Commons Library for Configuration handling and more -->
         <dependency>
             <groupId>com.knockturnmc</groupId>
             <artifactId>knockturn-commons</artifactId>
             <version>1.3.7-SNAPSHOT</version>
+        </dependency>
+        <!-- Utility library to work with Reflection -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.10</version>
         </dependency>
         <!-- Java Discord API: https://github.com/DV8FromTheWorld/JDA -->
         <dependency>

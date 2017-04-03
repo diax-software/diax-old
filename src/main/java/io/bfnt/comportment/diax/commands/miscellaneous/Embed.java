@@ -6,6 +6,9 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.exceptions.PermissionException;
 
+import static io.bfnt.comportment.diax.util.Utils.makeEmbed;
+import static io.bfnt.comportment.diax.util.Utils.makeName;
+
 /**
  * Created by Comporment on 30/03/2017 at 17:23
  * Dev'ving like a sir since 1998. | https://github.com/Comportment

@@ -1,10 +1,14 @@
 package io.bfnt.comportment.diax.commands.informative;
 
 import io.bfnt.comportment.diax.lib.command.CommandDescription;
+import io.bfnt.comportment.diax.lib.command.Commands;
 import io.bfnt.comportment.diax.lib.command.DiaxCommand;
 import net.dv8tion.jda.core.entities.Message;
 
+import javax.inject.Inject;
 import java.util.stream.Collectors;
+
+import static io.bfnt.comportment.diax.util.Utils.makeEmbed;
 
 /**
  * Created by Comporment on 28/03/2017 at 19:07
@@ -12,6 +16,14 @@ import java.util.stream.Collectors;
  */
 @CommandDescription(triggers = {"help", "?", "helpme"}, description = "Gives you help for Diax.")
 public class Help extends DiaxCommand {
+
+    private final Commands commands;
+
+    @Inject
+    public Help(Commands commands) {
+        this.commands = commands;
+    }
+
     /**
      * A command which displays all of the other registered {@link DiaxCommand} in the {@link io.bfnt.comportment.diax.lib.command.Commands} class.
      *
@@ -20,6 +32,10 @@ public class Help extends DiaxCommand {
      */
     @Override
     public void execute(Message trigger) {
-        trigger.getChannel().sendMessage(makeEmbed().addField("Commands", getCommands().stream().filter(command -> !command.getOwnerOnly()).map(DiaxCommand::getHelpFormat).collect(Collectors.joining("\n")), false).addField("Links", "[Invite me to your server](https://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=8)\n[My Discord server](https://discord.gg/c6M8PJZ)\n[My Patreon](https://www.patreon.com/Diax)", false).build()).queue();
+        trigger.getChannel().sendMessage(makeEmbed().addField("Commands", commands.getCommands().stream()
+                .map(commands::newInstance)
+                .filter(command -> !command.getOwnerOnly())
+                .map(DiaxCommand::getHelpFormat)
+                .collect(Collectors.joining("\n")), false).addField("Links", "[Invite me to your server](https://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=8)\n[My Discord server](https://discord.gg/c6M8PJZ)\n[My Patreon](https://www.patreon.com/Diax)", false).build()).queue();
     }
 }

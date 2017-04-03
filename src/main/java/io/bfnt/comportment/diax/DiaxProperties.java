@@ -13,6 +13,10 @@ public class DiaxProperties extends NamedProperties {
     private String felisCatV1;
     @Property(value = "diax.token.felisCatV2")
     private String felisCatV2;
+    @Property(value = "diax.commands.ignored", defaultvalue = "play,shuffle,skip")
+    private String ignoredCommands;
+    @Property(value = "diax.commands.prefix", defaultvalue = "<<")
+    private String commandPrefix;
 
     public String getMainToken() {
         return mainToken;
@@ -28,5 +32,13 @@ public class DiaxProperties extends NamedProperties {
 
     public String getFelisCatV2() {
         return felisCatV2;
+    }
+
+    public String getIgnoredCommands() {
+        return ignoredCommands;
+    }
+
+    public String getCommandPrefix() {
+        return commandPrefix;
     }
 }

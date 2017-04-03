@@ -6,6 +6,8 @@ import net.dv8tion.jda.core.entities.Message;
 
 import java.time.temporal.ChronoUnit;
 
+import static io.bfnt.comportment.diax.util.Utils.makeEmbed;
+
 /**
  * Created by Comporment on 01/04/2017 at 21:30
  * Dev'ving like a sir since 1998. | https://github.com/Comportment

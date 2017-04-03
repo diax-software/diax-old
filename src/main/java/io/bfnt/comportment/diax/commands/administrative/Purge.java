@@ -7,6 +7,8 @@ import net.dv8tion.jda.core.entities.Message;
 
 import java.util.stream.Collectors;
 
+import static io.bfnt.comportment.diax.util.Utils.makeEmbed;
+
 /**
  * Created by Comporment on 31/03/2017 at 12:29
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
