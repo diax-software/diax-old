@@ -176,7 +176,7 @@ public class MusicUtil extends Diax {
      * @param track The {@link AudioTrack} to grab the information of.
      * @return A {@link MessageEmbed} containing the info of the {@link AudioTrack}
      */
-    protected static MessageEmbed trackEmbed(AudioTrack track) {
+    public static MessageEmbed trackEmbed(AudioTrack track) {
         AudioTrackInfo info = track.getInfo();
         return new Diax().makeEmbed().addField("Now Playing...", String.format("`%s ` by `%s ` `[%s] `", info.title, info.author, MusicUtil.getTimestamp(info.length)), false).build();
     }
