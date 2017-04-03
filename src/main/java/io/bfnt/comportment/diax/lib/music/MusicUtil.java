@@ -13,10 +13,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import io.bfnt.comportment.diax.lib.Diax;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.MessageChannel;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.*;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -37,6 +34,16 @@ public class MusicUtil extends Diax {
         AudioSourceManagers.registerLocalSource(playerManager);
         AudioSourceManagers.registerRemoteSources(playerManager);
         return playerManager;
+    }
+
+    /**
+     * A method the stop the {@link AudioTrack} playing in the {@link Guild} associated with the {@link GuildMusicManager}
+     *
+     * @param manager The {@link GuildMusicManager} to stop.
+     * @since Azote
+     */
+    public static void stop(GuildMusicManager manager) {
+        manager.scheduler.clear();
     }
 
     /**
@@ -67,7 +74,7 @@ public class MusicUtil extends Diax {
      * @param trackUrl The url of the track.
      * @since Azote
      */
-    public static void loadAndPlay(GuildMusicManager manager, MessageChannel channel, String trackUrl) {
+    public static void loadAndPlay(GuildMusicManager manager, VoiceChannel voiceChannel, MessageChannel channel, String trackUrl) {
         playerManager.loadItemOrdered(manager, trackUrl, new AudioLoadResultHandler() {
             /**
              * Method that is fired when an {@link AudioTrack} is successfully loaded.
@@ -77,6 +84,7 @@ public class MusicUtil extends Diax {
              */
             @Override
             public void trackLoaded(AudioTrack track) {
+                voiceChannel.getGuild().getAudioManager().openAudioConnection(voiceChannel);
                 AudioTrackInfo info = track.getInfo();
                 channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("`%s ` by `%s ` has been added to the queue `[%s]`", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
                 if (manager.scheduler.getQueue().isEmpty()) {
@@ -93,6 +101,7 @@ public class MusicUtil extends Diax {
              */
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
+                voiceChannel.getGuild().getAudioManager().openAudioConnection(voiceChannel);
                 channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("The playlist `%s ` containing `%s ` tracks has been added to the queue.", playlist.getName(), playlist.getTracks().size()), false).build()).queue();
                 if (manager.scheduler.getQueue().isEmpty()) {
                     AudioTrackInfo info = playlist.getTracks().get(0).getInfo();

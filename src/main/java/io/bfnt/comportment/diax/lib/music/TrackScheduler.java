@@ -63,7 +63,7 @@ public class TrackScheduler extends AudioEventAdapter {
      */
     public void clear() {
         queue.clear();
-        channel.sendMessage(new Diax().makeEmbed().addField("Cleared!", "The queue has been cleared!", false).build()).queue();
+        /*channel.sendMessage(new Diax().makeEmbed().addField("Cleared!", "The queue has been cleared!", false).build()).queue();*/
     }
 
     /**
