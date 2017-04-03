@@ -4,8 +4,10 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
-import net.dv8tion.jda.core.entities.Guild;
+import io.bfnt.comportment.diax.lib.Diax;
+import net.dv8tion.jda.core.entities.TextChannel;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -19,8 +21,8 @@ public class TrackScheduler extends AudioEventAdapter
 {
     private final AudioPlayer player;
     private final BlockingQueue<AudioTrack> queue;
-    private final AudioTrack lastTrack = null;
-    private final Guild guild;
+    private AudioTrack lastTrack = null;
+    private final TextChannel channel;
     private boolean repeating;
 
     /**
@@ -29,9 +31,9 @@ public class TrackScheduler extends AudioEventAdapter
      * @param player The {@link AudioPlayer} to use to create a new {@link TrackScheduler}
      * @since Azote
      */
-    public TrackScheduler(AudioPlayer player, Guild guild)
+    public TrackScheduler(AudioPlayer player, TextChannel channel)
     {
-        this.guild = guild;
+        this.channel = channel;
         this.player = player;
         this.queue = new LinkedBlockingQueue<>();
     }
@@ -55,6 +57,7 @@ public class TrackScheduler extends AudioEventAdapter
     public void clear()
     {
         queue.clear();
+        channel.sendMessage(new Diax().makeEmbed().addField("Cleared!", "The queue has been cleared!", false).build()).queue();
     }
 
     /**
@@ -62,9 +65,10 @@ public class TrackScheduler extends AudioEventAdapter
      *
      * @since Azote
      */
-    public void nextTrack()
+    public void nextTrack(TextChannel channel)
     {
         player.startTrack(queue.poll(), false);
+        channel.sendMessage(MusicUtil.trackEmbed(queue.poll())).queue();
     }
 
     /**
@@ -78,16 +82,18 @@ public class TrackScheduler extends AudioEventAdapter
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason)
     {
-        if (queue.size() <= 0) guild.getAudioManager().closeAudioConnection();
+        if (queue.size() <= 0) channel.getGuild().getAudioManager().closeAudioConnection();
+        lastTrack = track;
         if (endReason.mayStartNext)
         {
             if (repeating)
             {
                 player.startTrack(lastTrack.makeClone(), false);
+                channel.sendMessage(MusicUtil.trackEmbed(lastTrack)).queue();
             }
             else
             {
-                nextTrack();
+                nextTrack(channel);
             }
         }
     }
@@ -99,7 +105,10 @@ public class TrackScheduler extends AudioEventAdapter
      */
     public void shuffle()
     {
-        Collections.shuffle((List<?>) queue);
+        List<AudioTrack> tracks = new ArrayList<>();
+        queue.drainTo(tracks);
+        Collections.shuffle(tracks);
+        queue.addAll(tracks);
     }
 
     /**
@@ -122,5 +131,8 @@ public class TrackScheduler extends AudioEventAdapter
     public void setRepeating(boolean repeating)
     {
         this.repeating = repeating;
+        String status = "no longer repeating.";
+        if (repeating) status = "now repeating.";
+        channel.sendMessage(new Diax().makeEmbed().addField("Repeating!", "The queue is " + status, false).build()).queue();
     }
 }

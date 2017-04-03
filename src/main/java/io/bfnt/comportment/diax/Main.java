@@ -38,7 +38,11 @@ public final class Main extends Diax
      */
     public static void main(String[] args) throws Exception
     {
-        new Main().main();
+        try
+        {
+            new Main().main();
+        }
+        catch (NullPointerException ignored) {}
     }
 
     /**

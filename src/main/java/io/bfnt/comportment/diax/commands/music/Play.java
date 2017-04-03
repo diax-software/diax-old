@@ -17,6 +17,6 @@ public class Play extends DiaxCommand
     public void execute(Message trigger)
     {
         trigger.getGuild().getAudioManager().openAudioConnection(trigger.getGuild().getVoiceChannels().get(0));
-        MusicUtil.loadAndPlay(MusicUtil.getMusicManager(trigger.getGuild()), trigger.getTextChannel(), trigger.getRawContent().split(" ")[1]);
+        MusicUtil.loadAndPlay(MusicUtil.getMusicManager(trigger.getTextChannel()), trigger.getTextChannel(), trigger.getRawContent().split(" ")[1]);
     }
 }

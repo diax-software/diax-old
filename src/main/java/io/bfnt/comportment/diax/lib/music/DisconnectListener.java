@@ -72,6 +72,6 @@ public class DisconnectListener extends ListenerAdapter
     private void close(Guild guild)
     {
         guild.getAudioManager().closeAudioConnection();
-        MusicUtil.getMusicManager(guild).scheduler.clear();
+        MusicUtil.getMusicManager(guild.getPublicChannel()).scheduler.clear();
     }
 }

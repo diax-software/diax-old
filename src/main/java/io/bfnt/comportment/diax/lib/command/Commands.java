@@ -11,6 +11,8 @@ import io.bfnt.comportment.diax.commands.informative.Statistics;
 import io.bfnt.comportment.diax.commands.miscellaneous.Bump;
 import io.bfnt.comportment.diax.commands.miscellaneous.Embed;
 import io.bfnt.comportment.diax.commands.music.Play;
+import io.bfnt.comportment.diax.commands.music.Shuffle;
+import io.bfnt.comportment.diax.commands.music.Skip;
 import io.bfnt.comportment.diax.commands.owner.Eval;
 
 import java.util.TreeSet;
@@ -42,6 +44,8 @@ public class Commands
             add(new Statistics());
             add(new Bump());
             add(new Play());
+            add(new Shuffle());
+            add(new Skip());
         }
     };
 
