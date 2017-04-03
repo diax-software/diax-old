@@ -6,6 +6,8 @@ import io.bfnt.comportment.diax.lib.music.GuildMusicManager;
 import io.bfnt.comportment.diax.lib.music.MusicUtil;
 import net.dv8tion.jda.core.entities.Message;
 
+import static io.bfnt.comportment.diax.util.Utils.makeEmbed;
+
 /**
  * Created by Comporment on 03/04/2017 at 19:43
  * Dev'ving like a sir since 1998. | https://github.com/Comportment

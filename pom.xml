@@ -8,6 +8,8 @@
     <artifactId>Diax</artifactId>
     <version>Azote</version>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.targetEncoding>UTF-8</project.build.targetEncoding>
         <diax.version>Diax ${project.version}</diax.version>
     </properties>
     <build>

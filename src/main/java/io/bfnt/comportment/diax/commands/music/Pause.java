@@ -9,6 +9,8 @@ import net.dv8tion.jda.core.entities.Message;
 
 import java.awt.*;
 
+import static io.bfnt.comportment.diax.util.Utils.makeEmbed;
+
 /**
  * Created by Comporment on 02/04/2017 at 16:21
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
