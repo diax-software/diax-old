@@ -42,7 +42,7 @@ public class Commands {
             add(new Stop());
             add(new Join());
             add(new WhoAmI());
-            add(new Playing());
+            add(new Song());
         }
     };
 
