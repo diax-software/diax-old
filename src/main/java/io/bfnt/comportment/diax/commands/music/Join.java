@@ -12,6 +12,12 @@ import net.dv8tion.jda.core.entities.Message;
  */
 @CommandDescription(triggers = {"join", "connect", "move"}, description = "Makes Diax join the voice channel you are in.", permission = Permission.VOICE_MOVE_OTHERS, guildOnly = true)
 public class Join extends DiaxCommand {
+    /**
+     * A {@link DiaxCommand} which makes Diax join the {@link net.dv8tion.jda.core.entities.VoiceChannel} the {@link Message#getAuthor()} is in.
+     *
+     * @param trigger The {@link Message} which triggered the command.
+     * @since Azote
+     */
     public void execute(Message trigger) {
         GuildVoiceState state = trigger.getGuild().getMember(trigger.getAuthor()).getVoiceState();
         if (state.inVoiceChannel()) {
