@@ -25,8 +25,7 @@ public class Embed extends DiaxCommand {
     public void execute(Message trigger) {
         try {
             trigger.delete().queue();
-        } catch (PermissionException ignored) {
-        }
+        } catch (PermissionException ignored) {}
         trigger.getChannel().sendMessage(makeEmbed().setAuthor(makeName(trigger.getAuthor()), trigger.getAuthor().getEffectiveAvatarUrl(), trigger.getAuthor().getEffectiveAvatarUrl()).setDescription(trigger.getRawContent().replaceFirst(trigger.getRawContent().split(" ")[0], "")).build()).queue();
     }
 }

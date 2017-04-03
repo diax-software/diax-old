@@ -18,7 +18,9 @@ public class Bump extends DiaxCommand {
      * @param trigger The {@link Message} which triggered the command.
      * @apiNote In Brazen I should send a POST request to a website to bump the server. FIXME: I don't do this.
      * @since Azote
+     * @deprecated Currently not being used until the fix is in.
      */
+    @Deprecated
     @Override
     public void execute(Message trigger) {
         long guildid = 293889712014360586L;
