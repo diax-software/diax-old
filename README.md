@@ -4,7 +4,7 @@
   <hr>
   <a href="https://bfnt.io/"><img src = "https://img.shields.io/badge/Supported_By-Blackfields_Network-red.svg?style=plastic"></a>
   <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Made_By-Comportment-green.svg?style=plastic"></a>
-  <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Version_Number-0.0.3-yellow.svg?style=plastic"></a>
+  <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Version_Number-0.0.4-yellow.svg?style=plastic"></a>
   <a href="https://github.com/Truency"><img src="https://img.shields.io/badge/Inspired_By-Nomsy-lightgrey.svg?style=plastic"></a>
   <a href="https://www.patreon.com/Diax"><img src="https://img.shields.io/badge/Donate-Patreon-blue.svg?style=plastic"></a>
   <br>
@@ -29,7 +29,7 @@
     </tr>
     <tr>
       <td>Music</td>
-      <td>80% Done!</td> 
+      <td>Done!</td> 
     </tr>
   </table>
   <hr />
