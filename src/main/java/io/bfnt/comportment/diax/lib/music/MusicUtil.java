@@ -79,28 +79,30 @@ public class MusicUtil extends Diax
             public void trackLoaded(AudioTrack track)
             {
                 AudioTrackInfo info = track.getInfo();
-                channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("**%s** by **%s** has been added to the queue (%s)", info.title, info.author, getTimestamp(info.length)),false).build()).queue();
+                channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("`%s ` by `%s ` has been added to the queue `[%s]`", info.title, info.author, getTimestamp(info.length)),false).build()).queue();
                 channel.sendMessage(track.getInfo().author);
+                //if (manager.scheduler.getQueue().isEmpty() send a message saying nowplaying to the channel.
                 manager.scheduler.queue(track);
             }
 
             @Override
             public void playlistLoaded(AudioPlaylist playlist)
             {
-                channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("The playlist **%s** containing **%s** tracks has been added to the queue.", playlist.getName(), playlist.getTracks().size()), false).build()).queue();
+                channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("The playlist `%s ` containing `%s ` tracks has been added to the queue.", playlist.getName(), playlist.getTracks().size()), false).build()).queue();
+                //if (manager.scheduler.getQueue().isEmpty() send a message saying nowplaying to the channel.
                 playlist.getTracks().forEach(manager.scheduler::queue);
             }
 
             @Override
             public void noMatches()
             {
-                channel.sendMessage(new Diax().makeEmbed().addField("Error!", String.format("There were no matches found for **%s**", trackUrl), false).setColor(new Color(255, 0, 0)).build()).queue();
+                channel.sendMessage(new Diax().makeEmbed().addField("Error!", String.format("There were no matches found for `%s `", trackUrl), false).setColor(new Color(255, 0, 0)).build()).queue();
             }
 
             @Override
             public void loadFailed(FriendlyException exception)
             {
-                channel.sendMessage(new Diax().makeEmbed().addField("Error!", String.format("The track could not be played due to: **%s**", exception.getMessage()), false).build()).queue();
+                channel.sendMessage(new Diax().makeEmbed().addField("Error!", String.format("The track could not be played due to: `%s `", exception.getMessage()), false).build()).queue();
             }
         });
     }
