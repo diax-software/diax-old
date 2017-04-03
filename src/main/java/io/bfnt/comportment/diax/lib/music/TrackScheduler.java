@@ -78,8 +78,9 @@ public class TrackScheduler extends AudioEventAdapter
      */
     public void nextTrack(TextChannel channel)
     {
-        player.startTrack(queue.poll(), false);
-        channel.sendMessage(MusicUtil.trackEmbed(queue.poll())).queue();
+        AudioTrack track = queue.poll();
+        player.startTrack(track, false);
+        channel.sendMessage(MusicUtil.trackEmbed(track).queue();
     }
 
     /**
