@@ -1,9 +1,6 @@
 package io.bfnt.comportment.diax;
 
-import com.google.inject.Binder;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
+import com.google.inject.*;
 import com.google.inject.name.Names;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -156,6 +153,10 @@ public final class Main implements Module, ComponentProvider {
         log(String.format("Finished loading with %d shard(s).", amount));
     }
 
+    /**
+     * TODO: Get Crystal to document properly [including args and return]
+     * @since Brazen
+     */
     @Override
     public void configure(Binder binder) {
         binder.bind(ComponentProvider.class).toInstance(this);
@@ -163,6 +164,11 @@ public final class Main implements Module, ComponentProvider {
         binder.bind(DiaxProperties.class).toProvider(() -> properties);
     }
 
+    /**
+     * TODO: Get Crystal to document properly [including args and return]
+     * @see Injector#getInstance(Key) You cannot inject an injector, this is a workaround.
+     * @since Brazen
+     */
     @Override
     public <T> T getInstance(Class<T> type) {
         return injector.getInstance(type);
