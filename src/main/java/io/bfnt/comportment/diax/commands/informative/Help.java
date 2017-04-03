@@ -35,6 +35,7 @@ public class Help extends DiaxCommand {
         trigger.getChannel().sendMessage(makeEmbed().addField("Commands", commands.getCommands().stream()
                 .map(commands::newInstance)
                 .filter(command -> !command.getOwnerOnly())
+                .sorted()
                 .map(DiaxCommand::getHelpFormat)
                 .collect(Collectors.joining("\n")), false).addField("Links", "[Invite me to your server](https://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=8)\n[My Discord server](https://discord.gg/c6M8PJZ)\n[My Patreon](https://www.patreon.com/Diax)", false).build()).queue();
     }
