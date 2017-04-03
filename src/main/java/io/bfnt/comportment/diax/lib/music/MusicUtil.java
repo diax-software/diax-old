@@ -185,6 +185,6 @@ public class MusicUtil extends Diax
     protected static MessageEmbed trackEmbed(AudioTrack track)
     {
         AudioTrackInfo info = track.getInfo();
-        return new Diax().makeEmbed().addField("Currently Playing..", String.format("`%s ` by `%s ` `[%s] `", info.title, info.author, MusicUtil.getTimestamp(info.length)), false).build();
+        return new Diax().makeEmbed().addField("Now Playing...", String.format("`%s ` by `%s ` `[%s] `", info.title, info.author, MusicUtil.getTimestamp(info.length)), false).build();
     }
 }
