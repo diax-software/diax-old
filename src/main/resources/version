@@ -1,1 +1,1 @@
-${maven.
+${project.version}
