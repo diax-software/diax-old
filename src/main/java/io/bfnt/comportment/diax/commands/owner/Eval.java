@@ -29,22 +29,21 @@ public class Eval extends DiaxCommand {
             engine.put("guild", trigger.getGuild());
             engine.put("channel", trigger.getChannel());
             try {
-                // fixed js imports. -nomsy
                 String code = trigger.getRawContent().replaceFirst(trigger.getRawContent().split(" ")[0], "");
                 trigger.getChannel().sendMessage("```js\n" +
                         engine.eval(
                                 String.join("\n",
                                         "load('nashorn:mozilla_compat.js');",
-                                        "imports = new JavaImporter(java.util, java.io, java.net, net.dv8tion.jda.core.*);",
+                                        "imports = new JavaImporter(java.util, java.io);",
                                         "(function(){",
                                         "with(imports){",
                                         code,
                                         "}",
                                         "})()"
                                 ))
-                        + "\n```");
+                        + "\n```").queue();
             } catch (Exception e) {
-                trigger.getChannel().sendMessage("Error executing code ```" + e.getMessage() + "\n```");
+                trigger.getChannel().sendMessage("Error executing code ```" + e.getMessage() + "\n```").queue();
             }
         } catch (Exception ignored) {
 
