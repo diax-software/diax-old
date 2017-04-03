@@ -20,6 +20,7 @@ public class Stop extends DiaxCommand {
      * @param trigger The {@link Message} which triggered the command.
      * @since Azote
      */
+    @Override
     public void execute(Message trigger) {
         MusicUtil.stop(MusicUtil.getMusicManager(trigger.getTextChannel()));
         trigger.getChannel().sendMessage(makeEmbed().addField("Stopped!", "All playing music has been stopped and the playlist has been cleared.", false).build()).queue();

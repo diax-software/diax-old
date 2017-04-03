@@ -17,6 +17,7 @@ public class WhoAmI extends DiaxCommand {
      * A {@link DiaxCommand} which will display the user card for the {@link Message#getAuthor()}
      *
      * @param trigger The {@link Message} which triggered the command.
+     * @apiNote This {@link DiaxCommand} will pull a user-card off a database and present it to the {@link Message#getAuthor()} FIXME: I don't do this yet.
      * @since Azote
      */
     public void execute(Message trigger) {

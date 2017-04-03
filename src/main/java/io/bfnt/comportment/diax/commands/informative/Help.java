@@ -28,6 +28,7 @@ public class Help extends DiaxCommand {
      * A command which displays all of the other registered {@link DiaxCommand} in the {@link io.bfnt.comportment.diax.lib.command.Commands} class.
      *
      * @param trigger The {@link Message} which triggered the command.
+     * @apiNote Method changed in Brazen to include injection.
      * @since Azote
      */
     @Override

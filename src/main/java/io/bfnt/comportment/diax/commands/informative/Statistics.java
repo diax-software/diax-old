@@ -17,6 +17,13 @@ import static io.bfnt.comportment.diax.util.Utils.makeEmbed;
  */
 @CommandDescription(triggers = {"statistics", "stats"}, description = "Displays some statistics about the shard Diax is on.")
 public class Statistics extends DiaxCommand {
+    /**
+     * A {@link DiaxCommand} which gets statistics from cross-shard instances.
+     *
+     * @param trigger The {@link Message} which triggered the command.
+     * @apiNote Rewrote in Brazen to look more pleasing in the source.
+     * @since Azote
+     */
     @Override
     public void execute(Message trigger) {
         List<JDA> shards = Arrays.asList(Main.getShards());

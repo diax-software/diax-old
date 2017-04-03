@@ -16,6 +16,7 @@ public class Bump extends DiaxCommand {
      * A command which bumps the {@link net.dv8tion.jda.core.entities.Guild} the {@link Message} was send in.
      *
      * @param trigger The {@link Message} which triggered the command.
+     * @apiNote In Brazen I should send a POST request to a website to bump the server. FIXME: I don't do this.
      * @since Azote
      */
     @Override

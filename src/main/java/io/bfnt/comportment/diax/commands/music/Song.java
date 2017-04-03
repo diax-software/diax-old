@@ -20,6 +20,7 @@ public class Song extends DiaxCommand {
      * @param trigger The {@link Message} which triggered the command.
      * @since Azote
      */
+    @Override
     public void execute(Message trigger) {
         GuildMusicManager manager = MusicUtil.getMusicManager(trigger.getTextChannel());
         if (manager.player.getPlayingTrack() == null) {
