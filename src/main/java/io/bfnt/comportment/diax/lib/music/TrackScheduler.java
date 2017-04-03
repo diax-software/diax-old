@@ -21,7 +21,7 @@ public class TrackScheduler extends AudioEventAdapter
 {
     private final AudioPlayer player;
     private final BlockingQueue<AudioTrack> queue;
-    private AudioTrack lastTrack = null;
+    private AudioTrack lastTrack;
     private final TextChannel channel;
     private boolean repeating;
 
@@ -80,7 +80,7 @@ public class TrackScheduler extends AudioEventAdapter
     {
         AudioTrack track = queue.poll();
         player.startTrack(track, false);
-        channel.sendMessage(MusicUtil.trackEmbed(track).queue();
+        channel.sendMessage(MusicUtil.trackEmbed(track)).queue();
     }
 
     /**

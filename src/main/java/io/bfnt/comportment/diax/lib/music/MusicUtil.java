@@ -75,30 +75,59 @@ public class MusicUtil extends Diax
     {
         playerManager.loadItemOrdered(manager, trackUrl, new AudioLoadResultHandler()
         {
+            /**
+             * Method that is fired when an {@link AudioTrack} is successfully loaded.
+             *
+             * @param track The {@link AudioTrack} that was loaded.
+             * @since Azote
+             */
             @Override
             public void trackLoaded(AudioTrack track)
             {
                 AudioTrackInfo info = track.getInfo();
                 channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("`%s ` by `%s ` has been added to the queue `[%s]`", info.title, info.author, getTimestamp(info.length)),false).build()).queue();
-                channel.sendMessage(track.getInfo().author);
-                //if (manager.scheduler.getQueue().isEmpty() send a message saying nowplaying to the channel.
+                if (manager.scheduler.getQueue().isEmpty())
+                {
+                    channel.sendMessage(new Diax().makeEmbed().addField("Now Playing!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
+                }
                 manager.scheduler.queue(track);
             }
 
+            /**
+             * Method that is fired when a {@link AudioPlaylist} is successfully loaded.
+             *
+             * @param playlist The {@link AudioPlaylist} that was loaded.
+             * @since Azote
+             */
             @Override
             public void playlistLoaded(AudioPlaylist playlist)
             {
                 channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("The playlist `%s ` containing `%s ` tracks has been added to the queue.", playlist.getName(), playlist.getTracks().size()), false).build()).queue();
-                //if (manager.scheduler.getQueue().isEmpty() send a message saying nowplaying to the channel.
+                if (manager.scheduler.getQueue().isEmpty())
+                {
+                    AudioTrackInfo info = playlist.getTracks().get(0).getInfo();
+                    channel.sendMessage(new Diax().makeEmbed().addField("Now Playing!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
+                }
                 playlist.getTracks().forEach(manager.scheduler::queue);
             }
 
+            /**
+             * Method that is fired when no matches are found.
+             *
+             * @since Azote
+             */
             @Override
             public void noMatches()
             {
                 channel.sendMessage(new Diax().makeEmbed().addField("Error!", String.format("There were no matches found for `%s `", trackUrl), false).setColor(new Color(255, 0, 0)).build()).queue();
             }
 
+            /**
+             * Method that is fired when a {@link FriendlyException} is encountered when a song is loaded.
+             *
+             * @param exception The {@link FriendlyException} that was thrown.
+             * @since Azote
+             */
             @Override
             public void loadFailed(FriendlyException exception)
             {
