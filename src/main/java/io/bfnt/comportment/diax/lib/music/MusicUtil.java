@@ -88,7 +88,7 @@ public class MusicUtil extends Diax {
                 AudioTrackInfo info = track.getInfo();
                 channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("`%s ` by `%s ` has been added to the queue `[%s]`", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
                 if (manager.scheduler.getQueue().isEmpty()) {
-                    channel.sendMessage(new Diax().makeEmbed().addField("Now Playing!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
+                    channel.sendMessage(new Diax().makeEmbed().addField("Now Song!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
                 }
                 manager.scheduler.queue(track);
             }
@@ -105,7 +105,7 @@ public class MusicUtil extends Diax {
                 channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("The playlist `%s ` containing `%s ` tracks has been added to the queue.", playlist.getName(), playlist.getTracks().size()), false).build()).queue();
                 if (manager.scheduler.getQueue().isEmpty()) {
                     AudioTrackInfo info = playlist.getTracks().get(0).getInfo();
-                    channel.sendMessage(new Diax().makeEmbed().addField("Now Playing!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
+                    channel.sendMessage(new Diax().makeEmbed().addField("Now Song!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
                 }
                 playlist.getTracks().forEach(manager.scheduler::queue);
             }
@@ -176,8 +176,8 @@ public class MusicUtil extends Diax {
      * @param track The {@link AudioTrack} to grab the information of.
      * @return A {@link MessageEmbed} containing the info of the {@link AudioTrack}
      */
-    protected static MessageEmbed trackEmbed(AudioTrack track) {
+    public static MessageEmbed trackEmbed(AudioTrack track) {
         AudioTrackInfo info = track.getInfo();
-        return new Diax().makeEmbed().addField("Now Playing...", String.format("`%s ` by `%s ` `[%s] `", info.title, info.author, MusicUtil.getTimestamp(info.length)), false).build();
+        return new Diax().makeEmbed().addField("Now Song...", String.format("`%s ` by `%s ` `[%s] `", info.title, info.author, MusicUtil.getTimestamp(info.length)), false).build();
     }
 }
