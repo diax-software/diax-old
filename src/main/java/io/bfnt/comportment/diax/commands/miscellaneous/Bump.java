@@ -11,8 +11,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 @CommandDescription(triggers = {"bump"}, description = "Bumps the server on the DiaxList", guildOnly = true, permission = Permission.CREATE_INSTANT_INVITE)
-public class Bump extends DiaxCommand
-{
+public class Bump extends DiaxCommand {
     /**
      * A command which bumps the {@link net.dv8tion.jda.core.entities.Guild} the {@link Message} was send in.
      *
@@ -20,9 +19,8 @@ public class Bump extends DiaxCommand
      * @since Azote
      */
     @Override
-    public void execute(Message trigger)
-    {
+    public void execute(Message trigger) {
         long guildid = 293889712014360586L;
-        trigger.getGuild().getPublicChannel().createInvite().queue(invite -> Main.getShards()[(int)((guildid >> 22) % trigger.getJDA().getShardInfo().getShardTotal())].getGuildById(guildid + "").getTextChannelById("294519934996971520").sendMessage(invite.getCode()).queue());
+        trigger.getGuild().getPublicChannel().createInvite().queue(invite -> Main.getShards()[(int) ((guildid >> 22) % trigger.getJDA().getShardInfo().getShardTotal())].getGuildById(guildid + "").getTextChannelById("294519934996971520").sendMessage(invite.getCode()).queue());
     }
 }

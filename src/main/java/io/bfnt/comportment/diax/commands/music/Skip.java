@@ -11,8 +11,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 @CommandDescription(triggers = {"skip", "next"}, description = "Skips the currently playing song in the playlist.", permission = Permission.VOICE_MOVE_OTHERS, guildOnly = true)
-public class Skip extends DiaxCommand
-{
+public class Skip extends DiaxCommand {
     /**
      * A {@link DiaxCommand} which skips the current playing song in the queue.
      *
@@ -20,8 +19,7 @@ public class Skip extends DiaxCommand
      * @since Azote
      */
     @Override
-    public void execute(Message trigger)
-    {
+    public void execute(Message trigger) {
         MusicUtil.skip(MusicUtil.getMusicManager(trigger.getTextChannel()));
         trigger.getChannel().sendMessage(makeEmbed().addField("Skipped!", "The current playing song has been skipped!", false).build()).queue();
     }

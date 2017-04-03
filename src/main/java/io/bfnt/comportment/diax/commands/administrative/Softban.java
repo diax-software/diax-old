@@ -11,8 +11,7 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 @CommandDescription(triggers = {"softban"}, description = "Soft-bans the mentioned users from the guild.", guildOnly = true, permission = Permission.KICK_MEMBERS, minimumArgs = 1)
-public class Softban extends DiaxCommand
-{
+public class Softban extends DiaxCommand {
     /**
      * A command which bans, and then unbans all of the mentioned {@link net.dv8tion.jda.core.entities.Member}s from the {@link net.dv8tion.jda.core.entities.Guild} the command was used in.
      *
@@ -20,18 +19,14 @@ public class Softban extends DiaxCommand
      * @since Azote
      */
     @Override
-    public void execute(Message trigger)
-    {
+    public void execute(Message trigger) {
         trigger.getMentionedUsers().forEach(user ->
         {
-            try
-            {
+            try {
                 trigger.getGuild().getController().ban(trigger.getGuild().getMember(user), 7).queue(_void
                         -> trigger.getGuild().getController().unban(user).queue(__void
-                            -> trigger.getChannel().sendMessage(makeEmbed().addField("Softbanned!", makeName(user) + " has been softbanned.", false).build()).queue()));
-            }
-            catch (PermissionException e)
-            {
+                        -> trigger.getChannel().sendMessage(makeEmbed().addField("Softbanned!", makeName(user) + " has been softbanned.", false).build()).queue()));
+            } catch (PermissionException e) {
                 trigger.getChannel().sendMessage(makeEmbed().addField("Error!", "I could not softban " + makeName(user), false).build()).queue();
             }
         });

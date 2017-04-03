@@ -24,8 +24,7 @@ import java.util.List;
  * Created by Comporment on 22/03/2017 at 19:09
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public final class Main extends Diax
-{
+public final class Main extends Diax {
     private static JDA[] shards;
     private String login = new Token().mainToken();
 
@@ -36,13 +35,21 @@ public final class Main extends Diax
      * @throws Exception JDABuilder will throw something.
      * @since Azote
      */
-    public static void main(String[] args) throws Exception
-    {
-        try
-        {
+    public static void main(String[] args) throws Exception {
+        try {
             new Main().main();
+        } catch (NullPointerException ignored) {
         }
-        catch (NullPointerException ignored) {}
+    }
+
+    /**
+     * A method to get an array containing all of the {@link JDA} shard instances.
+     *
+     * @return An array containing all of the {@link JDA} shards. (Might be null if no shards)
+     * @since Azote
+     */
+    public static JDA[] getShards() {
+        return shards;
     }
 
     /**
@@ -50,8 +57,7 @@ public final class Main extends Diax
      *
      * @since Azote
      */
-    private void main()
-    {
+    private void main() {
         log("Loading with version " + getVersion());
         int recommendedShards = getRecommendedShards() + 1;
         log(String.format("Starting with %d shard(s).", recommendedShards));
@@ -59,7 +65,7 @@ public final class Main extends Diax
         if (shards == null) System.exit(1);
         List<JDA> jdas = Arrays.asList(shards);
         log("Unique users on startup: " + jdas.stream().flatMap(shard -> shard.getUsers().stream().distinct()).count());
-        log("Guilds on startup: " +  jdas.stream().flatMap(shard -> shard.getGuilds().stream()).distinct().count());
+        log("Guilds on startup: " + jdas.stream().flatMap(shard -> shard.getGuilds().stream()).distinct().count());
     }
 
     /**
@@ -68,17 +74,13 @@ public final class Main extends Diax
      * @return the amount of shards the bot should use.
      * @since Azote
      */
-    private int getRecommendedShards()
-    {
-        try
-        {
+    private int getRecommendedShards() {
+        try {
             HttpResponse<JsonNode> request = Unirest.get("https://discordapp.com/api/gateway/bot")
                     .header("Authorization", "Bot " + login)
                     .header("Content-Type", "application/json").asJson();
             return Integer.parseInt(request.getBody().getObject().get("shards").toString());
-        }
-        catch (UnirestException|JSONException e)
-        {
+        } catch (UnirestException | JSONException e) {
             e.printStackTrace();
         }
         return 1;
@@ -89,53 +91,30 @@ public final class Main extends Diax
      *
      * @since Azote
      */
-    private void init(int amount)
-    {
+    private void init(int amount) {
         shards = new JDA[amount];
-        for (int i = 0; i < amount; i++)
-        {
+        for (int i = 0; i < amount; i++) {
             JDA jda = null;
-            try
-            {
+            try {
                 JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setAudioEnabled(true).setStatus(OnlineStatus.IDLE).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler(), new DisconnectListener());
-                if (amount > 1)
-                {
+                if (amount > 1) {
                     jda = builder.useSharding(i, amount).buildBlocking();
-                }
-                else
-                {
+                } else {
                     jda = builder.buildBlocking();
                 }
-            }
-            catch (LoginException|RateLimitedException|InterruptedException exception)
-            {
+            } catch (LoginException | RateLimitedException | InterruptedException exception) {
                 exception.printStackTrace();
             }
-            if (jda != null)
-            {
+            if (jda != null) {
                 shards[i] = jda;
                 log(String.format("Shard %d has been loaded successfully.", i + 1));
             }
-            try
-            {
+            try {
                 Thread.sleep(5000);
-            }
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         log(String.format("Finished loading with %d shard(s).", amount));
-    }
-
-    /**
-     * A method to get an array containing all of the {@link JDA} shard instances.
-     *
-     * @return An array containing all of the {@link JDA} shards. (Might be null if no shards)
-     * @since Azote
-     */
-    public static JDA[] getShards()
-    {
-        return shards;
     }
 }

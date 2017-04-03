@@ -7,8 +7,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 @FunctionalInterface
-public interface Command
-{
+public interface Command {
     /**
      * Method that is fired when a {@link DiaxCommand} is being executed.
      *

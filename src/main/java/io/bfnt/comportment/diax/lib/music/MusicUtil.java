@@ -22,8 +22,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MusicUtil extends Diax
-{
+public class MusicUtil extends Diax {
     private static final AudioPlayerManager playerManager = defaultAudioPlayerManager();
     private static final Map<Long, GuildMusicManager> musicManagers = new HashMap<>();
 
@@ -33,8 +32,7 @@ public class MusicUtil extends Diax
      * @return A {@link DefaultAudioPlayerManager} with the registered {@link com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers}
      * @since Azote
      */
-    private static DefaultAudioPlayerManager defaultAudioPlayerManager()
-    {
+    private static DefaultAudioPlayerManager defaultAudioPlayerManager() {
         DefaultAudioPlayerManager playerManager = new DefaultAudioPlayerManager();
         AudioSourceManagers.registerLocalSource(playerManager);
         AudioSourceManagers.registerRemoteSources(playerManager);
@@ -47,8 +45,7 @@ public class MusicUtil extends Diax
      * @param manager The {@link GuildMusicManager} to shuffle.
      * @since Azote
      */
-    public static void shuffle(GuildMusicManager manager)
-    {
+    public static void shuffle(GuildMusicManager manager) {
         manager.scheduler.shuffle();
     }
 
@@ -58,23 +55,20 @@ public class MusicUtil extends Diax
      * @param manager The {@link GuildMusicManager} to skip.
      * @since Azote
      */
-    public static void skip(GuildMusicManager manager)
-    {
+    public static void skip(GuildMusicManager manager) {
         manager.scheduler.nextTrack(manager.getChannel());
     }
 
     /**
      * Method which loads and plays the track at the given url.
      *
-     * @param manager The manager of the {@link Guild}
-     * @param channel The channel the {@link net.dv8tion.jda.core.entities.Message} was sent in.
+     * @param manager  The manager of the {@link Guild}
+     * @param channel  The channel the {@link net.dv8tion.jda.core.entities.Message} was sent in.
      * @param trackUrl The url of the track.
      * @since Azote
      */
-    public static void loadAndPlay(GuildMusicManager manager, MessageChannel channel, String trackUrl)
-    {
-        playerManager.loadItemOrdered(manager, trackUrl, new AudioLoadResultHandler()
-        {
+    public static void loadAndPlay(GuildMusicManager manager, MessageChannel channel, String trackUrl) {
+        playerManager.loadItemOrdered(manager, trackUrl, new AudioLoadResultHandler() {
             /**
              * Method that is fired when an {@link AudioTrack} is successfully loaded.
              *
@@ -82,12 +76,10 @@ public class MusicUtil extends Diax
              * @since Azote
              */
             @Override
-            public void trackLoaded(AudioTrack track)
-            {
+            public void trackLoaded(AudioTrack track) {
                 AudioTrackInfo info = track.getInfo();
-                channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("`%s ` by `%s ` has been added to the queue `[%s]`", info.title, info.author, getTimestamp(info.length)),false).build()).queue();
-                if (manager.scheduler.getQueue().isEmpty())
-                {
+                channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("`%s ` by `%s ` has been added to the queue `[%s]`", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
+                if (manager.scheduler.getQueue().isEmpty()) {
                     channel.sendMessage(new Diax().makeEmbed().addField("Now Playing!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
                 }
                 manager.scheduler.queue(track);
@@ -100,11 +92,9 @@ public class MusicUtil extends Diax
              * @since Azote
              */
             @Override
-            public void playlistLoaded(AudioPlaylist playlist)
-            {
+            public void playlistLoaded(AudioPlaylist playlist) {
                 channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("The playlist `%s ` containing `%s ` tracks has been added to the queue.", playlist.getName(), playlist.getTracks().size()), false).build()).queue();
-                if (manager.scheduler.getQueue().isEmpty())
-                {
+                if (manager.scheduler.getQueue().isEmpty()) {
                     AudioTrackInfo info = playlist.getTracks().get(0).getInfo();
                     channel.sendMessage(new Diax().makeEmbed().addField("Now Playing!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
                 }
@@ -117,8 +107,7 @@ public class MusicUtil extends Diax
              * @since Azote
              */
             @Override
-            public void noMatches()
-            {
+            public void noMatches() {
                 channel.sendMessage(new Diax().makeEmbed().addField("Error!", String.format("There were no matches found for `%s `", trackUrl), false).setColor(new Color(255, 0, 0)).build()).queue();
             }
 
@@ -129,8 +118,7 @@ public class MusicUtil extends Diax
              * @since Azote
              */
             @Override
-            public void loadFailed(FriendlyException exception)
-            {
+            public void loadFailed(FriendlyException exception) {
                 channel.sendMessage(new Diax().makeEmbed().addField("Error!", String.format("The track could not be played due to: `%s `", exception.getMessage()), false).build()).queue();
             }
         });
@@ -143,14 +131,12 @@ public class MusicUtil extends Diax
      * @return The {@link GuildMusicManager} for the guild- never null.
      * @since Azote
      */
-    public synchronized static GuildMusicManager getMusicManager(TextChannel channel)
-    {
+    public synchronized static GuildMusicManager getMusicManager(TextChannel channel) {
         Guild guild = channel.getGuild();
         long guildId = Long.parseLong(guild.getId());
         GuildMusicManager musicManager = musicManagers.get(guildId);
         musicManagers.putIfAbsent(guildId, musicManager);
-        if (musicManager == null)
-        {
+        if (musicManager == null) {
             musicManager = new GuildMusicManager(playerManager, channel);
             musicManagers.put(guildId, musicManager);
         }
@@ -164,11 +150,10 @@ public class MusicUtil extends Diax
      * @return The timestamp in the format HH:mm:ss or mm:ss
      * @since Azote
      */
-    private static String getTimestamp(long milliseconds)
-    {
-        int seconds = (int) (milliseconds / 1000) % 60 ;
+    private static String getTimestamp(long milliseconds) {
+        int seconds = (int) (milliseconds / 1000) % 60;
         int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
-        int hours   = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
+        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
 
         if (hours > 0)
             return String.format("%02d:%02d:%02d", hours, minutes, seconds);
@@ -182,8 +167,7 @@ public class MusicUtil extends Diax
      * @param track The {@link AudioTrack} to grab the information of.
      * @return A {@link MessageEmbed} containing the info of the {@link AudioTrack}
      */
-    protected static MessageEmbed trackEmbed(AudioTrack track)
-    {
+    protected static MessageEmbed trackEmbed(AudioTrack track) {
         AudioTrackInfo info = track.getInfo();
         return new Diax().makeEmbed().addField("Now Playing...", String.format("`%s ` by `%s ` `[%s] `", info.title, info.author, MusicUtil.getTimestamp(info.length)), false).build();
     }

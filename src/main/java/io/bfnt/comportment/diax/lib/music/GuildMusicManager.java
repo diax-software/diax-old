@@ -9,8 +9,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
  * Created by Comporment on 02/04/2017 at 16:18
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public class GuildMusicManager
-{
+public class GuildMusicManager {
     public final AudioPlayer player;
     public final TrackScheduler scheduler;
     private final TextChannel channel;
@@ -22,8 +21,7 @@ public class GuildMusicManager
      * @param channel {@link TextChannel} to get the {@link Guild} associated with the {@link GuildMusicManager}
      * @since Azote
      */
-    public GuildMusicManager(AudioPlayerManager manager, TextChannel channel)
-    {
+    public GuildMusicManager(AudioPlayerManager manager, TextChannel channel) {
         player = manager.createPlayer();
         scheduler = new TrackScheduler(player, channel);
         player.addListener(scheduler);
@@ -37,8 +35,7 @@ public class GuildMusicManager
      * @return The {@link AudioPlayerSendHandler} which was created.
      * @since Azote
      */
-    public AudioPlayerSendHandler getSendHandler()
-    {
+    public AudioPlayerSendHandler getSendHandler() {
         return new AudioPlayerSendHandler(player);
     }
 
@@ -48,8 +45,7 @@ public class GuildMusicManager
      * @return The {@link TextChannel} associated with the {@link #GuildMusicManager(AudioPlayerManager, TextChannel)}
      * @since Azote
      */
-    public TextChannel getChannel()
-    {
+    public TextChannel getChannel() {
         return channel;
     }
 }

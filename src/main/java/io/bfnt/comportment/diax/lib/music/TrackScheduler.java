@@ -17,12 +17,11 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Created by Comporment on 02/04/2017 at 16:19
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public class TrackScheduler extends AudioEventAdapter
-{
+public class TrackScheduler extends AudioEventAdapter {
     private final AudioPlayer player;
     private final BlockingQueue<AudioTrack> queue;
-    private AudioTrack lastTrack;
     private final TextChannel channel;
+    private AudioTrack lastTrack;
     private boolean repeating;
 
     /**
@@ -31,21 +30,19 @@ public class TrackScheduler extends AudioEventAdapter
      * @param player The {@link AudioPlayer} to use to create a new {@link TrackScheduler}
      * @since Azote
      */
-    public TrackScheduler(AudioPlayer player, TextChannel channel)
-    {
+    public TrackScheduler(AudioPlayer player, TextChannel channel) {
         this.channel = channel;
         this.player = player;
         this.queue = new LinkedBlockingQueue<>();
     }
-    
+
     /**
      * Method which gets the {@link #queue}
      *
      * @return The {@link #queue}
      * @since Azote
      */
-    public BlockingQueue<AudioTrack> getQueue()
-    {
+    public BlockingQueue<AudioTrack> getQueue() {
         return queue;
     }
 
@@ -55,8 +52,7 @@ public class TrackScheduler extends AudioEventAdapter
      * @param track The {@link AudioTrack} to attempt to play.
      * @since Azote
      */
-    public void queue(AudioTrack track)
-    {
+    public void queue(AudioTrack track) {
         if (!player.startTrack(track, true)) queue.offer(track);
     }
 
@@ -65,8 +61,7 @@ public class TrackScheduler extends AudioEventAdapter
      *
      * @since Azote
      */
-    public void clear()
-    {
+    public void clear() {
         queue.clear();
         channel.sendMessage(new Diax().makeEmbed().addField("Cleared!", "The queue has been cleared!", false).build()).queue();
     }
@@ -76,8 +71,7 @@ public class TrackScheduler extends AudioEventAdapter
      *
      * @since Azote
      */
-    public void nextTrack(TextChannel channel)
-    {
+    public void nextTrack(TextChannel channel) {
         AudioTrack track = queue.poll();
         player.startTrack(track, false);
         channel.sendMessage(MusicUtil.trackEmbed(track)).queue();
@@ -86,25 +80,20 @@ public class TrackScheduler extends AudioEventAdapter
     /**
      * Method which is fired when the {@link AudioTrack} ends. It attempts to play the next track.
      *
-     * @param player The {@link AudioPlayer} playing the {@link AudioTrack}
-     * @param track The {@link AudioTrack} that has ended.
+     * @param player    The {@link AudioPlayer} playing the {@link AudioTrack}
+     * @param track     The {@link AudioTrack} that has ended.
      * @param endReason The {@link AudioTrackEndReason} which caused the track to end.
      * @since Azote
      */
     @Override
-    public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason)
-    {
+    public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if (queue.size() <= 0) channel.getGuild().getAudioManager().closeAudioConnection();
         lastTrack = track;
-        if (endReason.mayStartNext)
-        {
-            if (repeating)
-            {
+        if (endReason.mayStartNext) {
+            if (repeating) {
                 player.startTrack(lastTrack.makeClone(), false);
                 channel.sendMessage(MusicUtil.trackEmbed(lastTrack)).queue();
-            }
-            else
-            {
+            } else {
                 nextTrack(channel);
             }
         }
@@ -115,8 +104,7 @@ public class TrackScheduler extends AudioEventAdapter
      *
      * @since Azote
      */
-    public void shuffle()
-    {
+    public void shuffle() {
         List<AudioTrack> tracks = new ArrayList<>();
         queue.drainTo(tracks);
         Collections.shuffle(tracks);
@@ -129,8 +117,7 @@ public class TrackScheduler extends AudioEventAdapter
      * @return A boolean saying if the {@link AudioTrack} is repeating.
      * @since Azote
      */
-    public boolean isRepeating()
-    {
+    public boolean isRepeating() {
         return repeating;
     }
 
@@ -140,8 +127,7 @@ public class TrackScheduler extends AudioEventAdapter
      * @param repeating Boolean to set the new value to.
      * @since Azote
      */
-    public void setRepeating(boolean repeating)
-    {
+    public void setRepeating(boolean repeating) {
         this.repeating = repeating;
         String status = "no longer repeating.";
         if (repeating) status = "now repeating.";
