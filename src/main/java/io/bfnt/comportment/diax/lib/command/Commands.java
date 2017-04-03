@@ -4,10 +4,7 @@ import io.bfnt.comportment.diax.commands.administrative.Ban;
 import io.bfnt.comportment.diax.commands.administrative.Kick;
 import io.bfnt.comportment.diax.commands.administrative.Purge;
 import io.bfnt.comportment.diax.commands.administrative.Softban;
-import io.bfnt.comportment.diax.commands.informative.Ginfo;
-import io.bfnt.comportment.diax.commands.informative.Help;
-import io.bfnt.comportment.diax.commands.informative.Ping;
-import io.bfnt.comportment.diax.commands.informative.Statistics;
+import io.bfnt.comportment.diax.commands.informative.*;
 import io.bfnt.comportment.diax.commands.miscellaneous.Bump;
 import io.bfnt.comportment.diax.commands.miscellaneous.Embed;
 import io.bfnt.comportment.diax.commands.music.*;
@@ -44,6 +41,7 @@ public class Commands {
             add(new Skip());
             add(new Stop());
             add(new Join());
+            add(new WhoAmI());
         }
     };
 
