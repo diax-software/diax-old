@@ -20,6 +20,7 @@ public class Join extends DiaxCommand {
      * @param trigger The {@link Message} which triggered the command.
      * @since Azote
      */
+    @Override
     public void execute(Message trigger) {
         GuildVoiceState state = trigger.getGuild().getMember(trigger.getAuthor()).getVoiceState();
         if (state.inVoiceChannel()) {

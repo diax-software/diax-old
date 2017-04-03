@@ -4,6 +4,7 @@ import io.bfnt.comportment.diax.Main;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.ISnowflake;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.utils.PermissionUtil;
 
@@ -68,7 +69,7 @@ public class Utils {
     /**
      * Method to get the ID of Comportment (the bot owner)
      *
-     * @return The ID of Comportment as described in {@link ISnowflake#getId()}
+     * @return The ID of Comportment as described in {@link ISnowflake#getId()} )}
      * @since Azote
      */
     public static String getOwnerId() {
