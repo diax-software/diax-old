@@ -37,6 +37,17 @@ public class TrackScheduler extends AudioEventAdapter
         this.player = player;
         this.queue = new LinkedBlockingQueue<>();
     }
+    
+    /**
+     * Method which gets the {@link #queue}
+     *
+     * @return The {@link #queue}
+     * @since Azote
+     */
+    public BlockingQueue<AudioTrack> getQueue()
+    {
+        return queue;
+    }
 
     /**
      * Method which attempts to play or queue the given {@link AudioTrack}.
