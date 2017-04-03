@@ -21,7 +21,7 @@ public class Song extends DiaxCommand {
     public void execute(Message trigger) {
         GuildMusicManager manager = MusicUtil.getMusicManager(trigger.getTextChannel());
         if (manager.player.getPlayingTrack() == null) {
-            trigger.getChannel().sendMessage(makeEmbed().addField("Now Song...", "Nothing.", false).build()).queue();
+            trigger.getChannel().sendMessage(makeEmbed().addField("Now Playing...", "Nothing.", false).build()).queue();
         } else {
             trigger.getChannel().sendMessage(MusicUtil.trackEmbed(MusicUtil.getMusicManager(trigger.getTextChannel()).player.getPlayingTrack())).queue();
         }
