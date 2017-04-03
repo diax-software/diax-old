@@ -44,7 +44,6 @@ public class Commands {
             add(new WhoAmI());
             add(new Song());
             add(new Pause());
-            add(new Unpause());
         }
     };
 

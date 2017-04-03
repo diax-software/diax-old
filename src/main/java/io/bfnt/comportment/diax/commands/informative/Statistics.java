@@ -20,11 +20,10 @@ public class Statistics extends DiaxCommand {
     public void execute(Message trigger) {
         List<JDA> shards;
         try {
-            shards = Arrays.asList(new Main().getShards());
+            shards = Arrays.asList(Main.getShards());
         } catch (NullPointerException e) {
             shards = Collections.singletonList(trigger.getJDA());
         }
-        //trigger.getChannel().sendMessage(makeEmbed().setDescription().build()).queue();
-        //       trigger.getChannel().sendMessage(makeEmbed().setDescription(String.format("Statistics for Shard #%d\n\n\uD83D\uDC65 Users: %s\n\uD83D\uDC64 Unique: %s\n\n\uD83D\uDCAF Version: %s", trigger.getJDA().getShardInfo().getShardId(), shards.forEach(s -> s.getGuilds().stream().mapToLong(guild -> guild.getMembers().size())) jda.getGuilds().stream().mapToLong(guild -> guild.getMembers().size()).sum(), jda.getUsers().stream().distinct().count(), getVersion())).build()).queue();
+        trigger.getChannel().sendMessage(makeEmbed().setDescription(String.format("Statistics for Diax!\n\nUsers: %s\n\nUnique: %s\n\nGuilds: %s", shards.stream().mapToLong(shard -> shard.getUsers().size()).sum(), shards.stream().mapToLong(shard -> shard.getUsers().stream().distinct().count()).sum(), shards.stream().mapToLong(shard -> shard.getGuilds().size()).sum())).build()).queue();
     }
 }
