@@ -84,7 +84,7 @@ public class CommandHandler extends ListenerAdapter {
                 return;
             }
         }
-        if (command.getDono)
+        //TODO: Implement donor only commands. if (command.getDonorOnly())
         try {
             command.execute(message);
         } catch (PermissionException e) {
