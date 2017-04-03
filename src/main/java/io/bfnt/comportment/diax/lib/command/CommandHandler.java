@@ -84,6 +84,7 @@ public class CommandHandler extends ListenerAdapter {
                 return;
             }
         }
+        if (command.getDono)
         try {
             command.execute(message);
         } catch (PermissionException e) {

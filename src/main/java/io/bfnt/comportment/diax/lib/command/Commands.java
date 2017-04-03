@@ -29,6 +29,11 @@ public class Commands {
         init();
     }
 
+    /**
+     * Method called when a nice instance of the {@link Commands} class is created.
+     * TODO: Get Crystal to document
+     * @since Brazen
+     */
     @SuppressWarnings("unchecked")
     private void init() {
         Reflections reflections = new Reflections(COMMAND_PACKAGE);
@@ -52,6 +57,13 @@ public class Commands {
         return commands.keySet();
     }
 
+    /**
+     * A method to find the {@link DiaxCommand} that might be executed.
+     *
+     * @param input A string containing the truncated input of the message.
+     * @return The {@link CommandDescription} of the {@link DiaxCommand}
+     * @since Brazen
+     */
     public CommandDescription find(String input) {
         for (CommandDescription cmd : commands.keySet()) {
             for (String s : cmd.triggers()) {
@@ -63,6 +75,13 @@ public class Commands {
         return null;
     }
 
+    /**
+     * A method that attempts to create a new instance of the {@link DiaxCommand} associated with the {@link CommandDescription} if the description is properly formatted.
+     *
+     * @param description The {@link CommandDescription} of the class.
+     * @return The {@link DiaxCommand} that was created.
+     * @since Brazen
+     */
     public DiaxCommand newInstance(CommandDescription description) {
         Class<? extends DiaxCommand> type;
         if (description != null && (type = commands.get(description)) != null) {

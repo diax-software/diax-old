@@ -117,4 +117,14 @@ public abstract class DiaxCommand extends ListenerAdapter implements Command, Co
     public boolean getOwnerOnly() {
         return getCommandDescription().ownerOnly();
     }
+
+    /**
+     * Method to get if only donors can use the {@link DiaxCommand}
+     *
+     * @return A boolean that describes if only donors can use the command.
+     * @since Brazen
+     */
+    public boolean getDonorOnly() {
+        return getCommandDescription().donorOnly();
+    }
 }

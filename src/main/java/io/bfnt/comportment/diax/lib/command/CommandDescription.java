@@ -62,4 +62,12 @@ public @interface CommandDescription {
      * @since Azote
      */
     boolean ownerOnly() default false;
+
+    /**
+     * Determines if the {@link DiaxCommand} can only be used by donors.
+     *
+     * @return If the {@link DiaxCommand} can only be used by donors.
+     * @since Brazen
+     */
+    boolean donorOnly() default false;
 }

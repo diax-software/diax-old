@@ -17,6 +17,7 @@ public class Eval extends DiaxCommand {
      * A command which evaluates the arguments of the {@link Message} that triggered the command.
      *
      * @param trigger The {@link Message} which triggered the command.
+     * @apiNote TODO: Implement Crystal's engine.
      * @since Azote
      */
     @Override
