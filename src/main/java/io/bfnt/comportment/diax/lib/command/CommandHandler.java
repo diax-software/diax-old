@@ -1,15 +1,33 @@
 package io.bfnt.comportment.diax.lib.command;
 
-import io.bfnt.comportment.diax.lib.Diax;
+import io.bfnt.comportment.diax.DiaxProperties;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.PermissionException;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
+
+import static io.bfnt.comportment.diax.util.Utils.*;
 
 /**
  * Created by Comporment on 28/03/2017 at 16:49
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public class CommandHandler extends Diax {
+public class CommandHandler extends ListenerAdapter {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Commands commands;
+    private final DiaxProperties properties;
+
+    @Inject
+    public CommandHandler(Commands commands, DiaxProperties properties) {
+        this.commands = commands;
+        this.properties = properties;
+    }
+
     /**
      * Method that is fired when the {@link net.dv8tion.jda.core.JDA} receives a message.
      *
@@ -21,18 +39,15 @@ public class CommandHandler extends Diax {
         Message message = event.getMessage();
         String content = message.getRawContent();
         if (event.getAuthor().isBot()) return;
-        if (!content.startsWith(getPrefix())) return;
-        log(String.format("%s | %s", makeName(event.getAuthor()), content));
-        content = content.replaceFirst(getPrefix(), "").trim().toLowerCase();
+        if (!content.startsWith(properties.getCommandPrefix())) return;
+        logger.info(String.format("%s | %s", makeName(event.getAuthor()), content));
+        content = content.replaceFirst(properties.getCommandPrefix(), "").trim().toLowerCase();
         String msg = content;
-        getCommands().forEach(command ->
-        {
-            for (String s : command.getTriggers())
-                if (msg.startsWith(s)) {
-                    execute(command, event.getMessage(), msg);
-                    return;
-                }
-        });
+
+        CommandDescription command = commands.find(msg);
+        if (command != null) {
+            execute(commands.newInstance(command), event.getMessage(), msg);
+        }
     }
 
     /**

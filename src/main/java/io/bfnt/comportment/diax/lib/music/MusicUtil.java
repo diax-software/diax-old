@@ -12,14 +12,16 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
-import io.bfnt.comportment.diax.lib.Diax;
 import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MusicUtil extends Diax {
+import static io.bfnt.comportment.diax.util.Utils.makeEmbed;
+
+public class MusicUtil extends ListenerAdapter {
     private static final AudioPlayerManager playerManager = defaultAudioPlayerManager();
     private static final Map<Long, GuildMusicManager> musicManagers = new HashMap<>();
 
@@ -86,9 +88,9 @@ public class MusicUtil extends Diax {
             public void trackLoaded(AudioTrack track) {
                 voiceChannel.getGuild().getAudioManager().openAudioConnection(voiceChannel);
                 AudioTrackInfo info = track.getInfo();
-                channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("`%s ` by `%s ` has been added to the queue `[%s]`", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
+                channel.sendMessage(makeEmbed().addField("Loaded!", String.format("`%s ` by `%s ` has been added to the queue `[%s]`", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
                 if (manager.scheduler.getQueue().isEmpty()) {
-                    channel.sendMessage(new Diax().makeEmbed().addField("Now Song!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
+                    channel.sendMessage(makeEmbed().addField("Now Song!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
                 }
                 manager.scheduler.queue(track);
             }
@@ -102,10 +104,10 @@ public class MusicUtil extends Diax {
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
                 voiceChannel.getGuild().getAudioManager().openAudioConnection(voiceChannel);
-                channel.sendMessage(new Diax().makeEmbed().addField("Loaded!", String.format("The playlist `%s ` containing `%s ` tracks has been added to the queue.", playlist.getName(), playlist.getTracks().size()), false).build()).queue();
+                channel.sendMessage(makeEmbed().addField("Loaded!", String.format("The playlist `%s ` containing `%s ` tracks has been added to the queue.", playlist.getName(), playlist.getTracks().size()), false).build()).queue();
                 if (manager.scheduler.getQueue().isEmpty()) {
                     AudioTrackInfo info = playlist.getTracks().get(0).getInfo();
-                    channel.sendMessage(new Diax().makeEmbed().addField("Now Song!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
+                    channel.sendMessage(makeEmbed().addField("Now Song!", String.format("`%s ` by `%s ` is now playing. `[%s] `", info.title, info.author, getTimestamp(info.length)), false).build()).queue();
                 }
                 playlist.getTracks().forEach(manager.scheduler::queue);
             }
@@ -117,7 +119,7 @@ public class MusicUtil extends Diax {
              */
             @Override
             public void noMatches() {
-                channel.sendMessage(new Diax().makeEmbed().addField("Error!", String.format("There were no matches found for `%s `", trackUrl), false).setColor(new Color(255, 0, 0)).build()).queue();
+                channel.sendMessage(makeEmbed().addField("Error!", String.format("There were no matches found for `%s `", trackUrl), false).setColor(new Color(255, 0, 0)).build()).queue();
             }
 
             /**
@@ -128,7 +130,7 @@ public class MusicUtil extends Diax {
              */
             @Override
             public void loadFailed(FriendlyException exception) {
-                channel.sendMessage(new Diax().makeEmbed().addField("Error!", String.format("The track could not be played due to: `%s `", exception.getMessage()), false).build()).queue();
+                channel.sendMessage(makeEmbed().addField("Error!", String.format("The track could not be played due to: `%s `", exception.getMessage()), false).build()).queue();
             }
         });
     }
@@ -178,6 +180,6 @@ public class MusicUtil extends Diax {
      */
     public static MessageEmbed trackEmbed(AudioTrack track) {
         AudioTrackInfo info = track.getInfo();
-        return new Diax().makeEmbed().addField("Now Song...", String.format("`%s ` by `%s ` `[%s] `", info.title, info.author, MusicUtil.getTimestamp(info.length)), false).build();
+        return makeEmbed().addField("Now Song...", String.format("`%s ` by `%s ` `[%s] `", info.title, info.author, MusicUtil.getTimestamp(info.length)), false).build();
     }
 }

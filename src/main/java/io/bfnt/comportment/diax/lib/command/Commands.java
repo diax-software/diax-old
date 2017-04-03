@@ -1,53 +1,46 @@
 package io.bfnt.comportment.diax.lib.command;
 
-import io.bfnt.comportment.diax.commands.administrative.Ban;
-import io.bfnt.comportment.diax.commands.administrative.Kick;
-import io.bfnt.comportment.diax.commands.administrative.Purge;
-import io.bfnt.comportment.diax.commands.administrative.Softban;
-import io.bfnt.comportment.diax.commands.informative.*;
-import io.bfnt.comportment.diax.commands.miscellaneous.Bump;
-import io.bfnt.comportment.diax.commands.miscellaneous.Embed;
-import io.bfnt.comportment.diax.commands.music.*;
-import io.bfnt.comportment.diax.commands.owner.Announce;
-import io.bfnt.comportment.diax.commands.owner.Eval;
+import io.bfnt.comportment.diax.ComponentProvider;
+import io.bfnt.comportment.diax.DiaxProperties;
+import org.reflections.Reflections;
 
-import java.util.TreeSet;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.*;
 
 /**
  * Created by Comporment on 30/03/2017 at 12:06
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
+@Singleton
 public class Commands {
 
-    /**
-     * A method which registers the {@link DiaxCommand}s to be able to be used when the {@link CommandHandler} is looking to see if a trigger is valid.
-     *
-     * @since Azote
-     */
-    private TreeSet<DiaxCommand> commands = new TreeSet<DiaxCommand>() {
-        {
-            add(new Help());
-            add(new Embed());
-            add(new Ban());
-            add(new Kick());
-            add(new Softban());
-            add(new Purge());
-            add(new Eval());
-            add(new Ginfo());
-            add(new Ping());
-            add(new Statistics());
-            add(new Bump());
-            add(new Play());
-            add(new Shuffle());
-            add(new Skip());
-            add(new Stop());
-            add(new Join());
-            add(new WhoAmI());
-            add(new Song());
-            add(new Pause());
-            add(new Announce());
+    private static final String COMMAND_PACKAGE = "io.bfnt.comportment.diax.commands";
+    private final ComponentProvider provider;
+    private final DiaxProperties properties;
+    private final Map<CommandDescription, Class<? extends DiaxCommand>> commands;
+
+    @Inject
+    public Commands(ComponentProvider provider, DiaxProperties properties) {
+        this.provider = provider;
+        this.properties = properties;
+        this.commands = new HashMap<>();
+
+        init();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void init() {
+        Reflections reflections = new Reflections(COMMAND_PACKAGE);
+        List<String> ignoredCommands = Arrays.asList(properties.getIgnoredCommands().trim().split(","));
+        Set<Class<?>> types = reflections.getTypesAnnotatedWith(CommandDescription.class);
+        for (Class<?> type : types) {
+            CommandDescription description = type.getAnnotation(CommandDescription.class);
+            if (Collections.disjoint(Arrays.asList(description.triggers()), ignoredCommands)) {
+                commands.put(description, (Class<? extends DiaxCommand>) type);
+            }
         }
-    };
+    }
 
     /**
      * A method to get all of the registered commands.
@@ -55,7 +48,27 @@ public class Commands {
      * @return All of the commands registered {@link #commands}
      * @since Azote
      */
-    public TreeSet<DiaxCommand> getCommands() {
-        return commands;
+    public Set<CommandDescription> getCommands() {
+        return commands.keySet();
+    }
+
+    public CommandDescription find(String input) {
+        for (CommandDescription cmd : commands.keySet()) {
+            for (String s : cmd.triggers()) {
+                if (input.startsWith(s)) {
+                    return cmd;
+                }
+            }
+        }
+        return null;
+    }
+
+    public DiaxCommand newInstance(CommandDescription description) {
+        Class<? extends DiaxCommand> type;
+        if (description != null && (type = commands.get(description)) != null) {
+            return provider.getInstance(type);
+        } else {
+            return null;
+        }
     }
 }

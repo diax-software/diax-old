@@ -4,7 +4,6 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
-import io.bfnt.comportment.diax.lib.Diax;
 import net.dv8tion.jda.core.entities.TextChannel;
 
 import java.util.ArrayList;
@@ -12,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import static io.bfnt.comportment.diax.util.Utils.makeEmbed;
 
 /**
  * Created by Comporment on 02/04/2017 at 16:19
@@ -63,7 +64,7 @@ public class TrackScheduler extends AudioEventAdapter {
      */
     public void clear() {
         queue.clear();
-        /*channel.sendMessage(new Diax().makeEmbed().addField("Cleared!", "The queue has been cleared!", false).build()).queue();*/
+        /*channel.sendMessage(makeEmbed().addField("Cleared!", "The queue has been cleared!", false).build()).queue();*/
     }
 
     /**
@@ -131,6 +132,6 @@ public class TrackScheduler extends AudioEventAdapter {
         this.repeating = repeating;
         String status = "no longer repeating.";
         if (repeating) status = "now repeating.";
-        channel.sendMessage(new Diax().makeEmbed().addField("Repeating!", "The queue is " + status, false).build()).queue();
+        channel.sendMessage(makeEmbed().addField("Repeating!", "The queue is " + status, false).build()).queue();
     }
 }

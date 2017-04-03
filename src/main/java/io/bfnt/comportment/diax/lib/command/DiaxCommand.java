@@ -1,14 +1,22 @@
 package io.bfnt.comportment.diax.lib.command;
 
 import io.bfnt.comportment.diax.commands.informative.Help;
-import io.bfnt.comportment.diax.lib.Diax;
 import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Created by Comporment on 28/03/2017 at 16:48
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public abstract class DiaxCommand extends Diax implements Command, Comparable<DiaxCommand> {
+public abstract class DiaxCommand extends ListenerAdapter implements Command, Comparable<DiaxCommand> {
+
+    @Inject
+    @Named("command.prefix")
+    private String prefix;
+
     /**
      * Method to get the CommandDescription annotation.
      *
@@ -97,7 +105,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @since Azote
      */
     public String getHelpFormat() {
-        return String.format("%s%s | %s", getPrefix(), getTrigger(), getDescription());
+        return String.format("%s%s | %s", prefix, getTrigger(), getDescription());
     }
 
     /**

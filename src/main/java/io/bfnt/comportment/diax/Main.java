@@ -4,11 +4,11 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.name.Names;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import io.bfnt.comportment.diax.lib.Diax;
 import io.bfnt.comportment.diax.lib.command.CommandHandler;
 import io.bfnt.comportment.diax.lib.music.DisconnectListener;
 import net.dv8tion.jda.core.AccountType;
@@ -18,20 +18,39 @@ import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import org.json.JSONException;
+import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
 import static com.knockturnmc.api.util.ConfigurationUtils.getDataFolder;
 import static com.knockturnmc.api.util.ConfigurationUtils.loadConfiguration;
+import static io.bfnt.comportment.diax.util.Utils.log;
 
 /**
  * Created by Comporment on 22/03/2017 at 19:09
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public final class Main extends Diax implements Module {
+public final class Main implements Module, ComponentProvider {
+    public static final String VERSION;
     private static JDA[] shards;
+
+    static {
+        InputStreamReader reader = new InputStreamReader(Main.class.getResourceAsStream("/version"));
+        BufferedReader txtReader = new BufferedReader(reader);
+        String version;
+        try {
+            version = txtReader.readLine();
+        } catch (IOException e) {
+            version = "null";
+            LoggerFactory.getLogger(Main.class).error("Can not find version file for CoreAPI");
+        }
+        VERSION = version;
+    }
 
     private final Injector injector;
     private DiaxProperties properties;
@@ -72,7 +91,7 @@ public final class Main extends Diax implements Module {
      * @since Azote
      */
     private void main() {
-        log("Loading with version " + getVersion());
+        log("Loading with version " + VERSION);
         int recommendedShards = getRecommendedShards() + 1;
         log(String.format("Starting with %d shard(s).", recommendedShards));
         init(recommendedShards);
@@ -114,8 +133,8 @@ public final class Main extends Diax implements Module {
                         .setToken(properties.getMainToken())
                         .setAudioEnabled(true)
                         .setStatus(OnlineStatus.IDLE)
-                        .setGame(Game.of(getPrefix() + "help | Shards: " + amount))
-                        .addListener(new CommandHandler(), new DisconnectListener());
+                        .setGame(Game.of(properties.getCommandPrefix() + "help | Shards: " + amount))
+                        .addListener(injector.getInstance(CommandHandler.class), new DisconnectListener());
                 if (amount > 1) {
                     jda = builder.useSharding(i, amount).buildBlocking();
                 } else {
@@ -139,7 +158,13 @@ public final class Main extends Diax implements Module {
 
     @Override
     public void configure(Binder binder) {
-        binder.bind(Diax.class).toInstance(this);
+        binder.bind(ComponentProvider.class).toInstance(this);
+        binder.bind(String.class).annotatedWith(Names.named("command.prefix")).toProvider(properties::getCommandPrefix);
         binder.bind(DiaxProperties.class).toProvider(() -> properties);
+    }
+
+    @Override
+    public <T> T getInstance(Class<T> type) {
+        return injector.getInstance(type);
     }
 }
