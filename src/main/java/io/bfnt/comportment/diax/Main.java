@@ -1,11 +1,14 @@
 package io.bfnt.comportment.diax;
 
+import com.google.inject.Binder;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.bfnt.comportment.diax.lib.Diax;
-import io.bfnt.comportment.diax.lib.Token;
 import io.bfnt.comportment.diax.lib.command.CommandHandler;
 import io.bfnt.comportment.diax.lib.music.DisconnectListener;
 import net.dv8tion.jda.core.AccountType;
@@ -20,13 +23,24 @@ import javax.security.auth.login.LoginException;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.knockturnmc.api.util.ConfigurationUtils.getDataFolder;
+import static com.knockturnmc.api.util.ConfigurationUtils.loadConfiguration;
+
 /**
  * Created by Comporment on 22/03/2017 at 19:09
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public final class Main extends Diax {
+public final class Main extends Diax implements Module {
     private static JDA[] shards;
-    private String login = new Token().mainToken();
+
+    private final Injector injector;
+    private DiaxProperties properties;
+
+    public Main() {
+        ClassLoader cl = getClass().getClassLoader();
+        properties = loadConfiguration(cl, "diax.properties", getDataFolder(), DiaxProperties.class);
+        injector = Guice.createInjector(this);
+    }
 
     /**
      * Method fired when the bot is started up.
@@ -77,7 +91,7 @@ public final class Main extends Diax {
     private int getRecommendedShards() {
         try {
             HttpResponse<JsonNode> request = Unirest.get("https://discordapp.com/api/gateway/bot")
-                    .header("Authorization", "Bot " + login)
+                    .header("Authorization", "Bot " + properties.getMainToken())
                     .header("Content-Type", "application/json").asJson();
             return Integer.parseInt(request.getBody().getObject().get("shards").toString());
         } catch (UnirestException | JSONException e) {
@@ -96,7 +110,12 @@ public final class Main extends Diax {
         for (int i = 0; i < amount; i++) {
             JDA jda = null;
             try {
-                JDABuilder builder = new JDABuilder(AccountType.BOT).setToken(login).setAudioEnabled(true).setStatus(OnlineStatus.IDLE).setGame(Game.of(getPrefix() + "help | Shards: " + amount)).addListener(new CommandHandler(), new DisconnectListener());
+                JDABuilder builder = new JDABuilder(AccountType.BOT)
+                        .setToken(properties.getMainToken())
+                        .setAudioEnabled(true)
+                        .setStatus(OnlineStatus.IDLE)
+                        .setGame(Game.of(getPrefix() + "help | Shards: " + amount))
+                        .addListener(new CommandHandler(), new DisconnectListener());
                 if (amount > 1) {
                     jda = builder.useSharding(i, amount).buildBlocking();
                 } else {
@@ -116,5 +135,11 @@ public final class Main extends Diax {
             }
         }
         log(String.format("Finished loading with %d shard(s).", amount));
+    }
+
+    @Override
+    public void configure(Binder binder) {
+        binder.bind(Diax.class).toInstance(this);
+        binder.bind(DiaxProperties.class).toProvider(() -> properties);
     }
 }

@@ -10,3 +10,6 @@ token/
 *.iml
 dependency-reduced-pom.xml
 Token.java
+
+# Config files
+*.properties
