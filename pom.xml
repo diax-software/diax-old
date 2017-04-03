@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!--File declaration.-->
+    <!-- File declaration -->
     <groupId>io.bfnt.comportment</groupId>
     <artifactId>Diax</artifactId>
     <version>Azote</version>
     <build>
         <plugins>
-            <!--Shades the .jar file-->
+            <!-- Shades the .jar file-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -23,7 +23,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--Adds MANIFEST on build.-->
+            <!-- Adds MANIFEST on build -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -38,7 +38,7 @@
                     </archive>
                 </configuration>
             </plugin>
-            <!--Compiles with Java 1.8-->
+            <!-- Compiles with Java 1.8 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -51,41 +51,64 @@
         </plugins>
     </build>
     <repositories>
-        <!--Repository for JDA and Lavaplayer-->
+        <!-- Repository for JDA and Lavaplayer -->
         <repository>
             <id>jcenter</id>
             <name>jcenter-bintray</name>
             <url>http://jcenter.bintray.com</url>
         </repository>
+        <!-- Knockturn Public Repo for DI (Thanks to Crystal) -->
+        <repository>
+            <id>knockturn-public</id>
+            <name>Knockturn Public Repository</name>
+            <url>https://repo.knockturnmc.com/content/repositories/knockturn-public/</url>
+        </repository>
     </repositories>
     <dependencies>
-        <!--Java Discord Wrapper: https://github.com/DV8FromTheWorld/JDA-->
+        <!-- Guice Depdendency Injection: https://github.com/google/guice -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>4.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>aopalliance</groupId>
+                    <artifactId>aopalliance</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.knockturnmc</groupId>
+            <artifactId>knockturn-commons</artifactId>
+            <version>1.3.6-SNAPSHOT</version>
+        </dependency>
+        <!-- Java Discord API: https://github.com/DV8FromTheWorld/JDA -->
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>3.0.0_165</version>
         </dependency>
-        <!--Music: https://github.com/sedmelluq/lavaplayer-->
+        <!-- Lavaplayer: [Audio wrapper for Discord] https://github.com/sedmelluq/lavaplayer -->
         <dependency>
             <groupId>com.sedmelluq</groupId>
             <artifactId>lavaplayer</artifactId>
             <version>1.2.34</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core-->
+        <!-- Logback: https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
+        <!-- Unirest: https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
         <dependency>
             <groupId>com.mashape.unirest</groupId>
             <artifactId>unirest-java</artifactId>
             <version>1.4.9</version>
         </dependency>
-        <!--Logger thingy that is used by -->
+        <!-- Logger that is used by Lavaplayer -->
         <dependency>
-            <groupId> org.apache.cassandra</groupId>
+            <groupId>org.apache.cassandra</groupId>
             <artifactId>cassandra-all</artifactId>
             <version>0.8.1</version>
             <exclusions>

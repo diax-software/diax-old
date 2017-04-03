@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 @CommandDescription(triggers = {"help", "?", "helpme"}, description = "Gives you help for Diax.")
-public class Help extends DiaxCommand
-{
+public class Help extends DiaxCommand {
     /**
      * A command which displays all of the other registered {@link DiaxCommand} in the {@link io.bfnt.comportment.diax.lib.command.Commands} class.
      *
@@ -20,8 +19,7 @@ public class Help extends DiaxCommand
      * @since Azote
      */
     @Override
-    public void execute(Message trigger)
-    {
+    public void execute(Message trigger) {
         trigger.getChannel().sendMessage(makeEmbed().addField("Commands", getCommands().stream().filter(command -> !command.getOwnerOnly()).map(DiaxCommand::getHelpFormat).collect(Collectors.joining("\n")), false).addField("Links", "[Invite me to your server](https://discordapp.com/oauth2/authorize?client_id=295500621862404097&scope=bot&permissions=8)\n[My Discord server](https://discord.gg/c6M8PJZ)\n[My Patreon](https://www.patreon.com/Diax)", false).build()).queue();
     }
 }

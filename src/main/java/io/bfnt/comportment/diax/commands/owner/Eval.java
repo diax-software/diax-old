@@ -12,8 +12,7 @@ import javax.script.ScriptEngineManager;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 @CommandDescription(triggers = {"eval"}, ownerOnly = true)
-public class Eval extends DiaxCommand
-{
+public class Eval extends DiaxCommand {
     /**
      * A command which evaluates the arguments of the {@link Message} that triggered the command.
      *
@@ -21,18 +20,33 @@ public class Eval extends DiaxCommand
      * @since Azote
      */
     @Override
-    public void execute(Message trigger)
-    {
-        try
-        {
+    public void execute(Message trigger) {
+        try {
             ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
             engine.put("jda", trigger.getJDA());
             engine.put("message", trigger);
             engine.put("event", trigger);
             engine.put("guild", trigger.getGuild());
             engine.put("channel", trigger.getChannel());
-            trigger.getChannel().sendMessage("```" + engine.eval(trigger.getRawContent().replaceFirst(trigger.getRawContent().split(" ")[0], "")) + "```").queue();
+            try {
+                String code = trigger.getRawContent().replaceFirst(trigger.getRawContent().split(" ")[0], "");
+                trigger.getChannel().sendMessage("```js\n" +
+                        engine.eval(
+                                String.join("\n",
+                                        "load('nashorn:mozilla_compat.js');",
+                                        "imports = new JavaImporter(java.util, java.io);",
+                                        "(function(){",
+                                        "with(imports){",
+                                        code,
+                                        "}",
+                                        "})()"
+                                ))
+                        + "\n```").queue();
+            } catch (Exception e) {
+                trigger.getChannel().sendMessage("Error executing code ```" + e.getMessage() + "\n```").queue();
+            }
+        } catch (Exception ignored) {
+
         }
-        catch (Exception ignored) {}
     }
 }

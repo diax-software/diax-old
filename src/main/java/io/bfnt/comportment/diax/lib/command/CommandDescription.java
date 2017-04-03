@@ -14,8 +14,7 @@ import java.lang.annotation.RetentionPolicy;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface CommandDescription
-{
+public @interface CommandDescription {
     /**
      * A boolean to describe if the {@link DiaxCommand} is only allowed to be used in a {@link net.dv8tion.jda.core.entities.Guild}
      *

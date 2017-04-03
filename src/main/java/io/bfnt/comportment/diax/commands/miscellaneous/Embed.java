@@ -11,8 +11,7 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 @CommandDescription(triggers = {"embed", "eb", "announce", "echo"}, description = "Embeds a message into a chat.", permission = Permission.MESSAGE_EMBED_LINKS, minimumArgs = 1)
-public class Embed extends DiaxCommand
-{
+public class Embed extends DiaxCommand {
     /**
      * A command which embeds the content of the {@link Message} which triggered the command.
      *
@@ -20,13 +19,11 @@ public class Embed extends DiaxCommand
      * @since Azote
      */
     @Override
-    public void execute(Message trigger)
-    {
-        try
-        {
+    public void execute(Message trigger) {
+        try {
             trigger.delete().queue();
+        } catch (PermissionException ignored) {
         }
-        catch (PermissionException ignored) {}
         trigger.getChannel().sendMessage(makeEmbed().setAuthor(makeName(trigger.getAuthor()), trigger.getAuthor().getEffectiveAvatarUrl(), trigger.getAuthor().getEffectiveAvatarUrl()).setDescription(trigger.getRawContent().replaceFirst(trigger.getRawContent().split(" ")[0], "")).build()).queue();
     }
 }

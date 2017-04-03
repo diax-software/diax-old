@@ -19,8 +19,7 @@ import java.util.TreeSet;
  * Created by Comporment on 28/03/2017 at 12:09
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public class Diax extends ListenerAdapter
-{
+public class Diax extends ListenerAdapter {
 
     /**
      * Logging from within static methods.
@@ -28,8 +27,7 @@ public class Diax extends ListenerAdapter
      * @param message Message to timestamp and then print to console.
      * @since Azote
      */
-    protected void log(String message)
-    {
+    protected void log(String message) {
         System.out.println(String.format("%s [Log] %s", new SimpleDateFormat("[HH:mm:ss]").format(new Date()), message));
     }
 
@@ -38,8 +36,7 @@ public class Diax extends ListenerAdapter
      *
      * @since Azote
      */
-    protected String getPrefix()
-    {
+    protected String getPrefix() {
         return "<<";
     }
 
@@ -49,8 +46,7 @@ public class Diax extends ListenerAdapter
      * @return A TreeSet containing all of the {@link DiaxCommand}s which can be used.
      * @since Azote
      */
-    protected TreeSet<DiaxCommand> getCommands()
-    {
+    protected TreeSet<DiaxCommand> getCommands() {
         return new Commands().getCommands();
     }
 
@@ -60,9 +56,8 @@ public class Diax extends ListenerAdapter
      * @return A {@link EmbedBuilder} containing Diax's defaults for the {@link net.dv8tion.jda.core.entities.MessageEmbed}
      * @since Azote
      */
-    protected EmbedBuilder makeEmbed()
-    {
-        return new EmbedBuilder().setColor(new Color(114,137,218)).setFooter(getVersion(), "https://cdn.discordapp.com/avatars/295500621862404097/07aa17a7391dbec5c3490e4975cc40e7.webp?size=1024");
+    public EmbedBuilder makeEmbed() {
+        return new EmbedBuilder().setColor(new Color(114, 137, 218)).setFooter(getVersion(), "https://cdn.discordapp.com/avatars/295500621862404097/07aa17a7391dbec5c3490e4975cc40e7.webp?size=1024");
     }
 
     /**
@@ -72,21 +67,19 @@ public class Diax extends ListenerAdapter
      * @return A string in the format: username#discriminator
      * @since Azote
      */
-    protected String makeName(User user)
-    {
+    protected String makeName(User user) {
         return String.format("%s#%s", user.getName(), user.getDiscriminator());
     }
 
     /**
      * Returns true if the {@link User} has the permission in the guild to use the command, or is Comportment himself.
      *
-     * @param user The {@link User} to check the permission of.
-     * @param guild The {@link Guild} to see if the user has the permission there.
+     * @param user       The {@link User} to check the permission of.
+     * @param guild      The {@link Guild} to see if the user has the permission there.
      * @param permission The {@link Permission} to check.
      * @return If the {@link User} is Comportment or has the required {@link Permission}
      */
-    protected boolean checkPermission(User user, Guild guild, Permission permission)
-    {
+    protected boolean checkPermission(User user, Guild guild, Permission permission) {
         return user.getId().equals("293884638101897216") | PermissionUtil.checkPermission(guild, guild.getMember(user), permission);
     }
 
@@ -96,8 +89,7 @@ public class Diax extends ListenerAdapter
      * @return The version name and number of the current version of Diax.
      * @since Azote
      */
-    protected String getVersion()
-    {
+    protected String getVersion() {
         return "Diax Azote-0.0.3-BETA";
     }
 
@@ -107,8 +99,7 @@ public class Diax extends ListenerAdapter
      * @return The ID of Comportment as described in {@link ISnowflake#getId()}
      * @since Azote
      */
-    protected String getOwnerId()
-    {
+    protected String getOwnerId() {
         return "293884638101897216";
     }
 }

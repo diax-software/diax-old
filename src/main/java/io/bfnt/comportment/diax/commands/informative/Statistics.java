@@ -15,21 +15,16 @@ import java.util.List;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 @CommandDescription(triggers = {"statistics", "stats"}, description = "Displays some statistics about the shard Diax is on.")
-public class Statistics extends DiaxCommand
-{
+public class Statistics extends DiaxCommand {
     @Override
-    public void execute(Message trigger)
-    {
+    public void execute(Message trigger) {
         List<JDA> shards;
-        try
-        {
+        try {
             shards = Arrays.asList(new Main().getShards());
-        }
-        catch (NullPointerException e)
-        {
+        } catch (NullPointerException e) {
             shards = Collections.singletonList(trigger.getJDA());
         }
         //trigger.getChannel().sendMessage(makeEmbed().setDescription().build()).queue();
- //       trigger.getChannel().sendMessage(makeEmbed().setDescription(String.format("Statistics for Shard #%d\n\n\uD83D\uDC65 Users: %s\n\uD83D\uDC64 Unique: %s\n\n\uD83D\uDCAF Version: %s", trigger.getJDA().getShardInfo().getShardId(), shards.forEach(s -> s.getGuilds().stream().mapToLong(guild -> guild.getMembers().size())) jda.getGuilds().stream().mapToLong(guild -> guild.getMembers().size()).sum(), jda.getUsers().stream().distinct().count(), getVersion())).build()).queue();
+        //       trigger.getChannel().sendMessage(makeEmbed().setDescription(String.format("Statistics for Shard #%d\n\n\uD83D\uDC65 Users: %s\n\uD83D\uDC64 Unique: %s\n\n\uD83D\uDCAF Version: %s", trigger.getJDA().getShardInfo().getShardId(), shards.forEach(s -> s.getGuilds().stream().mapToLong(guild -> guild.getMembers().size())) jda.getGuilds().stream().mapToLong(guild -> guild.getMembers().size()).sum(), jda.getUsers().stream().distinct().count(), getVersion())).build()).queue();
     }
 }

@@ -8,16 +8,14 @@ import net.dv8tion.jda.core.Permission;
  * Created by Comporment on 28/03/2017 at 16:48
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public abstract class DiaxCommand extends Diax implements Command, Comparable<DiaxCommand>
-{
+public abstract class DiaxCommand extends Diax implements Command, Comparable<DiaxCommand> {
     /**
      * Method to get the CommandDescription annotation.
      *
      * @return sometimes null, the {@link CommandDescription} annotation of the DiaxCommand.
      * @since Azote
      */
-    private CommandDescription getCommandDescription()
-    {
+    private CommandDescription getCommandDescription() {
         return getClass().getAnnotation(CommandDescription.class);
     }
 
@@ -27,8 +25,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return Whether or not the command can be used in guilds.
      * @since Azote
      */
-    public boolean getGuildOnly()
-    {
+    public boolean getGuildOnly() {
         return getCommandDescription().guildOnly();
     }
 
@@ -38,8 +35,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return An array of the Strings which will trigger the {@link DiaxCommand}
      * @since Azote
      */
-    public String[] getTriggers()
-    {
+    public String[] getTriggers() {
         return getCommandDescription().triggers();
     }
 
@@ -49,8 +45,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return A string containing the description of the {@link DiaxCommand}
      * @since Azote
      */
-    public String getDescription()
-    {
+    public String getDescription() {
         return getCommandDescription().description();
     }
 
@@ -60,8 +55,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return the minimum required {@link Permission} to use the command in a {@link net.dv8tion.jda.core.entities.Guild}
      * @since Azote
      */
-    public Permission getPermission()
-    {
+    public Permission getPermission() {
         return getCommandDescription().permission();
     }
 
@@ -71,8 +65,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return An int which has the minimum amount of args to use the {@link DiaxCommand}
      * @since Azote
      */
-    public int getMinimumArgs()
-    {
+    public int getMinimumArgs() {
         return getCommandDescription().minimumArgs();
     }
 
@@ -82,8 +75,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return A string which will mainly be used to trigger the {@link DiaxCommand}
      * @since Azote
      */
-    public String getTrigger()
-    {
+    public String getTrigger() {
         return getTriggers()[0];
     }
 
@@ -94,8 +86,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return an int describing the order that the command goes in.
      * @since Azote
      */
-    public int compareTo(DiaxCommand command)
-    {
+    public int compareTo(DiaxCommand command) {
         return (getTrigger() + getDescription()).compareTo(command.getTrigger() + command.getDescription());
     }
 
@@ -105,8 +96,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return A string containing the format of the command used in {@link Help}
      * @since Azote
      */
-    public String getHelpFormat()
-    {
+    public String getHelpFormat() {
         return String.format("%s%s | %s", getPrefix(), getTrigger(), getDescription());
     }
 
@@ -116,8 +106,7 @@ public abstract class DiaxCommand extends Diax implements Command, Comparable<Di
      * @return A boolean that describes if only the owner can use the command.
      * @since Azote
      */
-    public boolean getOwnerOnly()
-    {
+    public boolean getOwnerOnly() {
         return getCommandDescription().ownerOnly();
     }
 }
