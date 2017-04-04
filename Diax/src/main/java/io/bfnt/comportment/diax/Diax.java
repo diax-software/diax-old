@@ -65,7 +65,10 @@ public final class Diax implements ComponentProvider, Module {
     public void configure(Binder binder) {
         binder.bind(ComponentProvider.class).toInstance(this);
         binder.bind(DiaxProperties.class).toProvider(() -> properties);
+        /*
+        FIXME: This breaks it, but idek why.
         binder.bind(String.class).annotatedWith(Names.named("diax.prefix")).toProvider(properties::getPrefix);
+        */
     }
 
     @Override
