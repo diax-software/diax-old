@@ -1,6 +1,6 @@
 <!--TODO: Make this look pretty-->
 <div align = "center">
-  <a href="https://github.com/Comportment/Diax/tree/Diax-Azote"><img src="https://camo.githubusercontent.com/aae645921623a8d2c36742582d3dd3598bd219ed/687474703a2f2f666f6e746d656d652e636f6d2f7065726d616c696e6b2f3137303332382f34386664663364303837373263636166653639363536356630323936616465392e706e67"></a>
+  <a href="https://github.com/Comportment/Diax/tree/Diax-Azote"><img src="http://r78.cooltext.com/d.php?renderid=239013494114879&extension=png"></a>
   <hr>
   <a href="https://bfnt.io/"><img src = "https://img.shields.io/badge/Supported_By-Blackfields_Network-red.svg?style=plastic"></a>
   <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Made_By-Comportment-green.svg?style=plastic"></a>
