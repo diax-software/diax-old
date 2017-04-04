@@ -42,6 +42,10 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
         return channel;
     }
 
+    public void setChannel(TextChannel channel) {
+        this.channel = channel;
+    }
+
     public void clear() {
         queue.clear();
         player.startTrack(null, false);
@@ -49,10 +53,6 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
 
     public void queue(DiaxAudioTrack track) {
         if (!player.startTrack(track.getTrack(), true)) queue.offer(track);
-    }
-
-    public void setChannel(TextChannel channel) {
-        this.channel = channel;
     }
 
     public void shuffle() {

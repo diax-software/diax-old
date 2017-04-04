@@ -23,8 +23,6 @@ import java.io.InputStreamReader;
  */
 public final class Diax implements ComponentProvider, Module {
 
-    private final Injector injector;
-    private final DiaxProperties properties;
     public static final String VERSION;
     public static JDA[] SHARDS;
 
@@ -40,6 +38,9 @@ public final class Diax implements ComponentProvider, Module {
         }
         VERSION = version;
     }
+
+    private final Injector injector;
+    private final DiaxProperties properties;
 
     private Diax() {
         ClassLoader classLoader = this.getClass().getClassLoader();
@@ -64,7 +65,7 @@ public final class Diax implements ComponentProvider, Module {
     public void configure(Binder binder) {
         binder.bind(ComponentProvider.class).toInstance(this);
         binder.bind(DiaxProperties.class).toProvider(() -> properties);
-        binder.bind(String.class).annotatedWith(Names.named("command.prefix")).toProvider(properties::getPrefix);
+        binder.bind(String.class).annotatedWith(Names.named("diax.prefix")).toProvider(properties::getPrefix);
     }
 
     @Override
