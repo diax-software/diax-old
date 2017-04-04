@@ -13,6 +13,8 @@ public class DiaxProperties extends NamedProperties {
     private String token;
     @Property(value = "diax.prefix", defaultvalue = "<<")
     private String prefix;
+    @Property(value = "diax.commands.ignored")
+    private String ignoredCommands;
 
     public String getToken() {
         return token;
@@ -20,5 +22,9 @@ public class DiaxProperties extends NamedProperties {
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public String getIgnoredCommands(){
+        return ignoredCommands;
     }
 }
