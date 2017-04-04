@@ -20,6 +20,12 @@ public class Commands {
     private final DiaxProperties properties;
     private final Map<CommandDescription, Class<? extends DiaxCommand>> commands;
 
+    /**
+     * TODO: Get Crystal to document
+     * @param provider
+     * @param properties
+     * @since Brazen
+     */
     @Inject
     public Commands(ComponentProvider provider, DiaxProperties properties) {
         this.provider = provider;
