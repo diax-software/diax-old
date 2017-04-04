@@ -15,9 +15,10 @@ import static io.bfnt.comportment.diax.util.Utils.makeEmbed;
 @CommandDescription(triggers = {"song", "nowplaying"}, description = "Displays the currently playing track.", guildOnly = true)
 public class Song extends DiaxCommand {
     /**
-     * A {@link DiaxCommand}
+     * A {@link DiaxCommand} that attempts to play the argument.
      *
      * @param trigger The {@link Message} which triggered the command.
+     * @author Comportment
      * @since Azote
      */
     @Override
