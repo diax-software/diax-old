@@ -17,6 +17,8 @@ public class Utils {
      * Logging from within static methods.
      *
      * @param message Message to timestamp and then print to console.
+     * @author Comportment
+     * @apiNote Might be better to replace this with logback.
      * @since Azote
      */
     public static void log(String message) {
@@ -27,10 +29,22 @@ public class Utils {
      * Method to have a global way to make a {@link net.dv8tion.jda.core.entities.MessageEmbed}
      *
      * @return A {@link EmbedBuilder} containing Diax's defaults for the {@link net.dv8tion.jda.core.entities.MessageEmbed}
+     * @author Comportment
      * @since Azote
      */
     public static EmbedBuilder makeEmbed() {
         return new EmbedBuilder().setColor(new Color(114, 137, 218)).setFooter(getVersion(), "https://cdn.discordapp.com/avatars/295500621862404097/07aa17a7391dbec5c3490e4975cc40e7.webp?size=1024");
+    }
+    
+    /**
+     * Method to have a global way to display errors being displayed by {@link net.dv8tion.core.entities.MessageEmbed}
+     *
+     * @return A {@link net.dv8tion.core.entities.MessageEmbed} containing the default error message.
+     * @author Comportment
+     * @since Brazen
+     */
+    public static MessageEmbed makeError(String description) {
+        return makeEmbed().addField("Error!", description, false).setColor(new Color(255, 0, 0)).build();
     }
 
     /**
@@ -38,6 +52,7 @@ public class Utils {
      *
      * @param user The {@link User}'s name to convert into a nicer name.
      * @return A string in the format: username#discriminator
+     * @author Comportment
      * @since Azote
      */
     public static String makeName(User user) {
@@ -51,15 +66,21 @@ public class Utils {
      * @param guild      The {@link Guild} to see if the user has the permission there.
      * @param permission The {@link Permission} to check.
      * @return If the {@link User} is Comportment or has the required {@link Permission}
+     * @author Comportment
+     * @apiNote Could be rewrote to include multiple owners.
+     * @sinze Azote
      */
     public static boolean checkPermission(User user, Guild guild, Permission permission) {
-        return user.getId().equals("293884638101897216") | PermissionUtil.checkPermission(guild, guild.getMember(user), permission);
+        return user.getId().equals(getOwnerId()) | PermissionUtil.checkPermission(guild, guild.getMember(user), permission);
     }
 
     /**
      * A method to get the version number and name of Diax.
      *
      * @return The version name and number of the current version of Diax.
+     * @author Comportment
+     * @author Crystal
+     * @apiNote Changed by Crystal in Brazen to get the version as defined in the {@link Main} class.
      * @since Azote
      */
     public static String getVersion() {
@@ -69,7 +90,8 @@ public class Utils {
     /**
      * Method to get the ID of Comportment (the bot owner)
      *
-     * @return The ID of Comportment as described in {@link ISnowflake#getId()} )}
+     * @return The ID of Comportment as described in {@link ISnowflake#getId()} 
+     * @author Comportment
      * @since Azote
      */
     public static String getOwnerId() {
