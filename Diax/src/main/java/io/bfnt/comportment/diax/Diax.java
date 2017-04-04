@@ -48,7 +48,6 @@ public final class Diax implements ComponentProvider, Module {
     }
 
     public static void main(String[] args) {
-        Diax.main(new String[1]);
         try {
             new Diax().main();
         } catch (InterruptedException | RateLimitedException | LoginException | NullPointerException exception) {
