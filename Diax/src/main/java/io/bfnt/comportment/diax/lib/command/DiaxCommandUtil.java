@@ -16,8 +16,12 @@ import java.awt.*;
  */
 public class DiaxCommandUtil {
 
+    public static String makeName(User user) {
+        return String.format("%s#%s", user.getName(), user.getDiscriminator());
+    }
+
     public static EmbedBuilder defaultEmbed() {
-        return new EmbedBuilder().setColor(new Color(281, 125, 132)).setFooter(Diax.VERSION, "https://google.com");
+        return new EmbedBuilder().setColor(new Color(170, 101, 25)).setFooter(Diax.VERSION, "https://google.com");
     }
 
     public static MessageEmbed error(String message) {

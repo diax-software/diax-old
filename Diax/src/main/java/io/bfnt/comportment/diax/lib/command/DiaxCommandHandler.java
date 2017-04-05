@@ -32,20 +32,17 @@ public class DiaxCommandHandler extends ListenerAdapter {
         String content = message.getRawContent();
         if (event.getAuthor().isBot()) return;
         if (!content.startsWith(properties.getPrefix())) return;
-        /*logger.info(String.format("%s | %s", makeName(event.getAuthor()), content));*/
-        content = content.replaceFirst(properties.getPrefix(), "").trim().toLowerCase();
-        String msg = content;
-
-        DiaxCommandDescription command = commands.find(msg);
+        logger.info(String.format("%s | %s", DiaxCommandUtil.makeName(event.getAuthor()), content));
+        String truncated = content.replaceFirst(properties.getPrefix(), "").trim().toLowerCase();
+        DiaxCommandDescription command = commands.find(truncated.split(" ")[0]);
         if (command != null) {
-            execute(commands.newInstance(command), event.getMessage(), msg);
+            execute(commands.newInstance(command), event.getMessage(), truncated);
         }
     }
 
     private void execute(DiaxCommand command, Message message, String truncated) {
         if (truncated.split(" ").length < 1 + command.getMinimumArgs()) {
             message.getChannel().sendMessage(DiaxCommandUtil.error("You did not specify enouggh args!")).queue();
-            /*message.getChannel().sendMessage(makeEmbed().addField("Error!", "You did not specify enough args!", false).build()).queue();*/
             return;
         }
         switch (message.getChannelType()) {
@@ -71,7 +68,7 @@ public class DiaxCommandHandler extends ListenerAdapter {
             }
         }
         try {
-            command.execute(message, "");
+            command.execute(message, truncated);
         } catch (PermissionException e) {
             message.getChannel().sendMessage(DiaxCommandUtil.error("I do not have enough permission to do that.")).queue();
         } catch (Exception e) {

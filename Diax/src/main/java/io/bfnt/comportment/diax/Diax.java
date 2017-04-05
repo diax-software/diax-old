@@ -4,6 +4,7 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.name.Names;
 import com.knockturnmc.api.util.ConfigurationUtils;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -108,10 +109,7 @@ public final class Diax implements ComponentProvider, Module {
     public void configure(Binder binder) {
         binder.bind(ComponentProvider.class).toInstance(this);
         binder.bind(DiaxProperties.class).toProvider(() -> properties);
-        /*
-        FIXME: This breaks it, but idek why.
-        binder.bind(String.class).annotatedWith(Names.named("diax.prefix")).toProvider(properties::getPrefix);
-        */
+        /*binder.bind(String.class).annotatedWith(Names.named("diax.commands.prefix")).toProvider(properties::getPrefix);*/
     }
 
     @Override

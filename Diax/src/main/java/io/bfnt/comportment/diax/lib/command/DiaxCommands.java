@@ -49,7 +49,7 @@ public class DiaxCommands {
     public DiaxCommandDescription find(String input) {
         for (DiaxCommandDescription cmd : commands.keySet()) {
             for (String s : cmd.triggers()) {
-                if (input.startsWith(s)) {
+                if (input.equalsIgnoreCase(s)) {
                     return cmd;
                 }
             }
