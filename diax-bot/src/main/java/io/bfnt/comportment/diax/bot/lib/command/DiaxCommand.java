@@ -13,9 +13,9 @@ import javax.inject.Named;
  */
 public abstract class DiaxCommand implements DiaxCommandInterface, Comparable<DiaxCommand> {
 
-    @Inject
-    @Named(value = "diax.commands.prefix")
-    private String prefix;
+   // @Inject
+    //@Named(value = "diax.commands.prefix")
+    private String prefix = "<<";
 
     public abstract void execute(Message trigger, String truncated);
 

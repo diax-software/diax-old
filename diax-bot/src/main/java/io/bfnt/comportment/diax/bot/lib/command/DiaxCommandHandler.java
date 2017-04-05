@@ -40,9 +40,10 @@ public class DiaxCommandHandler extends ListenerAdapter {
         }
     }
 
-    private void execute(DiaxCommand command, Message message, String truncated) {
-        if (truncated.split(" ").length < 1 + command.getMinimumArgs()) {
-            message.getChannel().sendMessage(DiaxCommandUtil.error("You did not specify enouggh args!")).queue();
+    private void execute(DiaxCommand command, Message message, String args) {
+        args = args.replaceFirst(args.split(" ")[0], "").trim();
+        if (args.split(" ").length < command.getMinimumArgs()) {
+            message.getChannel().sendMessage(DiaxCommandUtil.error("You did not specify enough arguments for this command.")).queue();
             return;
         }
         switch (message.getChannelType()) {
@@ -68,7 +69,7 @@ public class DiaxCommandHandler extends ListenerAdapter {
             }
         }
         try {
-            command.execute(message, truncated);
+            command.execute(message, args);
         } catch (PermissionException e) {
             message.getChannel().sendMessage(DiaxCommandUtil.error("I do not have enough permission to do that.")).queue();
         } catch (Exception e) {
