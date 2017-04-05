@@ -5,6 +5,7 @@ import com.google.inject.name.Named;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 
+
 /**
  * Created by Comporment on 04/04/2017 at 22:47
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
@@ -12,7 +13,7 @@ import net.dv8tion.jda.core.entities.Message;
 public abstract class DiaxCommand implements DiaxCommandInterface, Comparable<DiaxCommand> {
 
     @Inject
-    @Named(value = "diax.prefix")
+    @Named(value = "diax.commands.prefix")
     private String prefix;
 
     public abstract void execute(Message trigger, String truncated);
