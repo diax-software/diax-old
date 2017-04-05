@@ -1,2 +1,3 @@
-**/depdendency-reduced-pom.xml
-**/target/
+*.iml
+*.configuration
+/.idea
