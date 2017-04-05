@@ -4,12 +4,20 @@ import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.name.Names;
 import com.knockturnmc.api.util.ConfigurationUtils;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import io.bfnt.comportment.diax.lib.audio.DiaxDisconnectListener;
+import io.bfnt.comportment.diax.lib.command.DiaxCommandHandler;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.OnlineStatus;
+import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
+import org.json.JSONException;
 import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
@@ -49,16 +57,51 @@ public final class Diax implements ComponentProvider, Module {
     }
 
     public static void main(String[] args) {
-        try {
-            new Diax().main();
-        } catch (InterruptedException | RateLimitedException | LoginException | NullPointerException exception) {
-            exception.printStackTrace();
-            System.exit(1);
+        new Diax().main();
+    }
+
+    private void main() {
+        initialise(getShardAmount());
+    }
+
+    private void initialise(int shards) {
+        Diax.SHARDS = new JDA[shards];
+        for (int i = 0; i < shards; i++) {
+            JDA jda = null;
+            try {
+                JDABuilder builder = new JDABuilder(AccountType.BOT)
+                        .addListener(injector.getInstance(DiaxCommandHandler.class), new DiaxDisconnectListener())
+                        .setAudioEnabled(true)
+                        .setGame(Game.of(properties.getGame()))
+                        .setToken(properties.getToken())
+                        .setStatus(OnlineStatus.ONLINE);
+                if (shards > 1) {
+                    jda = builder.useSharding(i, shards).buildBlocking();
+                } else {
+                    jda = builder.buildBlocking();
+                }
+            } catch (LoginException | RateLimitedException | InterruptedException ignored) {
+            }
+            if (jda != null) {
+                Diax.SHARDS[i] = jda;
+            }
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ignored) {
+            }
         }
     }
 
-    private void main() throws InterruptedException, LoginException, RateLimitedException {
-        JDA jda = new JDABuilder(AccountType.BOT).setToken(properties.getToken()).buildBlocking();
+    private int getShardAmount() {
+        try {
+            HttpResponse<JsonNode> request = Unirest.get("https://discordapp.com/api/gateway/bot")
+                    .header("Authorization", "Bot " + properties.getToken())
+                    .header("Content-Type", "application/json").asJson();
+            return Integer.parseInt(request.getBody().getObject().get("shards").toString()) + 1;
+        } catch (UnirestException | JSONException | NumberFormatException | NullPointerException exception) {
+            exception.printStackTrace();
+        }
+        return 2;
     }
 
     @Override

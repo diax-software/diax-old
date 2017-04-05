@@ -9,12 +9,14 @@ import com.knockturnmc.api.util.Property;
  */
 public class DiaxProperties extends NamedProperties {
 
-    @Property(value = "diax.token", defaultvalue = "Get your own.")
+    @Property(value = "diax.token", defaultvalue = "Mjk1MTYxNTUyNzk1OTkyMDY0.C8bMYw.RLo96PDsJGsBgWk7OgErRYOwKQw")
     private String token;
     @Property(value = "diax.prefix", defaultvalue = "<<")
     private String prefix;
     @Property(value = "diax.commands.ignored")
     private String ignoredCommands;
+    @Property(value = "diax.game", defaultvalue = "Change Me!")
+    private String game;
 
     public String getToken() {
         return token;
@@ -22,6 +24,10 @@ public class DiaxProperties extends NamedProperties {
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public String getGame() {
+        return game;
     }
 
     public String getIgnoredCommands(){
