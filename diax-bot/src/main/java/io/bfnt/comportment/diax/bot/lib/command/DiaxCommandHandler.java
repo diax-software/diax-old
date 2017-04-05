@@ -1,6 +1,6 @@
-package io.bfnt.comportment.diax.lib.command;
+package io.bfnt.comportment.diax.bot.lib.command;
 
-import io.bfnt.comportment.diax.DiaxProperties;
+import io.bfnt.comportment.diax.bot.DiaxProperties;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.PermissionException;
@@ -32,7 +32,7 @@ public class DiaxCommandHandler extends ListenerAdapter {
         String content = message.getRawContent();
         if (event.getAuthor().isBot()) return;
         if (!content.startsWith(properties.getPrefix())) return;
-        logger.info(String.format("%s | %s", DiaxCommandUtil.makeName(event.getAuthor()), content));
+        System.out.println(String.format("%s | %s", DiaxCommandUtil.makeName(event.getAuthor()), content));
         String truncated = content.replaceFirst(properties.getPrefix(), "").trim().toLowerCase();
         DiaxCommandDescription command = commands.find(truncated.split(" ")[0]);
         if (command != null) {

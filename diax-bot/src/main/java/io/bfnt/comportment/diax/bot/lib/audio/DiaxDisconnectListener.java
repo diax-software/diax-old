@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax.lib.audio;
+package io.bfnt.comportment.diax.bot.lib.audio;
 
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;

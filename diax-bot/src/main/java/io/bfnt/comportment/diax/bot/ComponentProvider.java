@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax;
+package io.bfnt.comportment.diax.bot;
 
 /**
  * Created by Comporment on 04/04/2017 at 19:57

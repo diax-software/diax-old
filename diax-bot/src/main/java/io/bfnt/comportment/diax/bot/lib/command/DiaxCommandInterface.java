@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax.lib.command;
+package io.bfnt.comportment.diax.bot.lib.command;
 
 import net.dv8tion.jda.core.entities.Message;
 

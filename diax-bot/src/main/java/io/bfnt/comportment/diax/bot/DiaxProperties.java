@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax;
+package io.bfnt.comportment.diax.bot;
 
 import com.knockturnmc.api.util.NamedProperties;
 import com.knockturnmc.api.util.Property;

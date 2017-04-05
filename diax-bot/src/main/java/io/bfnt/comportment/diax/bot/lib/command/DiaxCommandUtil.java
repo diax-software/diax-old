@@ -1,6 +1,6 @@
-package io.bfnt.comportment.diax.lib.command;
+package io.bfnt.comportment.diax.bot.lib.command;
 
-import io.bfnt.comportment.diax.Diax;
+import io.bfnt.comportment.diax.bot.Diax;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;

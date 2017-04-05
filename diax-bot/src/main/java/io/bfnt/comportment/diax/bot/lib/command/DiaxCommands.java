@@ -1,7 +1,7 @@
-package io.bfnt.comportment.diax.lib.command;
+package io.bfnt.comportment.diax.bot.lib.command;
 
-import io.bfnt.comportment.diax.ComponentProvider;
-import io.bfnt.comportment.diax.DiaxProperties;
+import io.bfnt.comportment.diax.bot.ComponentProvider;
+import io.bfnt.comportment.diax.bot.DiaxProperties;
 import org.reflections.Reflections;
 
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ import java.util.*;
 @Singleton
 public class DiaxCommands {
 
-    private static final String COMMAND_PACKAGE = "io.bfnt.comportment.diax.commands";
+    private static final String COMMAND_PACKAGE = "io.bfnt.comportment.diax.bot.commands";
     private final ComponentProvider provider;
     private final DiaxProperties properties;
     private final Map<DiaxCommandDescription, Class<? extends DiaxCommand>> commands;

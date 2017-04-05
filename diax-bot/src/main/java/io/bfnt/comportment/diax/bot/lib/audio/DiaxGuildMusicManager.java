@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax.lib.audio;
+package io.bfnt.comportment.diax.bot.lib.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;

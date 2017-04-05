@@ -1,17 +1,16 @@
-package io.bfnt.comportment.diax;
+package io.bfnt.comportment.diax.bot;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.name.Names;
 import com.knockturnmc.api.util.ConfigurationUtils;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import io.bfnt.comportment.diax.lib.audio.DiaxDisconnectListener;
-import io.bfnt.comportment.diax.lib.command.DiaxCommandHandler;
+import io.bfnt.comportment.diax.bot.lib.audio.DiaxDisconnectListener;
+import io.bfnt.comportment.diax.bot.lib.command.DiaxCommandHandler;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -109,7 +108,7 @@ public final class Diax implements ComponentProvider, Module {
     public void configure(Binder binder) {
         binder.bind(ComponentProvider.class).toInstance(this);
         binder.bind(DiaxProperties.class).toProvider(() -> properties);
-        binder.bind(String.class).annotatedWith(Names.named("diax.commands.prefix")).toProvider(properties::getPrefix);
+        //binder.bind(String.class).annotatedWith(Names.named("diax.commands.prefix")).toProvider(properties::getPrefix);
     }
 
     @Override

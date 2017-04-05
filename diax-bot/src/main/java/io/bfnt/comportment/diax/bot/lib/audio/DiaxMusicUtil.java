@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax.lib.audio;
+package io.bfnt.comportment.diax.bot.lib.audio;
 
 /**
  * Created by Comporment on 04/04/2017 at 22:09

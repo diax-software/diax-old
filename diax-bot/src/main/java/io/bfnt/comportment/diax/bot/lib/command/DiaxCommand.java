@@ -1,9 +1,10 @@
-package io.bfnt.comportment.diax.lib.command;
+package io.bfnt.comportment.diax.bot.lib.command;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 
 /**
