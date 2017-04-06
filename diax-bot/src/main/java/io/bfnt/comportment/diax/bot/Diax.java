@@ -12,6 +12,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.bfnt.comportment.diax.bot.lib.audio.DiaxDisconnectListener;
 import io.bfnt.comportment.diax.bot.lib.command.DiaxCommandHandler;
+import io.bfnt.comportment.diax.bot.lib.util.JDALogListener;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -63,6 +64,7 @@ public final class Diax implements ComponentProvider, Module {
 
     private void main() {
         initialise(getShardAmount());
+        new JDALogListener();
     }
 
     private void initialise(int shards) {
