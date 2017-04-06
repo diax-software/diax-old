@@ -25,11 +25,11 @@ public class DiaxUtil {
     }
 
     public static MessageEmbed errorEmbed(String message) {
-        return defaultEmbed().setColor(new Color(111, 16, 10)).addField("⛔ Error!", message, false).build();
+        return defaultEmbed().setColor(new Color(111, 16, 10)).addField("⛔ Error ⛔", message, false).build();
     }
 
     public static MessageEmbed musicEmbed(String message) {
-        return defaultEmbed().addField("\uD83C\uDFB5 Music! ", message, false).build();
+        return defaultEmbed().addField("\uD83C\uDFB5 Music \uD83C\uDFB5", message, false).build();
     }
 
     public static String getOwnerID() {

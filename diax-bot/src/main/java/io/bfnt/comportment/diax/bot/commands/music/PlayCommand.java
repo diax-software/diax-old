@@ -47,7 +47,7 @@ public class PlayCommand extends DiaxCommand {
                         message.getTextChannel().sendMessage(DiaxUtil.musicEmbed(String.format("Queuing `%s ` by `%s `.", track.getInfo().title, track.getInfo().author))).queue();
                         scheduler.queue(new DiaxAudioTrack(playlist.getSelectedTrack(), message.getAuthor(), message.getTextChannel()));
                     } else {
-                        message.getTextChannel().sendMessage(DiaxUtil.musicEmbed(String.format("Adding `%s ` tracks from `%s `.", playlist.getTracks().size(), playlist.getName()))).queue();
+                        message.getTextChannel().sendMessage(DiaxUtil.musicEmbed(String.format("Adding `%s ` tracks from the playlist `%s `.", playlist.getTracks().size(), playlist.getName()))).queue();
                         playlist.getTracks().forEach(audioTrack -> scheduler.queue(new DiaxAudioTrack(audioTrack, message.getAuthor(), message.getTextChannel())));
                     }
                 }
@@ -56,10 +56,11 @@ public class PlayCommand extends DiaxCommand {
 
             @Override
             public void noMatches() {
-                if (!query.startsWith("Search Results:"))
+                if (!query.startsWith("Search Results:")) {
                     query(manager, message, "ytsearch: " + query);
-                else
+                } else {
                     message.getTextChannel().sendMessage(DiaxUtil.musicEmbed("No results found.")).queue();
+                }
             }
 
             @Override

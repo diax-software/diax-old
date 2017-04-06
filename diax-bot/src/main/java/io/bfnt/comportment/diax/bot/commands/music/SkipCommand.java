@@ -16,9 +16,8 @@ public class SkipCommand extends DiaxCommand {
     @Override
     public void execute(Message trigger, String truncated) {
         DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
-        if (manager.scheduler.skip()) {
-            trigger.getChannel().sendMessage(DiaxUtil.musicEmbed("The current playing track has been skipped.")).queue();
-        } else {
+        if (!manager.scheduler.skip()) {
+            // trigger.getChannel().sendMessage(DiaxUtil.musicEmbed("The current playing track has been skipped.")).queue();
             trigger.getChannel().sendMessage(DiaxUtil.errorEmbed("Could **not** skip the track.")).queue();
         }
     }

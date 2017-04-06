@@ -99,11 +99,8 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
     }
 
     public void setRepeating(boolean repeating) {
-        String message = "The queue is no longer repeating.";
-        if (repeating) message = "The queue is now repeating.";
         logger.warn("Current track: " + (currentTrack == null ? "NULL" : currentTrack.hashCode()));
         this.repeating = repeating;
-        currentTrack.getChannel().sendMessage(message).queue();
     }
 
     public VoiceChannel getVoiceChannel(Guild guild, Member member) {
