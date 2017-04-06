@@ -10,7 +10,7 @@ import net.dv8tion.jda.core.entities.Message;
  */
 public abstract class DiaxCommand implements DiaxCommandInterface, Comparable<DiaxCommand> {
 
-    // @Inject
+    //@Inject
     //@Named(value = "diax.commands.prefix")
     private String prefix = "<<";
 

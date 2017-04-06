@@ -49,10 +49,12 @@ public class DiaxCommandHandler extends ListenerAdapter {
         if (message.getChannelType().equals(ChannelType.TEXT)) {
             if (!DiaxUtil.checkPermission(message.getAuthor(), message.getGuild(), command.getPermission())) {
                 message.getChannel().sendMessage(DiaxUtil.errorEmbed("You do not have enough permission to do that!")).queue();
+                return;
             }
         } else {
             if (command.getGuildOnly()) {
                 message.getChannel().sendMessage(DiaxUtil.errorEmbed("This command cannot be used in a private message.")).queue();
+                return;
             }
         }
         if (command.getOwnerOnly() && !message.getAuthor().getId().equals(DiaxUtil.getOwnerID())) {
