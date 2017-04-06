@@ -77,8 +77,9 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
             else if (!queue.isEmpty())
                 play(this.queue.poll());
         } else if (queue.isEmpty()) {
-            if (currentTrack != null)
+            if (currentTrack != null) {
                 currentTrack.getChannel().sendMessage(DiaxUtil.musicEmbed("Queue concluded.")).queue();
+            }
             stop();
         } else {
             play(queue.poll());
@@ -99,7 +100,7 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
     }
 
     public void setRepeating(boolean repeating) {
-        logger.warn("Current track: " + (currentTrack == null ? "NULL" : currentTrack.hashCode()));
+        logger.warn("Current track: " + (currentTrack == null ? "null" : currentTrack.hashCode()));
         this.repeating = repeating;
     }
 
@@ -154,13 +155,13 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
 
     @Override
     public void onTrackException(AudioPlayer player, AudioTrack track, FriendlyException exception) {
-        currentTrack.getChannel().sendMessage("Failed to play the track do to `" + exception.getMessage() + "`.").queue();
+        currentTrack.getChannel().sendMessage(DiaxUtil.errorEmbed("Failed to play the track do to `" + exception.getMessage() + "`.")).queue();
         logger.warn(exception.getMessage(), exception);
     }
 
     @Override
     public void onTrackStuck(AudioPlayer player, AudioTrack track, long thresholdMs) {
-        currentTrack.getChannel().sendMessage("Got stuck attempting to play track, skipping.").queue();
+        currentTrack.getChannel().sendMessage(DiaxUtil.errorEmbed("Got stuck attempting to play track, skipping.")).queue();
         skip();
     }
 }

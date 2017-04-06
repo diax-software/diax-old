@@ -16,14 +16,7 @@ public class RepeatCommand extends DiaxCommand {
     @Override
     public void execute(Message trigger, String truncated) {
         DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
-        boolean newValue = !manager.scheduler.isRepeating();
-        String message = "The track is %s repeating.";
-        if (newValue) {
-            message = String.format(message, "now");
-        } else {
-            message = String.format(message, "no longer");
-        }
-        manager.scheduler.setRepeating(newValue);
-        trigger.getChannel().sendMessage(DiaxUtil.musicEmbed(message)).queue();
+        manager.scheduler.setRepeating(!manager.scheduler.isRepeating());
+        trigger.getChannel().sendMessage(DiaxUtil.musicEmbed(String.format("The track is %s repeating.", manager.scheduler.isRepeating() ? "now" : "no longer"))).queue();
     }
 }
