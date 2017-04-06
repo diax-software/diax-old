@@ -1,0 +1,74 @@
+package io.bfnt.comportment.diax.bot.commands;
+
+import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
+import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
+import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import io.bfnt.comportment.diax.bot.lib.audio.DiaxAudioTrack;
+import io.bfnt.comportment.diax.bot.lib.audio.DiaxGuildMusicManager;
+import io.bfnt.comportment.diax.bot.lib.audio.DiaxTrackScheduler;
+import io.bfnt.comportment.diax.bot.lib.command.DiaxCommand;
+import io.bfnt.comportment.diax.bot.lib.command.DiaxCommandDescription;
+import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.entities.Channel;
+import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.TextChannel;
+import org.apache.commons.lang.StringUtils;
+
+/**
+ * Created by Comportment on 05/04/2017.
+ * If you don't understand this, we are screwed.
+ */
+@DiaxCommandDescription(triggers = {"play"}, minimumArgs = 1, guildOnly = true, description = "Plays the given URL/Query provided.")
+public class PlayCommand extends DiaxCommand {
+
+    public void execute(Message trigger, String truncated) {
+        DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
+        query(manager, trigger, truncated);
+    }
+
+    private void query(DiaxGuildMusicManager manager, Message message, String query) {
+        manager.getPlayerManager().loadItem(query, new AudioLoadResultHandler() {
+            @Override
+            public void trackLoaded(AudioTrack track) {
+                message.getTextChannel().sendMessage(String.format("Queuing `%s` by `%s`", track.getInfo().title, track.getInfo().author)).queue();
+                manager.scheduler.queue(new DiaxAudioTrack(track, message.getAuthor(), message.getTextChannel()));
+            }
+
+            @Override
+            public void playlistLoaded(AudioPlaylist playlist) {
+                DiaxTrackScheduler scheduler = manager.scheduler;
+                AudioTrack track;
+                if(playlist.isSearchResult()) {
+                    track = playlist.getTracks().get(0);
+                    message.getTextChannel().sendMessage(String.format("Queuing `%s` by `%s`", track.getInfo().title, track.getInfo().author)).queue();
+                    scheduler.queue(new DiaxAudioTrack(track, message.getAuthor(), message.getTextChannel()));
+                } else {
+                    if(playlist.getSelectedTrack() != null) {
+                        track = playlist.getSelectedTrack();
+                        message.getTextChannel().sendMessage(String.format("Queuing `%s` by `%s`", track.getInfo().title, track.getInfo().author)).queue();
+                        scheduler.queue(new DiaxAudioTrack(playlist.getSelectedTrack(), message.getAuthor(), message.getTextChannel()));
+                    } else {
+                        message.getTextChannel().sendMessage(String.format("Adding `%s` tracks from `%s`.", playlist.getTracks().size(), playlist.getName())).queue();
+                        playlist.getTracks().forEach(audioTrack -> scheduler.queue(new DiaxAudioTrack(audioTrack, message.getAuthor(), message.getTextChannel())));
+                    }
+                }
+
+            }
+
+            @Override
+            public void noMatches() {
+                if(!query.startsWith("Search Results:"))
+                    query(manager, message, "ytsearch: " + query);
+                else
+                    message.getTextChannel().sendMessage("No results found.").queue();
+            }
+
+            @Override
+            public void loadFailed(FriendlyException exception) {
+                message.getTextChannel().sendMessage(String.format("Failed to load `%s` because `%s`.", query, exception.getMessage())).queue();
+            }
+        });
+    }
+
+}
