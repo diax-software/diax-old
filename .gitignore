@@ -2,3 +2,4 @@
 *.properties
 .idea/
 target/
+*.log

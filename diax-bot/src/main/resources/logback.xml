@@ -7,14 +7,14 @@
 
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>[%d{HH:mm:ss}][%-1level][%logger{0}]: %msg%n</pattern>
+            <pattern>[%d{HH:mm:ss}] [%-1level] [%logger{0}]: %msg%n</pattern>
         </encoder>
     </appender>
 
     <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/bot.log</file>
         <encoder>
-            <pattern>[%d{HH:mm:ss}][%-1level][%logger{0}]: %msg%n</pattern>
+            <pattern>[%d{HH:mm:ss}] [%-1level] [%logger{0}]: %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_ARCHIVE}/bot.%d{MM-dd-yyyy}.log</fileNamePattern>

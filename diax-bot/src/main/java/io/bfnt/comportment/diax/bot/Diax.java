@@ -109,7 +109,7 @@ public final class Diax implements ComponentProvider, Module {
     @Override
     public void configure(Binder binder) {
         binder.bind(ComponentProvider.class).toInstance(this);
-//        binder.bind(String.class).annotatedWith(Names.named("diax.commands.prefix")).toProvider(properties::getPrefix);
+        //binder.bind(String.class).annotatedWith(Names.named("diax.commands.prefix")).toProvider(properties::getPrefix);
         binder.bind(DiaxProperties.class).toProvider(() -> properties);
     }
 
