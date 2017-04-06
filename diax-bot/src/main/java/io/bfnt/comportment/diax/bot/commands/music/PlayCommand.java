@@ -9,6 +9,7 @@ import io.bfnt.comportment.diax.bot.lib.audio.DiaxGuildMusicManager;
 import io.bfnt.comportment.diax.bot.lib.audio.DiaxTrackScheduler;
 import io.bfnt.comportment.diax.bot.lib.command.DiaxCommand;
 import io.bfnt.comportment.diax.bot.lib.command.DiaxCommandDescription;
+import io.bfnt.comportment.diax.bot.lib.util.DiaxUtil;
 import net.dv8tion.jda.core.entities.Message;
 
 /**
@@ -28,7 +29,7 @@ public class PlayCommand extends DiaxCommand {
         manager.getPlayerManager().loadItem(query, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
-                message.getTextChannel().sendMessage(String.format("Queuing `%s` by `%s`", track.getInfo().title, track.getInfo().author)).queue();
+                message.getTextChannel().sendMessage(DiaxUtil.musicEmbed(String.format("Queuing `%s ` by `%s `.", track.getInfo().title, track.getInfo().author))).queue();
                 manager.scheduler.queue(new DiaxAudioTrack(track, message.getAuthor(), message.getTextChannel()));
             }
 
@@ -38,15 +39,15 @@ public class PlayCommand extends DiaxCommand {
                 AudioTrack track;
                 if (playlist.isSearchResult()) {
                     track = playlist.getTracks().get(0);
-                    message.getTextChannel().sendMessage(String.format("Queuing `%s` by `%s`", track.getInfo().title, track.getInfo().author)).queue();
+                    message.getTextChannel().sendMessage(DiaxUtil.musicEmbed(String.format("Queuing `%s ` by `%s `.", track.getInfo().title, track.getInfo().author))).queue();
                     scheduler.queue(new DiaxAudioTrack(track, message.getAuthor(), message.getTextChannel()));
                 } else {
                     if (playlist.getSelectedTrack() != null) {
                         track = playlist.getSelectedTrack();
-                        message.getTextChannel().sendMessage(String.format("Queuing `%s` by `%s`", track.getInfo().title, track.getInfo().author)).queue();
+                        message.getTextChannel().sendMessage(DiaxUtil.musicEmbed(String.format("Queuing `%s ` by `%s `.", track.getInfo().title, track.getInfo().author))).queue();
                         scheduler.queue(new DiaxAudioTrack(playlist.getSelectedTrack(), message.getAuthor(), message.getTextChannel()));
                     } else {
-                        message.getTextChannel().sendMessage(String.format("Adding `%s` tracks from `%s`.", playlist.getTracks().size(), playlist.getName())).queue();
+                        message.getTextChannel().sendMessage(DiaxUtil.musicEmbed(String.format("Adding `%s ` tracks from `%s `.", playlist.getTracks().size(), playlist.getName()))).queue();
                         playlist.getTracks().forEach(audioTrack -> scheduler.queue(new DiaxAudioTrack(audioTrack, message.getAuthor(), message.getTextChannel())));
                     }
                 }
@@ -58,12 +59,12 @@ public class PlayCommand extends DiaxCommand {
                 if (!query.startsWith("Search Results:"))
                     query(manager, message, "ytsearch: " + query);
                 else
-                    message.getTextChannel().sendMessage("No results found.").queue();
+                    message.getTextChannel().sendMessage(DiaxUtil.musicEmbed("No results found.")).queue();
             }
 
             @Override
             public void loadFailed(FriendlyException exception) {
-                message.getTextChannel().sendMessage(String.format("Failed to load `%s` because `%s`.", query, exception.getMessage())).queue();
+                message.getTextChannel().sendMessage(DiaxUtil.musicEmbed(String.format("Failed to load `%s` because `%s`.", query, exception.getMessage()))).queue();
             }
         });
     }

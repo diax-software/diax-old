@@ -1,6 +1,7 @@
 package io.bfnt.comportment.diax.bot.lib.command;
 
 import io.bfnt.comportment.diax.bot.DiaxProperties;
+import io.bfnt.comportment.diax.bot.lib.util.DiaxUtil;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.PermissionException;
@@ -32,7 +33,7 @@ public class DiaxCommandHandler extends ListenerAdapter {
         String content = message.getRawContent();
         if (event.getAuthor().isBot()) return;
         if (!content.startsWith(properties.getPrefix())) return;
-        logger.info(String.format("%s | %s", DiaxCommandUtil.makeName(event.getAuthor()), content));
+        logger.info(String.format("%s | %s", DiaxUtil.makeName(event.getAuthor()), content));
         String truncated = content.replaceFirst(properties.getPrefix(), "").trim().toLowerCase();
         DiaxCommandDescription command = commands.find(truncated.split(" ")[0]);
         if (command != null) {
@@ -43,35 +44,35 @@ public class DiaxCommandHandler extends ListenerAdapter {
     private void execute(DiaxCommand command, Message message, String args) {
         args = args.replaceFirst(args.split(" ")[0], "").trim();
         if (args.split(" ").length < command.getMinimumArgs()) {
-            message.getChannel().sendMessage(DiaxCommandUtil.error("You did not specify enough arguments for this command.")).queue();
+            message.getChannel().sendMessage(DiaxUtil.errorEmbed("You did not specify enough arguments for this command.")).queue();
             return;
         }
         switch (message.getChannelType()) {
             case TEXT: {
-                if (!DiaxCommandUtil.checkPermission(message.getAuthor(), message.getGuild(), command.getPermission())) {
-                    message.getChannel().sendMessage(DiaxCommandUtil.error("You do not have enough permission to do that!")).queue();
+                if (!DiaxUtil.checkPermission(message.getAuthor(), message.getGuild(), command.getPermission())) {
+                    message.getChannel().sendMessage(DiaxUtil.errorEmbed("You do not have enough permission to do that!")).queue();
                     return;
                 }
                 break;
             }
             default: {
                 if (command.getGuildOnly()) {
-                    message.getChannel().sendMessage(DiaxCommandUtil.error("This command cannot be used in a private message.")).queue();
+                    message.getChannel().sendMessage(DiaxUtil.errorEmbed("This command cannot be used in a private message.")).queue();
                     return;
                 }
                 break;
             }
         }
         if (command.getOwnerOnly()) {
-            if (!message.getAuthor().getId().equals(DiaxCommandUtil.getOwnerID())) {
-                message.getChannel().sendMessage(DiaxCommandUtil.error("This is an owner only command, baka.")).queue();
+            if (!message.getAuthor().getId().equals(DiaxUtil.getOwnerID())) {
+                message.getChannel().sendMessage(DiaxUtil.errorEmbed("This is an owner only command, baka.")).queue();
                 return;
             }
         }
         try {
             command.execute(message, args);
         } catch (PermissionException e) {
-            message.getChannel().sendMessage(DiaxCommandUtil.error("I do not have enough permission to do that.")).queue();
+            message.getChannel().sendMessage(DiaxUtil.errorEmbed("I do not have enough permission to do that.")).queue();
         } catch (Exception e) {
             message.getChannel().sendMessage("An error occurred, please contact Comportment#9489 with more info.").queue();
             e.printStackTrace();

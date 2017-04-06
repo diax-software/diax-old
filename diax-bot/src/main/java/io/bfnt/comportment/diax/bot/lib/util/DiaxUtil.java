@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax.bot.lib.command;
+package io.bfnt.comportment.diax.bot.lib.util;
 
 import io.bfnt.comportment.diax.bot.Diax;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -14,7 +14,7 @@ import java.awt.*;
  * Created by Comporment on 04/04/2017 at 22:55
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public class DiaxCommandUtil {
+public class DiaxUtil {
 
     public static String makeName(User user) {
         return String.format("%s#%s", user.getName(), user.getDiscriminator());
@@ -24,8 +24,12 @@ public class DiaxCommandUtil {
         return new EmbedBuilder().setColor(new Color(170, 101, 25)).setFooter(Diax.VERSION, "https://google.com");
     }
 
-    public static MessageEmbed error(String message) {
-        return defaultEmbed().setColor(new Color(111, 16, 10)).addField("Error!", message, false).build();
+    public static MessageEmbed errorEmbed(String message) {
+        return defaultEmbed().setColor(new Color(111, 16, 10)).addField("⛔ Error!", message, false).build();
+    }
+
+    public static MessageEmbed musicEmbed(String message) {
+        return defaultEmbed().addField("\uD83C\uDFB5 Music! ", message, false).build();
     }
 
     public static String getOwnerID() {

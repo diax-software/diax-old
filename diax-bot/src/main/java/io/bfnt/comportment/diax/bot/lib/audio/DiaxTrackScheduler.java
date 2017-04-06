@@ -6,7 +6,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
-import io.bfnt.comportment.diax.bot.lib.command.DiaxCommandUtil;
+import io.bfnt.comportment.diax.bot.lib.util.DiaxUtil;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.User;
@@ -78,7 +78,7 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
                 play(this.queue.poll());
         } else if (queue.isEmpty()) {
             if (currentTrack != null)
-                currentTrack.getChannel().sendMessage("Queue concluded").queue();
+                currentTrack.getChannel().sendMessage(DiaxUtil.musicEmbed("Queue concluded.")).queue();
             stop();
         } else {
             play(queue.poll());
@@ -137,12 +137,12 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
             if (!repeating) {
                 AudioTrackInfo info = this.currentTrack.getTrack().getInfo();
                 User requester = currentTrack.getRequester();
-                currentTrack.getChannel().sendMessage(String.format("Now playing: `%s ` by `%s ` | Requested by: `%s `", info.title, info.author, DiaxCommandUtil.makeName(requester))).queue();
+                currentTrack.getChannel().sendMessage(DiaxUtil.musicEmbed(String.format("Now playing: `%s ` by `%s `\nRequested by: `%s `", info.title, info.author, DiaxUtil.makeName(requester)))).queue();
             } else {
-                currentTrack.getChannel().sendMessage("Repeating the last song.").queue();
+                currentTrack.getChannel().sendMessage(DiaxUtil.musicEmbed("Repeating the last song.")).queue();
             }
         } else {
-            logger.warn("Wasn't able to join voice channel.");
+            currentTrack.getChannel().sendMessage(DiaxUtil.errorEmbed("Could not join that voice channel!")).queue();
             stop();
         }
     }
