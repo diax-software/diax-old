@@ -38,6 +38,5 @@ public class DiaxDisconnectListener extends ListenerAdapter {
 
     private void close(Guild guild) {
         guild.getAudioManager().closeAudioConnection();
-        //MusicUtil.getMusicManager(guild.getPublicChannel()).scheduler.clear();
     }
 }

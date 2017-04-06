@@ -6,6 +6,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
+import io.bfnt.comportment.diax.bot.lib.command.DiaxCommandUtil;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.exceptions.PermissionException;
 import org.slf4j.Logger;
@@ -85,7 +86,7 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
     }
 
     public void stop() {
-        logger.debug("stop");
+        logger.debug("Stopping the track.");
         queue.clear();
         manager.player.stopTrack();
         currentTrack = null;
@@ -130,12 +131,12 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
 
     @Override
     public void onTrackStart(AudioPlayer player, AudioTrack track) {
-        logger.debug("START");
+        logger.debug("Starting the player.");
         if(joinVoiceChannel()) {
             if(!repeating) {
                 AudioTrackInfo info = this.currentTrack.getTrack().getInfo();
                 User requester = currentTrack.getRequester();
-                currentTrack.getChannel().sendMessage(String.format("Now playing: `%s ` by `%s ` | Requested by: `%s#%s `", info.title, info.author, requester.getName(), requester.getDiscriminator())).queue();
+                currentTrack.getChannel().sendMessage(String.format("Now playing: `%s ` by `%s ` | Requested by: `%s `", info.title, info.author, DiaxCommandUtil.makeName(requester))).queue();
             } else {
                 currentTrack.getChannel().sendMessage("Repeating the last song.").queue();
             }

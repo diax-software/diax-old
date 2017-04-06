@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax.bot.commands;
+package io.bfnt.comportment.diax.bot.commands.music;
 
 import io.bfnt.comportment.diax.bot.lib.audio.DiaxGuildMusicManager;
 import io.bfnt.comportment.diax.bot.lib.command.DiaxCommand;

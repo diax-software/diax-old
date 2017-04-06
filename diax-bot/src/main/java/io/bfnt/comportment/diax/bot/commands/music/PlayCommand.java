@@ -1,4 +1,4 @@
-package io.bfnt.comportment.diax.bot.commands;
+package io.bfnt.comportment.diax.bot.commands.music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
