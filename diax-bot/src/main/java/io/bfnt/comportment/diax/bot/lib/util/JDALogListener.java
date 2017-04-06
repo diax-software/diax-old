@@ -19,12 +19,9 @@ public class JDALogListener implements LogListener {
         SimpleLog.LEVEL = Level.OFF;
     }
 
-
     @Override
     public void onLog(SimpleLog simpleLog, Level level, Object o) {
         switch (level) {
-            case ALL:
-                break;
             case TRACE:
                 LOGGER.trace(o.toString());
                 break;
@@ -39,8 +36,6 @@ public class JDALogListener implements LogListener {
                 break;
             case FATAL:
                 LOGGER.error(o.toString());
-                break;
-            case OFF:
                 break;
         }
     }
