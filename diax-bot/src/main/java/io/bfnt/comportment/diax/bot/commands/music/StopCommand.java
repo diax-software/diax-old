@@ -12,11 +12,10 @@ import net.dv8tion.jda.core.entities.Message;
 @DiaxCommandDescription(triggers = {"stop"}, guildOnly = true)
 public class StopCommand extends DiaxCommand {
 
-	@Override
-	public void execute(Message trigger, String truncated) {
-		DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
-		manager.scheduler.stop();
-		trigger.getChannel().sendMessage("Playback has been stopped.").queue();
-	}
-
+    @Override
+    public void execute(Message trigger, String truncated) {
+        DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
+        manager.scheduler.stop();
+        trigger.getChannel().sendMessage("Playback has been stopped.").queue();
+    }
 }

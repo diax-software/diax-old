@@ -12,10 +12,9 @@ import net.dv8tion.jda.core.entities.Message;
 @DiaxCommandDescription(triggers = {"skip", "next"}, guildOnly = true)
 public class SkipCommand extends DiaxCommand {
 
-	@Override
-	public void execute(Message trigger, String truncated) {
-		DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
-		manager.scheduler.skip();
-	}
-
+    @Override
+    public void execute(Message trigger, String truncated) {
+        DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
+        manager.scheduler.skip();
+    }
 }

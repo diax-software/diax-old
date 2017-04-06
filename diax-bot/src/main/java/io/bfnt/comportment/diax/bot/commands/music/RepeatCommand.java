@@ -12,10 +12,9 @@ import net.dv8tion.jda.core.entities.Message;
 @DiaxCommandDescription(triggers = {"repeat"}, guildOnly = true)
 public class RepeatCommand extends DiaxCommand {
 
-	@Override
-	public void execute(Message trigger, String truncated) {
-		DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
-		manager.scheduler.setRepeating(!manager.scheduler.isRepeating());
-	}
-
+    @Override
+    public void execute(Message trigger, String truncated) {
+        DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
+        manager.scheduler.setRepeating(!manager.scheduler.isRepeating());
+    }
 }

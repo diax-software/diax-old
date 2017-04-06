@@ -12,41 +12,41 @@ import org.slf4j.LoggerFactory;
  */
 public class JDALogListener implements LogListener {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(JDA.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JDA.class);
 
-	public JDALogListener() {
-		SimpleLog.addListener(this);
-		SimpleLog.LEVEL = Level.OFF;
-	}
+    public JDALogListener() {
+        SimpleLog.addListener(this);
+        SimpleLog.LEVEL = Level.OFF;
+    }
 
 
-	@Override
-	public void onLog(SimpleLog simpleLog, Level level, Object o) {
-		switch (level) {
-			case ALL:
-				break;
-			case TRACE:
-				LOGGER.trace(o.toString());
-				break;
-			case DEBUG:
-				LOGGER.debug(o.toString());
-				break;
-			case INFO:
-				LOGGER.info(o.toString());
-				break;
-			case WARNING:
-				LOGGER.warn(o.toString());
-				break;
-			case FATAL:
-				LOGGER.error(o.toString());
-				break;
-			case OFF:
-				break;
-		}
-	}
+    @Override
+    public void onLog(SimpleLog simpleLog, Level level, Object o) {
+        switch (level) {
+            case ALL:
+                break;
+            case TRACE:
+                LOGGER.trace(o.toString());
+                break;
+            case DEBUG:
+                LOGGER.debug(o.toString());
+                break;
+            case INFO:
+                LOGGER.info(o.toString());
+                break;
+            case WARNING:
+                LOGGER.warn(o.toString());
+                break;
+            case FATAL:
+                LOGGER.error(o.toString());
+                break;
+            case OFF:
+                break;
+        }
+    }
 
-	@Override
-	public void onError(SimpleLog simpleLog, Throwable throwable) {
-		LOGGER.error(throwable.getMessage(), throwable);
-	}
+    @Override
+    public void onError(SimpleLog simpleLog, Throwable throwable) {
+        LOGGER.error(throwable.getMessage(), throwable);
+    }
 }

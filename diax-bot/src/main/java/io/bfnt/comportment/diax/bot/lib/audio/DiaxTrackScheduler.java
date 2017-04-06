@@ -7,7 +7,10 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import io.bfnt.comportment.diax.bot.lib.command.DiaxCommandUtil;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.exceptions.PermissionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +28,10 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class DiaxTrackScheduler extends AudioEventAdapter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-
-    private DiaxGuildMusicManager manager;
     private final BlockingQueue<DiaxAudioTrack> queue;
+    private DiaxGuildMusicManager manager;
     private boolean repeating = false;
-    
+
     private DiaxAudioTrack currentTrack;
     private DiaxAudioTrack lastTrack;
 
@@ -44,7 +45,7 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
     }
 
     public boolean play(DiaxAudioTrack track) {
-        if(track != null) {
+        if (track != null) {
             currentTrack = track;
             return manager.player.startTrack(track.getTrack(), false);
         }
@@ -52,13 +53,13 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
     }
 
     public void queue(DiaxAudioTrack track) {
-        if(queue.offer(track) && this.currentTrack == null) {
+        if (queue.offer(track) && this.currentTrack == null) {
             skip();
         }
     }
 
     public boolean shuffle() {
-        if(!queue.isEmpty()) {
+        if (!queue.isEmpty()) {
             List<DiaxAudioTrack> tracks = new ArrayList<>();
             queue.drainTo(tracks);
             Collections.shuffle(tracks);
@@ -70,13 +71,13 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
 
     public boolean skip() {
         lastTrack = currentTrack;
-        if(repeating) {
-            if(currentTrack != null)
+        if (repeating) {
+            if (currentTrack != null)
                 play(currentTrack.clone());
-            else if(!queue.isEmpty())
+            else if (!queue.isEmpty())
                 play(this.queue.poll());
-        } else if(queue.isEmpty()) {
-            if(currentTrack != null)
+        } else if (queue.isEmpty()) {
+            if (currentTrack != null)
                 currentTrack.getChannel().sendMessage("Queue concluded").queue();
             stop();
         } else {
@@ -93,6 +94,10 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
         manager.guild.getAudioManager().closeAudioConnection();
     }
 
+    public boolean isRepeating() {
+        return this.repeating;
+    }
+
     public void setRepeating(boolean repeating) {
         String message = "The queue is no longer repeating.";
         if (repeating) message = "The queue is now repeating.";
@@ -101,15 +106,11 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
         currentTrack.getChannel().sendMessage(message).queue();
     }
 
-    public boolean isRepeating() {
-        return this.repeating;
-    }
-
     public VoiceChannel getVoiceChannel(Guild guild, Member member) {
         VoiceChannel vc = null;
-        if(member != null && member.getVoiceState().inVoiceChannel()) {
+        if (member != null && member.getVoiceState().inVoiceChannel()) {
             vc = member.getVoiceState().getChannel();
-        } else if(!guild.getVoiceChannels().isEmpty()) {
+        } else if (!guild.getVoiceChannels().isEmpty()) {
             vc = guild.getVoiceChannels().get(0);
         }
         return vc;
@@ -119,10 +120,10 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
         Guild guild = this.manager.guild;
         Member member = guild.getMember(currentTrack.getRequester());
         VoiceChannel voiceChannel = getVoiceChannel(guild, member);
-        if(!guild.getAudioManager().isConnected() || this.queue.isEmpty()) {
+        if (!guild.getAudioManager().isConnected() || this.queue.isEmpty()) {
             try {
                 guild.getAudioManager().openAudioConnection(voiceChannel);
-            } catch(PermissionException exception) {
+            } catch (PermissionException exception) {
                 return false;
             }
         }
@@ -132,8 +133,8 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
     @Override
     public void onTrackStart(AudioPlayer player, AudioTrack track) {
         logger.debug("Starting the player.");
-        if(joinVoiceChannel()) {
-            if(!repeating) {
+        if (joinVoiceChannel()) {
+            if (!repeating) {
                 AudioTrackInfo info = this.currentTrack.getTrack().getInfo();
                 User requester = currentTrack.getRequester();
                 currentTrack.getChannel().sendMessage(String.format("Now playing: `%s ` by `%s ` | Requested by: `%s `", info.title, info.author, DiaxCommandUtil.makeName(requester))).queue();
@@ -148,7 +149,7 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
 
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason reason) {
-        if(reason.mayStartNext) {
+        if (reason.mayStartNext) {
             logger.warn("Was told we could play the next track.");
             skip();
         }

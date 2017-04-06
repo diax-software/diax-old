@@ -14,13 +14,19 @@ import java.lang.annotation.RetentionPolicy;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface DiaxCommandDescription  {
+public @interface DiaxCommandDescription {
 
     boolean guildOnly() default false;
+
     boolean donorOnly() default false;
+
     boolean ownerOnly() default false;
+
     String[] triggers() default {};
+
     String description() default "";
+
     Permission permission() default Permission.MESSAGE_WRITE;
+
     int minimumArgs() default 0;
 }

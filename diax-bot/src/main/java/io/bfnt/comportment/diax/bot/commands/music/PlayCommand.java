@@ -9,11 +9,7 @@ import io.bfnt.comportment.diax.bot.lib.audio.DiaxGuildMusicManager;
 import io.bfnt.comportment.diax.bot.lib.audio.DiaxTrackScheduler;
 import io.bfnt.comportment.diax.bot.lib.command.DiaxCommand;
 import io.bfnt.comportment.diax.bot.lib.command.DiaxCommandDescription;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * Created by Comportment on 05/04/2017.
@@ -40,12 +36,12 @@ public class PlayCommand extends DiaxCommand {
             public void playlistLoaded(AudioPlaylist playlist) {
                 DiaxTrackScheduler scheduler = manager.scheduler;
                 AudioTrack track;
-                if(playlist.isSearchResult()) {
+                if (playlist.isSearchResult()) {
                     track = playlist.getTracks().get(0);
                     message.getTextChannel().sendMessage(String.format("Queuing `%s` by `%s`", track.getInfo().title, track.getInfo().author)).queue();
                     scheduler.queue(new DiaxAudioTrack(track, message.getAuthor(), message.getTextChannel()));
                 } else {
-                    if(playlist.getSelectedTrack() != null) {
+                    if (playlist.getSelectedTrack() != null) {
                         track = playlist.getSelectedTrack();
                         message.getTextChannel().sendMessage(String.format("Queuing `%s` by `%s`", track.getInfo().title, track.getInfo().author)).queue();
                         scheduler.queue(new DiaxAudioTrack(playlist.getSelectedTrack(), message.getAuthor(), message.getTextChannel()));
@@ -59,7 +55,7 @@ public class PlayCommand extends DiaxCommand {
 
             @Override
             public void noMatches() {
-                if(!query.startsWith("Search Results:"))
+                if (!query.startsWith("Search Results:"))
                     query(manager, message, "ytsearch: " + query);
                 else
                     message.getTextChannel().sendMessage("No results found.").queue();
@@ -71,5 +67,4 @@ public class PlayCommand extends DiaxCommand {
             }
         });
     }
-
 }

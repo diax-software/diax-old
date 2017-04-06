@@ -3,9 +3,6 @@ package io.bfnt.comportment.diax.bot.lib.command;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 
 /**
  * Created by Comporment on 04/04/2017 at 22:47
@@ -13,7 +10,7 @@ import javax.inject.Named;
  */
 public abstract class DiaxCommand implements DiaxCommandInterface, Comparable<DiaxCommand> {
 
-   // @Inject
+    // @Inject
     //@Named(value = "diax.commands.prefix")
     private String prefix = "<<";
 

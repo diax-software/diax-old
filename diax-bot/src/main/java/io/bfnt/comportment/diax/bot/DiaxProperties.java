@@ -30,7 +30,7 @@ public final class DiaxProperties extends NamedProperties {
         return game;
     }
 
-    public String getIgnoredCommands(){
+    public String getIgnoredCommands() {
         return ignoredCommands;
     }
 }

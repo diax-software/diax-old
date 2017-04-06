@@ -1,11 +1,9 @@
 package io.bfnt.comportment.diax.bot.lib.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.TextChannel;
 
 import java.util.HashMap;
 
@@ -36,6 +34,10 @@ public class DiaxGuildMusicManager {
         guild.getAudioManager().setSendingHandler(getSendHandler());
     }
 
+    public static DiaxGuildMusicManager getManagerFor(Guild guild) {
+        return MANAGERS.computeIfAbsent(guild.getId(), k -> new DiaxGuildMusicManager(guild));
+    }
+
     public DefaultAudioPlayerManager getPlayerManager() {
         return PLAYER_MANAGER;
     }
@@ -43,9 +45,4 @@ public class DiaxGuildMusicManager {
     public DiaxAudioPlayerSendHandler getSendHandler() {
         return new DiaxAudioPlayerSendHandler(player);
     }
-
-    public static DiaxGuildMusicManager getManagerFor(Guild guild) {
-        return MANAGERS.computeIfAbsent(guild.getId(), k -> new DiaxGuildMusicManager(guild));
-    }
-
 }

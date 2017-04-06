@@ -5,5 +5,4 @@ package io.bfnt.comportment.diax.bot.lib.audio;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 public class DiaxMusicUtil {
-
 }

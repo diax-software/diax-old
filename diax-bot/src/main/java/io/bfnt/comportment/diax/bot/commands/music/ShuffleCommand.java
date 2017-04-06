@@ -12,11 +12,10 @@ import net.dv8tion.jda.core.entities.Message;
 @DiaxCommandDescription(triggers = {"shuffle"}, guildOnly = true)
 public class ShuffleCommand extends DiaxCommand {
 
-	@Override
-	public void execute(Message trigger, String truncated) {
-		DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
-		if(manager.scheduler.shuffle())
-			trigger.getTextChannel().sendMessage("Queue shuffled.").queue();
-	}
-
+    @Override
+    public void execute(Message trigger, String truncated) {
+        DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
+        if (manager.scheduler.shuffle())
+            trigger.getTextChannel().sendMessage("Queue shuffled.").queue();
+    }
 }
