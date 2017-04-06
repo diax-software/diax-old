@@ -10,7 +10,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Created by NachtRaben on 4/5/2017.
  */
 
-@DiaxCommandDescription(triggers = {"repeat"}, guildOnly = true)
+@DiaxCommandDescription(triggers = {"repeat"}, guildOnly = true, description = "Toggles if the track repeats.")
 public class RepeatCommand extends DiaxCommand {
 
     @Override

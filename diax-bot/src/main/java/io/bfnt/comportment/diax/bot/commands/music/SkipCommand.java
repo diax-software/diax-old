@@ -10,7 +10,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Created by NachtRaben on 4/5/2017.
  */
 
-@DiaxCommandDescription(triggers = {"skip", "next"}, guildOnly = true)
+@DiaxCommandDescription(triggers = {"skip", "next"}, guildOnly = true, description = "Skips to the next track.")
 public class SkipCommand extends DiaxCommand {
 
     @Override

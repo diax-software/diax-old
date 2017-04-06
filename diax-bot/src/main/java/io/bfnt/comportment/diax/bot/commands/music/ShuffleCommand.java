@@ -10,7 +10,7 @@ import net.dv8tion.jda.core.entities.Message;
  * Created by NachtRaben on 4/5/2017.
  */
 
-@DiaxCommandDescription(triggers = {"shuffle"}, guildOnly = true)
+@DiaxCommandDescription(triggers = {"shuffle"}, guildOnly = true, description = "Shuffles the current playlist.")
 public class ShuffleCommand extends DiaxCommand {
 
     @Override

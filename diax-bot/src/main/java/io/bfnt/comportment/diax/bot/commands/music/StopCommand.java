@@ -4,13 +4,14 @@ import io.bfnt.comportment.diax.bot.lib.audio.DiaxGuildMusicManager;
 import io.bfnt.comportment.diax.bot.lib.command.DiaxCommand;
 import io.bfnt.comportment.diax.bot.lib.command.DiaxCommandDescription;
 import io.bfnt.comportment.diax.bot.lib.util.DiaxUtil;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 
 /**
  * Created by NachtRaben on 4/5/2017.
  */
 
-@DiaxCommandDescription(triggers = {"stop"}, guildOnly = true)
+@DiaxCommandDescription(triggers = {"stop"}, guildOnly = true, description = "Stops playback of music.", permission = Permission.VOICE_MOVE_OTHERS)
 public class StopCommand extends DiaxCommand {
 
     @Override
