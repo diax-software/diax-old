@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 @DiaxCommandDescription(triggers = {"play"}, minimumArgs = 1, guildOnly = true, description = "Plays the given URL/Query provided.")
 public class PlayCommand extends DiaxCommand {
 
+    @Override
     public void execute(Message trigger, String truncated) {
         DiaxGuildMusicManager manager = DiaxGuildMusicManager.getManagerFor(trigger.getGuild());
         query(manager, trigger, truncated);
