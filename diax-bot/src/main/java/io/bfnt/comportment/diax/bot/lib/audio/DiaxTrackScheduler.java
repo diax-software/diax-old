@@ -2,11 +2,14 @@ package io.bfnt.comportment.diax.bot.lib.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
+import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.exceptions.PermissionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,76 +22,146 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 public class DiaxTrackScheduler extends AudioEventAdapter {
-    private final AudioPlayer player;
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
+    private DiaxGuildMusicManager manager;
     private final BlockingQueue<DiaxAudioTrack> queue;
-    private TextChannel channel;
-    private boolean repeating;
+    private boolean repeating = false;
+    
+    private DiaxAudioTrack currentTrack;
+    private DiaxAudioTrack lastTrack;
 
-    public DiaxTrackScheduler(AudioPlayer player, TextChannel channel) {
-        this.channel = channel;
-        this.player = player;
+    public DiaxTrackScheduler(DiaxGuildMusicManager manager) {
+        this.manager = manager;
         this.queue = new LinkedBlockingQueue<>();
-    }
-
-    public AudioPlayer getPlayer() {
-        return this.player;
     }
 
     public BlockingQueue<DiaxAudioTrack> getQueue() {
         return queue;
     }
 
-    public TextChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(TextChannel channel) {
-        this.channel = channel;
-    }
-
-    public void clear() {
-        queue.clear();
-        player.startTrack(null, false);
+    public boolean play(DiaxAudioTrack track) {
+        if(track != null) {
+            currentTrack = track;
+            return manager.player.startTrack(track.getTrack(), false);
+        }
+        return false;
     }
 
     public void queue(DiaxAudioTrack track) {
-        if (!player.startTrack(track.getTrack(), true)) queue.offer(track);
+        if(queue.offer(track) && this.currentTrack == null) {
+            skip();
+        }
     }
 
-    public void shuffle() {
-        List<DiaxAudioTrack> tracks = new ArrayList<>();
-        queue.drainTo(tracks);
-        Collections.shuffle(tracks);
-        queue.addAll(tracks);
+    public boolean shuffle() {
+        if(!queue.isEmpty()) {
+            List<DiaxAudioTrack> tracks = new ArrayList<>();
+            queue.drainTo(tracks);
+            Collections.shuffle(tracks);
+            queue.addAll(tracks);
+            return true;
+        }
+        return false;
     }
 
     public boolean skip() {
-        DiaxAudioTrack track = this.queue.poll();
-        AudioTrackInfo info = track.getTrack().getInfo();
-        User requester = track.getRequester();
-        this.channel.sendMessage(String.format("Now playing: `%s ` by `%s ` | Requested by: `%s#%s `", info.title, info.author, requester.getName(), requester.getDiscriminator()));
-        return player.startTrack(queue.poll().getTrack(), false);
+        lastTrack = currentTrack;
+        if(repeating) {
+            if(currentTrack != null)
+                play(currentTrack.clone());
+            else if(!queue.isEmpty())
+                play(this.queue.poll());
+        } else if(queue.isEmpty()) {
+            if(currentTrack != null)
+                currentTrack.getChannel().sendMessage("Queue concluded").queue();
+            stop();
+        } else {
+            play(queue.poll());
+        }
+        return true;
+    }
+
+    public void stop() {
+        logger.debug("stop");
+        queue.clear();
+        manager.player.stopTrack();
+        currentTrack = null;
+        manager.guild.getAudioManager().closeAudioConnection();
     }
 
     public void setRepeating(boolean repeating) {
         String message = "The queue is no longer repeating.";
         if (repeating) message = "The queue is now repeating.";
+        logger.warn("Current track: " + (currentTrack == null ? "NULL" : currentTrack.hashCode()));
         this.repeating = repeating;
-        channel.sendMessage(message);
+        currentTrack.getChannel().sendMessage(message).queue();
+    }
+
+    public boolean isRepeating() {
+        return this.repeating;
+    }
+
+    public VoiceChannel getVoiceChannel(Guild guild, Member member) {
+        VoiceChannel vc = null;
+        if(member != null && member.getVoiceState().inVoiceChannel()) {
+            vc = member.getVoiceState().getChannel();
+        } else if(!guild.getVoiceChannels().isEmpty()) {
+            vc = guild.getVoiceChannels().get(0);
+        }
+        return vc;
+    }
+
+    public boolean joinVoiceChannel() {
+        Guild guild = this.manager.guild;
+        Member member = guild.getMember(currentTrack.getRequester());
+        VoiceChannel voiceChannel = getVoiceChannel(guild, member);
+        if(!guild.getAudioManager().isConnected() || this.queue.isEmpty()) {
+            try {
+                guild.getAudioManager().openAudioConnection(voiceChannel);
+            } catch(PermissionException exception) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onTrackStart(AudioPlayer player, AudioTrack track) {
+        logger.debug("START");
+        if(joinVoiceChannel()) {
+            if(!repeating) {
+                AudioTrackInfo info = this.currentTrack.getTrack().getInfo();
+                User requester = currentTrack.getRequester();
+                currentTrack.getChannel().sendMessage(String.format("Now playing: `%s ` by `%s ` | Requested by: `%s#%s `", info.title, info.author, requester.getName(), requester.getDiscriminator())).queue();
+            } else {
+                currentTrack.getChannel().sendMessage("Repeating the last song.").queue();
+            }
+        } else {
+            logger.warn("Wasn't able to join voice channel.");
+            stop();
+        }
     }
 
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason reason) {
-        if (this.repeating) {
-            player.startTrack(track.makeClone(), false);
-            this.channel.sendMessage("Repeating the last song.").queue();
-            return;
+        if(reason.mayStartNext) {
+            logger.warn("Was told we could play the next track.");
+            skip();
         }
-        if (this.queue.size() <= 0) {
-            this.channel.getGuild().getAudioManager().closeAudioConnection();
-            this.channel.sendMessage("Queue concluded.").queue();
-            return;
-        }
+    }
+
+    @Override
+    public void onTrackException(AudioPlayer player, AudioTrack track, FriendlyException exception) {
+        currentTrack.getChannel().sendMessage("Failed to play the track do to `" + exception.getMessage() + "`.").queue();
+        logger.warn(exception.getMessage(), exception);
+    }
+
+    @Override
+    public void onTrackStuck(AudioPlayer player, AudioTrack track, long thresholdMs) {
+        currentTrack.getChannel().sendMessage("Got stuck attempting to play track, skipping.").queue();
         skip();
     }
 }

@@ -2,30 +2,50 @@ package io.bfnt.comportment.diax.bot.lib.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
+
+import java.util.HashMap;
 
 /**
  * Created by Comporment on 04/04/2017 at 22:07
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
 public class DiaxGuildMusicManager {
+
+    private static HashMap<String, DiaxGuildMusicManager> MANAGERS;
+    private static DefaultAudioPlayerManager PLAYER_MANAGER;
+
+    static {
+        MANAGERS = new HashMap<>();
+        PLAYER_MANAGER = new DefaultAudioPlayerManager();
+        AudioSourceManagers.registerRemoteSources(PLAYER_MANAGER);
+    }
+
     public final AudioPlayer player;
     public final DiaxTrackScheduler scheduler;
-    private final TextChannel channel;
+    public final Guild guild;
 
-    public DiaxGuildMusicManager(AudioPlayerManager manager, TextChannel channel) {
-        player = manager.createPlayer();
-        scheduler = new DiaxTrackScheduler(player, channel);
+    public DiaxGuildMusicManager(Guild guild) {
+        player = PLAYER_MANAGER.createPlayer();
+        scheduler = new DiaxTrackScheduler(this);
+        this.guild = guild;
         player.addListener(scheduler);
-        this.channel = channel;
-        channel.getGuild().getAudioManager().setSendingHandler(getSendHandler());
+        guild.getAudioManager().setSendingHandler(getSendHandler());
+    }
+
+    public DefaultAudioPlayerManager getPlayerManager() {
+        return PLAYER_MANAGER;
     }
 
     public DiaxAudioPlayerSendHandler getSendHandler() {
         return new DiaxAudioPlayerSendHandler(player);
     }
 
-    public TextChannel getChannel() {
-        return channel;
+    public static DiaxGuildMusicManager getManagerFor(Guild guild) {
+        return MANAGERS.computeIfAbsent(guild.getId(), k -> new DiaxGuildMusicManager(guild));
     }
+
 }
