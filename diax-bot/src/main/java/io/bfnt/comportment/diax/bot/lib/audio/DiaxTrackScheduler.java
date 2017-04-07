@@ -155,7 +155,7 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
 
     @Override
     public void onTrackException(AudioPlayer player, AudioTrack track, FriendlyException exception) {
-        currentTrack.getChannel().sendMessage(DiaxUtil.errorEmbed("Failed to play the track do to `" + exception.getMessage() + "`.")).queue();
+        currentTrack.getChannel().sendMessage(DiaxUtil.errorEmbed("Failed to play the track due to: `" + exception.getMessage() + " `")).queue();
         logger.warn(exception.getMessage(), exception);
     }
 
