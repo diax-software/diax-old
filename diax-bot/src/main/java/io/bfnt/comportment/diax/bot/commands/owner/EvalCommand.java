@@ -20,11 +20,11 @@ public class EvalCommand extends DiaxCommand {
         ScriptEngine engine = this.addMethods(new ScriptEngineManager().getEngineByName("nashorn"), trigger);
         String output;
         try {
-            output = "" + engine.eval(String.join("\n", "load('nashown:mozilla_compat.js');", "imports = new JavaImporter(java.util, java.io);", "(function(){", "with(imports){", truncated, "}", "})()"));
+            output = "" + engine.eval(String.join("\n", "load('nashorn:mozilla_compat.js');", "imports = new JavaImporter(java.util, java.io);", "(function(){", "with(imports){", truncated, "}", "})()"));
         } catch (Exception exception) {
             output = exception.getMessage();
         }
-        trigger.getChannel().sendMessage(DiaxUtil.defaultEmbed().setDescription(output).build()).queue();
+        trigger.getChannel().sendMessage(DiaxUtil.defaultEmbed().setDescription(String.format("```js\n%s ```", output)).build()).queue();
     }
 
     private ScriptEngine addMethods(ScriptEngine engine, Message trigger) {
