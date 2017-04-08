@@ -15,7 +15,7 @@ import java.util.*;
 @Singleton
 public class DiaxCommands {
 
-    private static final String COMMAND_PACKAGE = "io.bfnt.comportment.diax.bot.commands";
+    private static final String COMMAND_PACKAGE = "main.java.io.bfnt.comportment.io.bfnt.comportment.bot.commands";
     private final ComponentProvider provider;
     private final DiaxProperties properties;
     private final Map<DiaxCommandDescription, Class<? extends DiaxCommand>> commands;

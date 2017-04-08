@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.bfnt.comportment</groupId>
-    <artifactId>diax-bot</artifactId>
+    <artifactId>io.bfnt.comportment.diax-bot</artifactId>
     <version>Brazen</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.targetEncoding>UTF-8</project.build.targetEncoding>
-        <diax.version>Diax ${project.version}</diax.version>
+        <io.bfnt.comportment.diax.version>Diax ${project.version}</io.bfnt.comportment.diax.version>
     </properties>
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
@@ -41,7 +41,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>io.bfnt.comportment.diax.Main</mainClass>
+                            <mainClass>main.java.io.bfnt.comportment.diax.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

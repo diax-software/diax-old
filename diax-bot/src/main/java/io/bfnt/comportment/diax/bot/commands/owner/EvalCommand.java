@@ -33,6 +33,7 @@ public class EvalCommand extends DiaxCommand {
         engine.put("event", trigger);
         engine.put("guild", trigger.getGuild());
         engine.put("channel", trigger.getChannel());
+        engine.put("embed", new net.dv8tion.jda.core.EmbedBuilder());
         return engine;
     }
 }

@@ -14,12 +14,12 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class DiaxDisconnectListener extends ListenerAdapter {
 
     @Override
-    public void onGuildUnavailable(GuildUnavailableEvent event) {
+    public void onGuildLeave(GuildLeaveEvent event) {
         close(event.getGuild());
     }
 
     @Override
-    public void onGuildLeave(GuildLeaveEvent event) {
+    public void onGuildUnavailable(GuildUnavailableEvent event) {
         close(event.getGuild());
     }
 
