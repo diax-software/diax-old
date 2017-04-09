@@ -16,7 +16,7 @@
         <encoder>
             <pattern>[%d{HH:mm:ss, -5}] [%level] [%logger{0}] %msg%n</pattern>
         </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/bot-%d{MM-dd-yyyy}.log</fileNamePattern>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
