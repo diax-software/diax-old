@@ -17,6 +17,6 @@ public class Main {
 
     public void main() {
         Connection conn = r.connection().hostname("localhost").port(28015).connect();
-        r.table("authors").delete().run(conn);
+        r.table("authors").insert(r.hashMap()).delete().run(conn);
     }
 }

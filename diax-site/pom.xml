@@ -41,7 +41,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>main.java.io.bfnt.comportment.diax.Main</mainClass>
+                            <mainClass>main.java.io.bfnt.comportment.diax.web.Testing</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
