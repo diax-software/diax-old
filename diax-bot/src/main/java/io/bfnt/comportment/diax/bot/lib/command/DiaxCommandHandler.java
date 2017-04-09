@@ -32,7 +32,7 @@ public class DiaxCommandHandler extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         String content = event.getMessage().getRawContent();
         if (event.getAuthor().isBot() || !content.startsWith(properties.getPrefix())) return;
-        logger.info(String.format("%s | %s", DiaxUtil.makeName(event.getAuthor()), content));
+        logger.info(String.format("[%s] %s", DiaxUtil.makeName(event.getAuthor()), content));
         String truncated = content.replaceFirst(properties.getPrefix(), "").trim();
         DiaxCommandDescription command = commands.find(truncated.split(" ")[0]);
         if (command != null) {
