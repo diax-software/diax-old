@@ -1,0 +1,81 @@
+html, body {
+
+    font-family: "Lucida Console";
+    background: url("../images/background.jpg") no-repeat center center fixed #000000;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+
+    color: white;
+}
+
+h1, h5 {
+
+    text-align: center;
+}
+
+header {
+
+    width: 100%;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+
+    list-style: none;
+    margin: auto;
+    padding: 0;
+    width: 100%;
+    height: 70px;
+    overflow: hidden;
+    background: #000000 100%;
+    position: fixed;
+    text-align: center;
+}
+
+li a.item {
+
+    color: #ffffff;
+    padding: 35px;
+    text-decoration: none;
+    float: right;
+    line-height: 0;
+    font-size: 20px;
+}
+
+li a.item:hover {
+
+    background-color: #1b1b1b;
+    color: #20C20E;
+}
+
+table {
+
+    margin: 2% auto;
+    border: 0;
+    width: 85%;
+    background-color: black;
+    border-radius: 10px;
+}
+
+p, h5 {
+
+    font-family: Verdana;
+    margin: 3%;
+    align-self: center;
+}
+
+img {
+
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+div {
+}
