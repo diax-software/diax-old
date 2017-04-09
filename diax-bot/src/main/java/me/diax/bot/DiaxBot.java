@@ -11,6 +11,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import me.diax.bot.lib.audio.DiaxDisconnectListener;
 import me.diax.bot.lib.command.DiaxCommandHandler;
+import me.diax.bot.lib.util.DiaxLogger;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -57,7 +58,7 @@ public final class DiaxBot implements ComponentProvider, Module {
     }
 
     public static void main(String[] args) {
-        /* new DiaxLogger(); */
+        new DiaxLogger();
         new DiaxBot().main();
     }
 

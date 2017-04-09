@@ -2,19 +2,21 @@
 <configuration>
     <property name="LOG_PATH" value="."/>
     <property name="LOG_ARCHIVE" value="${LOG_PATH}/logs"/>
+    <property name="PATTERN" value="[%d{HH:mm:ss, -5}] [%level] [%logger{0}] %msg%n"/>
 
     <logger name="me.diax" level="TRACE"/>
 
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--filter class="me.diax.bot.lib.util.DiaxLogger" />-->
         <encoder>
-            <pattern>[%d{HH:mm:ss, -5}] [%level] [%logger{0}] %msg%n</pattern>
+            <pattern>${PATTERN}</pattern>
         </encoder>
     </appender>
 
     <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/bot-latest.log</file>
         <encoder>
-            <pattern>[%d{HH:mm:ss, -5}] [%level] [%logger{0}] %msg%n</pattern>
+            <pattern>${PATTERN}</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/bot-%d{MM-dd-yyyy}.log</fileNamePattern>

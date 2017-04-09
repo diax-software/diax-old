@@ -57,4 +57,11 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>web</artifactId>
+            <version>LATEST</version>
+        </dependency>
+    </dependencies>
 </project>

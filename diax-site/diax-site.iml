@@ -27,5 +27,6 @@
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="GlassFish 4.1.2" level="application_server_libraries" />
+    <orderEntry type="library" name="Maven: org.glassfish:web:4.1.2" level="project" />
   </component>
 </module>
