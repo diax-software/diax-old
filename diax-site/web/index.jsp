@@ -1,4 +1,4 @@
-<%@ page import="io.bfnt.comportment.diax.web.Testing" %>
+<%@ page import="me.diax.web.Testing" %>
 
 <%--
   Created by Comportment on 09/04/2017.
@@ -8,7 +8,10 @@
 
 <html>
 <head>
-    <!--link rel="icon" href="resources/images/favicon.ico" / TODO: Find out why this doesn't work.-->
+    <!--
+    link rel="icon" href="resources/images/favicon.ico" /
+    FIXME: Find out why this is broken
+    -->
     <link rel="stylesheet" type="text/css" href="resources/styles/old.css"/>
     <title>Diax</title>
 </head>
