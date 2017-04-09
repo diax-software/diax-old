@@ -60,6 +60,7 @@ public final class DiaxBot implements ComponentProvider, Module {
     }
 
     public static void main(String[] args) {
+        SimpleLog.LEVEL = SimpleLog.Level.OFF;
         new DiaxBot().main();
     }
 
