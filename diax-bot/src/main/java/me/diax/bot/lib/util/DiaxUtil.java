@@ -1,6 +1,6 @@
 package me.diax.bot.lib.util;
 
-import me.diax.bot.Diax;
+import me.diax.bot.DiaxBot;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
@@ -21,7 +21,7 @@ public class DiaxUtil {
     }
 
     public static EmbedBuilder defaultEmbed() {
-        return new EmbedBuilder().setColor(new Color(170, 101, 25)).setFooter(Diax.VERSION, "https://google.com");
+        return new EmbedBuilder().setColor(new Color(170, 101, 25)).setFooter(DiaxBot.VERSION, "https://google.com");
     }
 
     public static MessageEmbed errorEmbed(String message) {

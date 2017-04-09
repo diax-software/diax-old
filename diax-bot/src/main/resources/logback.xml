@@ -1,28 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="LOG_PATH" value="."/>
     <property name="LOG_ARCHIVE" value="${LOG_PATH}/logs"/>
-
-    <logger name="io.bfnt.comportment"
-            level="TRACE"/> <!-- Filters out loggers in your path and runs them with trace instead -->
-
+    <logger name="me.diax" level="TRACE"/>
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>[%d{HH:mm:ss}] [%-1level] [%logger{0}]: %msg%n</pattern>
+            <pattern>[%d{HH:mm:ss, -5}] [%level] [%logger{0}] %msg%n</pattern>
         </encoder>
     </appender>
-
     <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/bot.log</file>
+        <file>${LOG_PATH}/bot-latest.log</file>
         <encoder>
-            <pattern>[%d{HH:mm:ss}] [%-1level] [%logger{0}]: %msg%n</pattern>
+            <pattern>[%d{HH:mm:ss, -5}] [%level] [%logger{0}] %msg%n</pattern>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicy">
+                <fileNamePattern>${LOG_PATH}/bot-%d{MM-dd-yyyy}.log</fileNamePattern>
+                <maxHistory>10</maxHistory>
+            </rollingPolicy>
         </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_ARCHIVE}/bot.%d{MM-dd-yyyy}.log</fileNamePattern>
-            <maxHistory>10</maxHistory>
-        </rollingPolicy>
     </appender>
-
-    <root level="INFO">
+    <root level="Info">
         <appender-ref ref="Console"/>
         <appender-ref ref="File"/>
     </root>

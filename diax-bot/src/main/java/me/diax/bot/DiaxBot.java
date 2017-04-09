@@ -12,12 +12,14 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import me.diax.bot.lib.audio.DiaxDisconnectListener;
 import me.diax.bot.lib.command.DiaxCommandHandler;
 import me.diax.bot.lib.util.JDALogListener;
+import me.diax.bot.listeners.DiaxLogger;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
+import net.dv8tion.jda.core.utils.SimpleLog;
 import org.json.JSONException;
 import org.slf4j.LoggerFactory;
 
@@ -30,20 +32,20 @@ import java.io.InputStreamReader;
  * Created by Comporment on 04/04/2017 at 19:45
  * Dev'ving like a sir since 1998. | https://github.com/Comportment
  */
-public final class Diax implements ComponentProvider, Module {
+public final class DiaxBot implements ComponentProvider, Module {
 
     public static final String VERSION;
     public static JDA[] SHARDS;
 
     static {
-        InputStreamReader reader = new InputStreamReader(Diax.class.getResourceAsStream("/version"));
+        InputStreamReader reader = new InputStreamReader(DiaxBot.class.getResourceAsStream("/version"));
         BufferedReader txtReader = new BufferedReader(reader);
         String version;
         try {
             version = txtReader.readLine();
         } catch (IOException e) {
             version = "Unknown";
-            LoggerFactory.getLogger(Diax.class).error("Could not find the build of Diax.");
+            LoggerFactory.getLogger(DiaxBot.class).error("Could not find the build of diax-bot.");
         }
         VERSION = version;
     }
@@ -51,28 +53,29 @@ public final class Diax implements ComponentProvider, Module {
     private final Injector injector;
     private final DiaxProperties properties;
 
-    private Diax() {
+    private DiaxBot() {
         ClassLoader classLoader = this.getClass().getClassLoader();
         injector = Guice.createInjector(this);
         properties = ConfigurationUtils.loadConfiguration(classLoader, "diax.properties", ConfigurationUtils.getDataFolder(), DiaxProperties.class);
     }
 
     public static void main(String[] args) {
-        new Diax().main();
+        new DiaxBot().main();
     }
 
     private void main() {
+        SimpleLog.addListener(new DiaxLogger());
         initialise(getShardAmount());
         new JDALogListener();
     }
 
     private void initialise(int shards) {
-        Diax.SHARDS = new JDA[shards];
+        DiaxBot.SHARDS = new JDA[shards];
         for (int i = 0; i < shards; i++) {
             JDA jda = null;
             try {
                 JDABuilder builder = new JDABuilder(AccountType.BOT)
-                        .addListener(injector.getInstance(DiaxCommandHandler.class), new DiaxDisconnectListener())
+                        .addEventListener(injector.getInstance(DiaxCommandHandler.class), new DiaxDisconnectListener())
                         .setAudioEnabled(true)
                         .setGame(Game.of(properties.getGame()))
                         .setToken(properties.getToken())
@@ -85,7 +88,7 @@ public final class Diax implements ComponentProvider, Module {
             } catch (LoginException | RateLimitedException | InterruptedException ignored) {
             }
             if (jda != null) {
-                Diax.SHARDS[i] = jda;
+                DiaxBot.SHARDS[i] = jda;
             }
             try {
                 Thread.sleep(5000);

@@ -83,7 +83,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>3.0.0_169</version>
+            <version>3.0.0_170</version>
         </dependency>
         <dependency>
             <groupId>com.sedmelluq</groupId>
@@ -114,6 +114,11 @@
                     <artifactId>log4j</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>me.diax</groupId>
+            <artifactId>srv</artifactId>
+            <version>Actualisation</version>
         </dependency>
     </dependencies>
 </project>
