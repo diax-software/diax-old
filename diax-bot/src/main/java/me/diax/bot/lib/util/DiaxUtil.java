@@ -39,4 +39,9 @@ public class DiaxUtil {
     public static boolean checkPermission(User user, Guild guild, Permission permission) {
         return user.getId().equals(getOwnerID()) || PermissionUtil.checkPermission(guild, guild.getMember(user), permission);
     }
+
+    public static int getShard(Guild guild) {
+        long id = Long.valueOf(guild.getId());
+        return (int) (id >> 22) % DiaxBot.SHARDS.length;
+    }
 }

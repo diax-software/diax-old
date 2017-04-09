@@ -11,15 +11,13 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import me.diax.bot.lib.audio.DiaxDisconnectListener;
 import me.diax.bot.lib.command.DiaxCommandHandler;
-import me.diax.bot.lib.util.JDALogListener;
-import me.diax.bot.listeners.DiaxLogger;
+import me.diax.bot.lib.util.DiaxLogger;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
-import net.dv8tion.jda.core.utils.SimpleLog;
 import org.json.JSONException;
 import org.slf4j.LoggerFactory;
 
@@ -60,14 +58,12 @@ public final class DiaxBot implements ComponentProvider, Module {
     }
 
     public static void main(String[] args) {
-        SimpleLog.LEVEL = SimpleLog.Level.OFF;
+        new DiaxLogger();
         new DiaxBot().main();
     }
 
     private void main() {
-        SimpleLog.addListener(new DiaxLogger());
         initialise(getShardAmount());
-        new JDALogListener();
     }
 
     private void initialise(int shards) {

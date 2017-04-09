@@ -1,4 +1,4 @@
-package me.diax.bot.listeners;
+package me.diax.bot.lib.util;
 
 import net.dv8tion.jda.core.utils.SimpleLog;
 import net.dv8tion.jda.core.utils.SimpleLog.LogListener;
@@ -11,6 +11,11 @@ import org.slf4j.LoggerFactory;
  * If you don't understand this, we are screwed.
  */
 public class DiaxLogger implements LogListener {
+
+    public DiaxLogger() {
+        SimpleLog.addListener(this);
+        SimpleLog.LEVEL = SimpleLog.Level.OFF;
+    }
 
     @Override
     public void onLog(SimpleLog log, SimpleLog.Level level, Object object) {
