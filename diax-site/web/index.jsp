@@ -9,7 +9,7 @@
 <html>
 <head>
     <!--
-    link rel="icon" href="resources/images/favicon.ico" /
+    <link rel="icon" href="resources/images/favicon.ico" />
     FIXME: Find out why this is broken
     -->
     <link rel="stylesheet" type="text/css" href="resources/styles/old.css"/>

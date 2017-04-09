@@ -41,7 +41,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>main.java.me.diax.web.Testing</mainClass>
+                            <mainClass>me.diax.web.Testing</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,5 +1,4 @@
 *.log
-*.iml
 *.properties
 .idea/
 target/

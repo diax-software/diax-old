@@ -78,12 +78,12 @@
         <dependency>
             <groupId>com.knockturnmc</groupId>
             <artifactId>knockturn-commons</artifactId>
-            <version>1.3.7-SNAPSHOT</version>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
-            <version>0.9.10</version>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>com.github.DV8FromTheWorld</groupId>
@@ -93,17 +93,17 @@
         <dependency>
             <groupId>com.sedmelluq</groupId>
             <artifactId>lavaplayer</artifactId>
-            <version>1.2.35</version>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.1</version>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>com.mashape.unirest</groupId>
             <artifactId>unirest-java</artifactId>
-            <version>1.4.9</version>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cassandra</groupId>
