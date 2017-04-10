@@ -13,11 +13,7 @@
         </encoder>
     </appender>
 
-    <appender name="Discord" class="me.diax.bot.lib.util.DiaxDiscordAppender">
-        <encoder>
-            <pattern>${PATTERN}</pattern>
-        </encoder>
-    </appender>
+    <appender name="Discord" class="me.diax.bot.lib.util.DiaxDiscordAppender"/>
 
     <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/bot-latest.log</file>

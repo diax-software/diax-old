@@ -116,7 +116,7 @@ public final class DiaxBot implements ComponentProvider, Module {
     }
 
     @Override
-    public <T> T getInstance(Class<T> type) {
+    public <E> E getInstance(Class<E> type) {
         return injector.getInstance(type);
     }
 }

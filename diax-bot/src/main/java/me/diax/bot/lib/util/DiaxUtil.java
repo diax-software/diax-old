@@ -53,7 +53,17 @@ public class DiaxUtil {
         return getShard(id);
     }
 
-    //public static List<String> splitByEvery(int amount, String input) {
-    // return Arrays.asList(input.split(String.format("(?<=\\G.{%s})", amount)));
-    //}
+    public static String[] splitStringEvery(String s, int interval) {
+        int size = (int) Math.ceil(((s.length() / (double) interval)));
+        String[] result = new String[size];
+
+        int j = 0;
+        int lastIndex = result.length - 1;
+        for (int i = 0; i < lastIndex; i++) {
+            result[i] = s.substring(j, j + interval);
+            j += interval;
+        }
+        result[lastIndex] = s.substring(j);
+        return result;
+    }
 }
