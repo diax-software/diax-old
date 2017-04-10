@@ -35,7 +35,7 @@ public class DiaxGuildMusicManager {
     }
 
     public static DiaxGuildMusicManager getManagerFor(Guild guild) {
-        return MANAGERS.computeIfAbsent(guild.getId(), i -> new DiaxGuildMusicManager(guild));
+        return MANAGERS.computeIfAbsent(guild.getId(), (i) -> new DiaxGuildMusicManager(guild));
     }
 
     public DefaultAudioPlayerManager getPlayerManager() {
