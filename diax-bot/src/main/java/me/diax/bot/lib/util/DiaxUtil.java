@@ -1,5 +1,6 @@
 package me.diax.bot.lib.util;
 
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import me.diax.bot.DiaxBot;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
@@ -30,6 +31,10 @@ public class DiaxUtil {
 
     public static MessageEmbed musicEmbed(String message) {
         return defaultEmbed().addField("\uD83C\uDFB5 Music \uD83C\uDFB5", message, false).build();
+    }
+
+    public static String getTrackInfo(AudioTrack track) {
+        return String.format("`%s ` by `%s `", track.getInfo().title, track.getInfo().author);
     }
 
     public static String getOwnerID() {
