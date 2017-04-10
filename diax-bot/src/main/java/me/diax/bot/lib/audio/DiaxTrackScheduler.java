@@ -128,6 +128,10 @@ public class DiaxTrackScheduler extends AudioEventAdapter {
         return true;
     }
 
+    public DiaxAudioTrack getCurrentTrack() {
+        return currentTrack;
+    }
+
     @Override
     public void onTrackStart(AudioPlayer player, AudioTrack track) {
         logger.debug("Starting the player.");

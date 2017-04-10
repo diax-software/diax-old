@@ -1,6 +1,6 @@
 package me.diax.bot.commands.music;
 
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import me.diax.bot.lib.audio.DiaxAudioTrack;
 import me.diax.bot.lib.audio.DiaxGuildMusicManager;
 import me.diax.bot.lib.command.DiaxCommand;
 import me.diax.bot.lib.command.DiaxCommandDescription;
@@ -16,7 +16,7 @@ public class SongCommand extends DiaxCommand {
 
     @Override
     public void execute(Message trigger, String args) {
-        AudioTrack track = DiaxGuildMusicManager.getManagerFor(trigger.getGuild()).player.getPlayingTrack();
-        trigger.getChannel().sendMessage(DiaxUtil.musicEmbed("Currently playing:\n" + (track == null ? "Nothing." : DiaxUtil.getTrackInfo(track)))).queue();
+        DiaxAudioTrack track = DiaxGuildMusicManager.getManagerFor(trigger.getGuild()).scheduler.getCurrentTrack();
+        trigger.getChannel().sendMessage(DiaxUtil.musicEmbed("Currently playing:\n" + (track == null ? "`Nothing.`" : DiaxUtil.getTrackInfo(track)))).queue();
     }
 }
