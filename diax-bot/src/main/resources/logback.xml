@@ -4,8 +4,6 @@
     <property name="LOG_ARCHIVE" value="${LOG_PATH}/logs"/>
     <property name="PATTERN" value="[%d{HH:mm:ss, -5}] [%level] [%logger{0}] %msg%n"/>
 
-    <logger name="me.diax" level="TRACE"/>
-
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <!--filter class="me.diax.bot.lib.util.DiaxLogger" />-->
         <encoder>
