@@ -36,12 +36,24 @@ public class DiaxUtil {
         return "293884638101897216";
     }
 
+    public static String getGuildID() {
+        return "293889712014360586";
+    }
+
     public static boolean checkPermission(User user, Guild guild, Permission permission) {
         return user.getId().equals(getOwnerID()) || PermissionUtil.checkPermission(guild, guild.getMember(user), permission);
     }
 
+    public static int getShard(long guildID) {
+        return (int) (guildID >> 22) % DiaxBot.SHARDS.length;
+    }
+
     public static int getShard(Guild guild) {
         long id = Long.valueOf(guild.getId());
-        return (int) (id >> 22) % DiaxBot.SHARDS.length;
+        return getShard(id);
     }
+
+    //public static List<String> splitByEvery(int amount, String input) {
+    // return Arrays.asList(input.split(String.format("(?<=\\G.{%s})", amount)));
+    //}
 }
