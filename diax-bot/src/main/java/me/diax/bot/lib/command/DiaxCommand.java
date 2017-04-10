@@ -11,7 +11,7 @@ import net.dv8tion.jda.core.entities.Message;
 public abstract class DiaxCommand implements DiaxCommandInterface, Comparable<DiaxCommand> {
 
     //@Inject
-    //@Named(value = "io.bfnt.comportment.diax.commands.prefix")
+    //@Named(value = "me.diax.commands.prefix")
     private String prefix = "<<";
 
     public abstract void execute(Message trigger, String truncated);
