@@ -22,7 +22,11 @@ public class DiaxUtil {
     }
 
     public static EmbedBuilder defaultEmbed() {
-        return new EmbedBuilder().setColor(new Color(170, 101, 25)).setFooter(DiaxBot.VERSION, "https://google.com");
+        return new EmbedBuilder().setColor(new Color(170, 101, 25)).setFooter(DiaxBot.VERSION, "https://cdn.discordapp.com/icons/293889712014360586/32a876d0e467fe7227f50e3bcfc45bd2.jpg");
+    }
+
+    public static EmbedBuilder simpleEmbed(String message) {
+        return defaultEmbed().setDescription(message);
     }
 
     public static MessageEmbed errorEmbed(String message) {
