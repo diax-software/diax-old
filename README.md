@@ -5,8 +5,8 @@
 <!DOCTYPE html>
     <html>
     <div align = "center">
-        <a href="https://github.com/DiaxBot/Diax"><img src="resources/images/brazen_banner.png"></a></a>
-        <hr>
+        <a href="https://github.com/DiaxBot/Diax"><img src="resources/images/brazen_banner.png"></a>
+        <hr />
         <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Made_By-Comportment-green.svg?style=plastic"></a>
         <a href="https://github.com/Comportment"><img src="https://img.shields.io/badge/Version_Number-0.0.4-yellow.svg?style=plastic"></a>
         <a href="https://www.patreon.com/Diax"><img src="https://img.shields.io/badge/Donate-Patreon-blue.svg?style=plastic"></a>
