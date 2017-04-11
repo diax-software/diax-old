@@ -1,4 +1,4 @@
-package me.diax.bot.commands.statistics;
+package me.diax.bot.commands.profile;
 
 import me.diax.bot.lib.command.DiaxCommand;
 import me.diax.bot.lib.command.DiaxCommandDescription;

@@ -26,7 +26,7 @@ public class Help extends DiaxCommand {
     @Override
     public void execute(Message trigger, String args) {
         trigger.getChannel().sendMessage(DiaxUtil.defaultEmbed().addField("Commands", commands.getCommands().stream()
-                // .sorted()
+                //.sorted()
                 .map(commands::newInstance)
                 .filter(command -> ! command.getOwnerOnly())
                 .map(DiaxCommand::getHelpFormat)
