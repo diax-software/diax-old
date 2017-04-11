@@ -2,6 +2,7 @@ package me.diax.bot.commands.profile;
 
 import me.diax.bot.lib.command.DiaxCommand;
 import me.diax.bot.lib.command.DiaxCommandDescription;
+import me.diax.bot.lib.util.DiaxUtil;
 import net.dv8tion.jda.core.entities.Message;
 
 /**
@@ -13,6 +14,6 @@ public class Balance extends DiaxCommand {
 
     @Override
     public void execute(Message trigger, String args) {
-        trigger.getChannel().sendMessage("SoonTM").queue();
+        trigger.getChannel().sendMessage(DiaxUtil.defaultEmbed().setDescription("SoonTM").build()).queue();
     }
 }
