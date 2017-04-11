@@ -2,8 +2,7 @@
  * Created by Comporment on 11/04/2017 at 22:40
  * Is it a bird, is it a plane? Nope, it's another file header.
 -->
-<!DOCTYPE html>
-    <html>
+<html>
     <div align = "center">
         <a href="https://github.com/DiaxBot/Diax"><img src="resources/images/brazen_banner.png"></a>
         <hr />
