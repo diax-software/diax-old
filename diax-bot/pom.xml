@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.diax</groupId>
     <artifactId>bot</artifactId>
-    <version>Brazen</version>
+    <version>Brazen-0.0.4</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.targetEncoding>UTF-8</project.build.targetEncoding>
-        <io.bfnt.comportment.diax.version>Diax ${project.version}</io.bfnt.comportment.diax.version>
+        <me.diax.version>Diax ${project.version}</me.diax.version>
     </properties>
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
