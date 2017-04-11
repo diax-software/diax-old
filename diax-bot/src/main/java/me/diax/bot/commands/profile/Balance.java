@@ -1,7 +1,7 @@
 package me.diax.bot.commands.profile;
 
+import me.diax.bot.lib.command.DiaxCommand;
 import me.diax.bot.lib.command.DiaxCommandDescription;
-import me.diax.bot.lib.command.DiaxCommands;
 import net.dv8tion.jda.core.entities.Message;
 
 /**
@@ -9,7 +9,7 @@ import net.dv8tion.jda.core.entities.Message;
  * If you don't understand this, we are screwed.
  */
 @DiaxCommandDescription(triggers = {"balance", "bal", "currency"})
-public class Balance extends DiaxCommands {
+public class Balance extends DiaxCommand {
 
     @Override
     public void execute(Message trigger, String args) {
