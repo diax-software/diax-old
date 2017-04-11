@@ -1,6 +1,5 @@
+diax.properties
 *.log
-*.properties
+diax.iml
+log/
 .idea/
-target/
-out/
-logs/
