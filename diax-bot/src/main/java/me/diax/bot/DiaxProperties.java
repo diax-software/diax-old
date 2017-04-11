@@ -15,7 +15,7 @@ public final class DiaxProperties extends NamedProperties {
     private String prefix;
     @Property(value = "diax.commands.ignored")
     private String ignoredCommands;
-    @Property(value = "diax.game", defaultvalue = "Change Me!")
+    @Property(value = "diax.game", defaultvalue = "eeeeeeeeeeeeeeeee")
     private String game;
 
     public String getToken() {
