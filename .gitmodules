@@ -1,9 +1,12 @@
 [submodule "diax-bot"]
 	path = diax-bot
 	url = https://github.com/DiaxBot/diax-bot
+	branch = .
 [submodule "diax-site"]
 	path = diax-site
 	url = https://github.com/DiaxBot/diax-site
+	branch = .
 [submodule "diax-srv"]
 	path = diax-srv
 	url = https://github.com/DiaxBot/diax-srv
+	branch = .
